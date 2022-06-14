@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>MHS-Web</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <!-- 
+        font-family: 'Do Hyeon', sans-serif;
+        font-family: 'Noto Sans KR', sans-serif; 
+    -->
+</head>
+<body>
+    <div id="my-fullpage">
+        <div class="section profile" data-title="ABOUT">
+            <div class="wrap Ed-container">
+                <div class="inner-wrap Ed-item Ed-front">
+                        <h1></h1>
+                        <article>
+                            <!-- <div>
+                                <img id="ID-Photo" src="resource/image/img-01.jpg" alt="증명사진">
+                            </div>
+                            <div class="profile-list">
+                                <ul>
+                                    <li>이름: 문현석</li>
+                                    <li>나이: 30 (1993.11.12)</li>
+                                    <li>이메일: ifonlymun@gmail.com</li>
+                                    <li>휴대전화: 010-2652-8284</li>
+                                </ul>
+                                <ul>
+                                    <li>프로젝트 경험</li>
+                                    <li>자바 팀프로젝트</li>
+                                    <li>Servlet/JSP 개인프로젝트</li>
+                                    <li>Servlet/JSP 프로젝트를 SPRING FRAME WORK로 이식</li>
+                                    <li>SPRING FRAME WORK 팀프로젝트</li>
+                                    <li>포트폴리오 웹사이트 제작</li>
+                                </ul>
+                            </div> -->
+                        </article>
+                </div> <!--End of Front-->
+                <div class="inner-wrap Ed-item Ed-back">
+                    <h1>SKILLS</h1>
+                    <article>
+                        <div class="skill-group">
+                            <h2>Frontend</h2>
+                            <img src="resource/image/html5.svg" alt="html5">
+                            <img src="resource/image/css3.svg" alt="css3(1)">
+                            <img src="resource/image/javascript.svg" alt="javascript">
+                            <img src="resource/image/jquery.svg" alt="jquery">
+                        </div>
+                        <div class="skill-group">
+                            <h2>Backend</h2>
+                            <img src="resource/image/java.svg" alt="java" style="width: 7vw; max-width: none;">
+                            <img src="resource/image/servlet&jsp.png" alt="Servlet&JSP" style="width: 7vw; max-width: none;">
+                            <img src="resource/image/spring.svg" alt="SpringFrameWork" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                            <img src="resource/image/oracle.svg" alt="oracle" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                        </div>
+                        <div class="skill-group-wrap">
+                            <div class="skill-group">
+                                <h2>Deployment</h2>
+                                <img src="resource/image/amazon-web-services.svg" alt="아마존 웹서비스" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                            </div>
+                            <div class="skill-group">
+                                <h2>Certificate</h2>
+                                <figure>
+                                    <img src="resource/image/certificate.png" alt="정보처리 산업기사 자격증" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                                    <figcaption>
+                                        정보처리 산업기사
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </article>
+                </div><!--End of Back-->
+                <!-- <div class="profile-nav">
+                    <ul>
+                        <li style="background-color: black;"></li>
+                        <li></li>
+                    </ul>
+                </div> -->
+                <button class="Ed-btn" title="뒤집어보기" onclick="EdProfileTurn()">
+                    <img src="resource/image/turn-left.png" alt="뒤집기">
+                </button>
+                <script>
+                    /* 버튼을 클릭했을때 한방향으로 뒤집어지는 효과를 위해 script사용 */
+                    var angle = 0;
+                    var profile_isFront = true;
+                    var profile_isBackCheck = false;
+                    var Ed_front = $(".Ed-front");
+                    var Ed_back = $(".Ed-back");
+                    var Ed_btn = $(".Ed-btn");
+
+                    // 프로필 뒤집어야 하는경우 작동, 프로필 y축 180도 회전 및 내비 색상변경
+                    function EdProfileTurn(turnLeft){
+                        if(turnLeft) {
+                            angle -= 180;
+                            Ed_front.css({"transform": "rotateY("+angle+"deg)"});
+                            Ed_back.css({"transform" : "rotateY("+ (angle - 180) +"deg)"});
+                        }
+                        else {
+                            angle += 180;
+                            Ed_front.css({"transform": "rotateY("+angle+"deg)"});
+                            Ed_back.css({"transform" : "rotateY("+ (angle - 180) +"deg)"});
+                        }
+
+                        //프로필섹션 front, back 상태 설정 및 내비 색상 변경
+                        if(profile_isFront){
+                            // $(".profile-nav li").eq(0).css("background-color","lightgray");
+                            // $(".profile-nav li").eq(1).css("background-color","black");
+                            profile_isFront = false;
+                            profile_isBackCheck = true;
+                        }
+                        else {
+                            // $(".profile-nav li").eq(0).css("background-color","black");
+                            // $(".profile-nav li").eq(1).css("background-color","lightgray");
+                            profile_isFront = true;
+                        }
+                        
+                        // 프로필 카드 뒤집기시 버튼 투명하게 변경
+                        Ed_btn.stop().animate({"opacity": 0}, 300);
+                        setTimeout(function(){
+                            Ed_btn.stop().animate({"opacity": 1}, 250);
+                        }, 1250);
+                    }
+
+                    //프로필 내비 클릭시 뒤집기
+                    // $(".profile-nav li").click(function(){
+                    //     if(profile_isFront) {
+                    //         if($(this)[0] == $(".profile-nav li").eq(1).get(0)) { // 객체 비교시 주의!
+                    //             EdProfileTurn();
+                    //         }
+                    //     }
+                    //     else {
+                    //         if($(this)[0] == $(".profile-nav li").eq(0).get(0)) {
+                    //             EdProfileTurn(true);
+                    //         }
+                    //     }
+                    // });
+                </script>
+            </div>
+        </div>
+        <div class="section portfolio java" data-title="자바 팀프로젝트">
+            <div class="slides">
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/java-musicPlayer/00.PNG" alt="JavaMusic 메인화면" data-height="60vh">
+                                    <img class="modal-img" src="resource/portfolio-img/java-musicPlayer/09.PNG" alt="JavaMusic Top100 리스트" data-height="60vh">
+                                </div>
+                                <div class="explain">
+                                    <p class="mg-bt-2rem">
+                                        <strong>JAVA로 제작한 음악플레이어 입니다.</strong><br><br>
+                                        처음 주제를 정했을때, 멀티쓰레드를 이용해야하는 부담이 있었지만 끝내 잘 마무리 지었습니다.<br>
+                                        팀원들과 협업을 통해 <span class="color-red">소통의 중요성</span>과
+                                        <span class="color-red">팀장으로서</span> 팀원들의 개발능력을 토대로 업무를 분배하고 프로젝트를 이끌어나가는 <span class="color-red">리더십의 중요성</span> 또한 깨달았습니다.</span><br><br>
+                                        
+                                        프로그램은 지정된 폴더에 있는 MP3파일을 재생할수 있고, 간단한 회원가입 기능을 추가해
+                                        사용자마다 플레이리스트를 각자 관리할 수 있습니다.<br>
+                                        음악을 재생하면서 프로그램 조작이 가능해야 했기에 멀티쓰레드를 활용했습니다.<br>
+                                    </p>
+                                    <hr class="wid-100">
+                                    <ul class="pd-lt-1vw">
+                                        <li><span class="font-bold">주요기능:</span> 음악재생, 계정생성, 플레이리스트 관리</li>
+                                        <li><span class="font-bold">제작기간:</span> 2주</li>
+                                        <li><span class="font-bold">제작인원:</span> 4명</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트 - 계정생성 & 로그인</h1>
+                            <article>
+                                <div class="videos">
+                                    <video id="vid1" controls preload="auto" playsinline data-state="default">
+                                        <source src="resource/portfolio-img/java-musicPlayer/뮤직플레이어 회원가입&로그인.mkv">
+                                        브라우저에서 지원하지 않는 영상 타입입니다. 비디오 확장자 mkv.
+                                    </video>
+                                </div>
+                                <div class="explain">
+                                    <p>프로그램 이용시 로그인또는 게스트입장으로 이용가능합니다.<br>
+                                        <span class="color-red">※게스트로 입장하면 1분 미리듣기만 가능※</span>
+                                    </p>
+                                    <p>계정생성시 입력한 데이터를 객체직렬화하여 파일로 저장하였습니다. </p>
+                                    <p>저장된 파일을 읽어들여 로그인기능을 구현하는데 사용했습니다.</p>
+                                    <p>계정데이터를 암호화해서 파일에 저장하는 절차가 추가되어야 하지만,<br> 
+                                        아쉽게 암호화 절차를 뺀 기본적인 기능 구현에 만족해야 했습니다.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트 - 뮤직리스트</h1>
+                            <article>
+                                <div class="videos">
+                                    <video controls preload="auto" playsinline data-state="default">
+                                        <source src="resource/portfolio-img/java-musicPlayer/top100리스트 페이징 & 곡선택.mkv">
+                                        브라우저에서 지원하지 않는 영상 타입입니다. 비디오 확장자 mkv.
+                                    </video>
+                                </div>
+                                <div class="explain">
+                                    <p>mp3파일의 경로와 곡의 정보를 이용해 MusicVo객체를 생성하고 리스트로 만들었습니다.</p>
+                                    <p>곡의 정보들( 가수명, 노래제목 , 앨범, 장르, 곡 길이등)은 mp3태그를 파싱했습니다.<br>
+                                        <span class="color-red">※jaudiotagger 라이브러리 사용※</span>
+                                    </p>
+                                    <p>뮤직리스트 기능으로 검색, 전체재생, 재생, 내 플레이리스트에 추가, 즐겨찾기에 추가, 현재재생목록 끝에 추가 등이 있습니다.</p>
+                                    <p>페이징 기능을 만들어 많은 곡이 있어도 고정된 화면비 내에서 사용자가 탐색이 가능하도록 했습니다.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트 - 내 재생목록</h1>
+                            <article>
+                                <div class="videos">
+                                    <video controls preload="auto" playsinline data-state="default">
+                                        <source src="resource/portfolio-img/java-musicPlayer/내 재생목록 생성 & 곡추가.mp4">
+                                        브라우저에서 지원하지 않는 영상 타입입니다. 비디오 확장자 mp4.
+                                    </video>
+                                </div>
+                                <div class="explain">
+                                    <p class="mg-bt-4rem">뮤직리스트에서 곡을 선택하여 내 재생목록에 추가가 가능합니다.</p>
+                                    <P class="mg-bt-4rem">재생목록의 생성,삭제및 재생목록내의 곡들의 추가,삭제 또한 가능합니다.</P>
+                                    <p class="mg-bt-4rem">재생목록들은 LinkedHashMap 자료구조를 이용해 구현했습니다.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트 - 뮤직컨트롤러</h1>
+                            <article>
+                                <div class="videos">
+                                    <video controls preload="auto" playsinline data-state="default">
+                                        <source src="resource/portfolio-img/java-musicPlayer/뮤직 컨트롤러.mp4">
+                                        브라우저에서 지원하지 않는 영상 타입입니다. 비디오 확장자 mp4.
+                                    </video>
+                                </div>
+                                <div class="explain">
+                                    <p>선택한 음악, 재생목록을 재생하고 컨트롤합니다.</p>
+                                    <p>음악을 재생하면서 프로그램 조작이 가능해야 했기에 멀티쓰레드 프로그래밍 기법을 사용했습니다.</p>
+                                    <p>프로그램을 조작하는 메인 쓰레드와 별개로 음악을 재생하는 쓰레드, 음악파일을 디코딩하고 재생환경을 컨트롤하는 쓰레드를 직접 제어했습니다.</p>
+                                    <p>기본적인 재생/일시정지, 정지, 이전곡, 다음곡 이외 재생방식(루프, 셔플)과 볼륨조절을 기능을 구현했습니다.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트 - 환경설정</h1>
+                            <article>
+                                <div class="videos">
+                                    <video controls preload="auto" playsinline data-state="default">
+                                        <source src="resource/portfolio-img/java-musicPlayer/환경설정.mp4">
+                                        브라우저에서 지원하지 않는 영상 타입입니다. 비디오 확장자 mp4.
+                                    </video>
+                                </div>
+                                <div class="explain">
+                                    <p class="mg-bt-4rem">페이지당 출력개수를 조절할 수 있습니다.</p>
+                                    <p class="mg-bt-4rem">볼륨 조절 변동값을 설정할 수 있습니다.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>자바 팀프로젝트 - 설계구조 및 파트분배</h1>
+                            <article style="padding-top: 10vh;">
+                                <img class="row-Img modal-img" src="resource/portfolio-img/java-musicPlayer/설계구조.PNG" alt="java팀플 설계구조">
+                                <img class="row-Img modal-img" src="resource/portfolio-img/java-musicPlayer/파트분배.PNG" alt="java팀플 파트분배">
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section portfolio s-j" data-title="Servlet/JSP 개인프로젝트">
+            <div class="slides">
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/index01.PNG" alt="홈 화면 상단">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/index02.PNG" alt="홈 화면 하단">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        <strong>회원제 게시판 형태의 웹 애플리케이션 입니다.</strong><br><br>
+                                        웹 애플리케이션 개발을 위해서
+                                        <span class="color-red font-bold" data-tooltip="웹 상에서 클라이언트와 서버 사이에 이루어지는 요청(request)/응답(response) 프로토콜 HyperText Transfer Protocol">HTTP</span>, 
+                                        <span class="color-red font-bold" data-tooltip="자바를 사용하여 웹 페이지를 동적으로 생성 가능하게 함">Servlet</span>/<!--
+                                    --><span class="color-red font-bold" data-tooltip="HTML내에 자바 코드를 작성 가능하게 하여 작업의 효율성을 높인 Java Server Page">JSP</span>,
+                                        <span class="color-red font-bold" data-tooltip="오라클사의 관계형 데이터베이스 관리 시스템(RDBMS)">오라클DBMS</span>,
+                                        <span class="color-red font-bold" data-tooltip="웹 페이지의 구조적 설계와 웹 페이지 작성의 기본이 되는 HyperText Markup Language">HTML</span>,
+                                        <span class="color-red font-bold" data-tooltip="웹 페이지의 비주얼 디자인을 위한 스타일 시트 언어">CSS</span>,
+                                        <span class="color-red font-bold" data-tooltip="클라이언트의 웹 브라우저에서 기능 동작을 위해 주로 사용되며, Node.js와 같은 프레임워크를 사용하면 서버 측 프로그래밍에서도 사용할 수 있다.">JavaScript</span>와
+                                        <span class="color-red font-bold" data-tooltip="웹사이트에 자바스크립트를 쉽게 활용할 수 있도록 도와주는 오픈소스 기반의 자바스크립트 라이브러리">jquery</span>
+                                        를 학습했습니다.<br>
+                                        이번 프로젝트를 통해서 전무했던 웹 애플리케이션에 대한 이해와 웹 개발방법에 대해 알 수 있었습니다.<br><br>
+                                        회원제기능(가입, 개인정보수정, 탈퇴)과 게시판기능(조회, 작성, 수정, 삭제)구현을 중점으로 개발하였습니다.
+                                    </p>
+                                    <hr class="wid-100">
+                                    <ul class="pd-lt-1vw">
+                                        <li><span class="font-bold">주요기능:</span> 회원가입, 게시글 작성, 게시글 조회</li>
+                                        <li><span class="font-bold">제작기간:</span> 1주</li>
+                                        <li><span class="font-bold">제작인원:</span> 1명</li>
+                                        <li><span class="font-bold">웹 주소 :</span> <a href="https://jsp.ifonlygaram.net" target="_blank">https://jsp.ifonlygaram.net</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 회원가입 & 로그인,로그아웃</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/DB_table_member.PNG" alt="회원 DB 테이블">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/DB_table_member_relationship.PNG" alt="회원 DB 테이블 관계도">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_00.PNG" alt="약관동의">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_01.PNG" alt="아이디검사">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_02.PNG" alt="비밀번호검사1">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_03.PNG" alt="비밀번호검사2">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_04.PNG" alt="비밀번호확인">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_05.PNG" alt="이메일검사">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_06.PNG" alt="닉네임작성">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원가입_07.PNG" alt="가입완료">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/로그인_00.PNG" alt="로그인">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/로그인_01.PNG" alt="아이디기억하기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/로그인_02.PNG" alt="로그인완료">
+                                </div>
+                                <div class="explain">
+                                    <p class="mg-bt-3rem">
+                                        회원제 기능구현을 위해 <span class="font-bold">Oracle DBMS를 이용</span>하여 <span class="font-bold">회원 테이블을 생성</span>했습니다.
+                                    </p>
+                                    <p class="mg-bt-3rem">
+                                        회원가입중 데이터 입력시 각 데이터들에 대한 <span class="font-bold">중복체크, 패턴체크</span>기능을 구현했습니다. 
+                                    </p>
+                                    <p class="mg-bt-3rem">
+                                        로그인시 <span class="font-bold">쿠키를 이용해</span> 사용자 아이디를 기억하는 기능을 구현했습니다.<br>
+                                    </p>
+                                    <p class="mg-bt-3rem">
+                                        로그인 성공시 세션객체에 사용자 정보를 저장하고 로그아웃시 세션객체의 사용자 정보를 제거합니다.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 회원 정보(비밀번호) 암호화</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/bcrypt_00.png" alt="Bcrypt 클래스 작성">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/bcrypt_01.png" alt="회원가입시 비밀번호 암호화 과정">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/bcrypt_02.png" alt="Bcrypt 적용'전' 로그인 로직">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/bcrypt_03.png" alt="Bcrypt 적용'후' 로그인 로직">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/bcrypt_04.png" alt="비밀번호가 암호화된 10번 행">
+                                </div>
+                                <div class="explain">
+                                    <p class="font-bold mg-bt-3rem">DB에 저장되는 회원 비밀번호를 <span class="color-red" data-tooltip="
+                                        - 1999년에 publish된 password-hashing function이다.<br>
+                                        - Blowfish 암호를 기반으로 설계된 암호화 함수이며 현재까지 사용중인 가장 강력한 해시 메커니즘 중 하나이다.<br>
+                                        - 보안에 집착하기로 유명한 OpenBSD에서 사용하고 있다.<br>
+                                        - .NET 및 Java를 포함한 많은 플랫폼,언어에서 사용할 수 있다.<br>
+                                        - 반복횟수를 늘려 연산속도를 늦출 수 있으므로 연산 능력이 증가하더라도 brute-forece 공격에 대비할 수 있다.<br>
+                                    ">Bcrypt</span> 라이브러리를 이용해 암호화 했습니다.</p>
+                                    <p class="mg-bt-3rem">
+                                        spring security를 접하고난뒤 <span class="font-bold">jsp/servlet에도 보안관련 조치를 할 수 없을까 고민</span>하다 Bcrypt를 알게되어 적용하게 되었습니다.
+                                    </p>
+                                    <p class="mg-bt-3rem">
+                                        Bcrypt를 적용하기 전에는 DB상 회원비밀번호가 그대로 노출되었지만,<br>
+                                        Bcrypt적용후 <span class="font-bold">Bcrypt.hashpw() 메서드를 통해 암호화된 비밀번호가 DB에 저장</span>됩니다.<br>
+                                    </p>
+                                    <p>
+                                        로그인 시에는 사용자가 입력하는 비밀번호와 DB의 암호화된 비밀번호를 <span class="font-bold">Bcrypt.checkpw() 메서드를 통해 비교후 로그인</span> 하게 됩니다.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 회원정보수정 & ID,PWD 찾기</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보수정_01.PNG" alt="회원정보 메인페이지">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보수정_02.PNG" alt="비밀번호 재확인 절차">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보수정_03.PNG" alt="비밀번호 수정">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보찾기_01.PNG" alt="ID/PWD 찾기 메인페이지">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보찾기_02.PNG" alt="이메일 인증">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보찾기_03.PNG" alt="인증코드 입력">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보찾기_04.PNG" alt="이메일로 인증코드 확인">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/회원정보찾기_05.PNG" alt="인증코드로 정보찾기 완료">
+                                </div>
+                                <div class="explain">
+                                    <p class="mg-bt-4rem">
+                                        <span class="font-bold">회원정보수정</span><br>
+                                        비밀번호 변경, 메일 변경, 이름 변경이 가능하며 정보 변경을 위해서는 한번더 비밀번호 확인이 필요합니다.<br>
+                                        정보 변경시에도 사용자가 입력한 데이터의 중복체크, 패턴체크가 적용됩니다.
+                                    </p>
+                                    <p class="mg-bt-4rem">
+                                        <span class="font-bold">ID/PWD 찾기</span><br>
+                                        가입시 입력한 이메일을 이용해 각 정보를 찾을수 있습니다.<br>
+                                        서버측에서 메일발송을 위해 <span class="color-red font-bold" data-tooltip="
+                                        - SMTP(Simple Mail Transfer Protocol)는 응용 프로그램 계층 프로토콜이다.<br>
+                                        - 인터넷에서 전자우편을 전송하기 위한 표준 메커니즘이다.<br>
+                                        - 클라이언트가 자신이 포함된 도메인의 메일 서버에게 메일을 전송하거나 이를 수신한 메일서버가 상대방 도메인의 메일 서버로 전송하는 경우에 사용이 된다.<br>
+                                        - TCP Port는 주로 25번을 사용하고 587번도 사용한다. 
+                                        ">SMTP</span>를 이용했습니다<br>
+                                        메일로 발송되는 인증코드는 uuid.random() 메서드를 통해 얻을수 있는 임의의 난수를 이용했습니다.
+                                        <!-- 회원탈퇴<br>
+                                        회원탈퇴시 회원이 작성한 글,댓글 등은 삭제 처리하지 않음, 해당 글,댓글의 사용자를 '탈퇴한 회원'으로 변경하고
+                                        탈퇴 할 사용자를 DB서버내 테이블에서 delete처리함 -->
+                                    </p>
+                                    <p>
+                                        회원정보수정과 ID/PWD찾기 기능 모두 Bcrypt를 이용한 비밀번호 암호화를 적용시켰습니다.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 게시글 조회,작성</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 테이블.PNG" alt="게시판 DB 테이블">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/DB_table_board_relationship.PNG" alt="게시판 DB 테이블 관계도">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_01.PNG" alt="게시판 목록 조회">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_02.PNG" alt="게시판 상세 조회">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_02_0.PNG" alt="게시판 글쓰기 버튼">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_03.PNG" alt="게시판 글쓰기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_04.PNG" alt="글쓰기 파일첨부">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_05.PNG" alt="작성한 게시글 조회">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판_06.PNG" alt="작성한 게시글 상세 조회 및 첨부파일 다운">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        게시글 기능 구현을 위해 DB에 <span class="font-bold">게시글 테이블을 생성</span>했습니다.
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">게시글 목록 조회</span><br>
+                                        게시판 페이지를 요청하게 되면 해당 카테고리에 맞는 게시글들을 페이지네이션을 거쳐
+                                        사용자의 웹 페이지에 게시글 목록 형태로 출력하게 됩니다.
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">게시글 상세 조회</span><br>
+                                        게시글 목록중 하나의 게시글을 클릭하여 게시글 세부내용을 요청할시
+                                        게시글의 BNO값을 이용해 해당하는 게시글 상세 페이지로 이동합니다.
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">게시글 작성</span><br>
+                                        게시글을 작성하면 DB테이블에 글 번호, 제목, 내용, 작성날짜, 아이디, 게시판 카테고리 데이터를 저장(INSERT)하게 됩니다.
+                                        글 번호(BNO)는 <span class="color-red font-bold" data-tooltip="
+                                        - 유일(UNIQUE)한 값을 생성해주는 오라클 객체이다.<br>
+                                        - 시퀀스를 생성하면 기본키와 같이 순차적으로 증가하는 컬럼을 자동적으로 생성 할 수 있다.<br>
+                                        - 보통 PRIMARY KEY 값을 생성하기 위해 사용 한다.<br>
+                                        - 메모리에 Cache되었을 때 SEQUENCE 값의 액세스 효율이 증가 한다.<br>
+                                        - SEQUENCE는 테이블과는 독립적으로 저장되고 생성됩니다. 따라서 하나의 SEQUENCE를 여러 테이블에서 쓸 수 있다.<br>
+                                        ">시퀀스</span>를 통해 발급받습니다.<br>
+                                        파일첨부 기능을 구현했습니다.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 게시글 수정,삭제</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 수정_-01.PNG" alt="권한없는 경우 수정,삭제기능 비활성">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 수정_00.PNG" alt="권한있는 경우 수정,삭제기능 활성">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 수정_01.PNG" alt="작성한 게시글 수정하기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 수정_02.PNG" alt="수정한 게시글 확인">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 삭제_00.PNG" alt="게시글 삭제하기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 삭제_01.PNG" alt="게시글 삭제완료">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/게시판 삭제_02.PNG" alt="목록에서 삭제된 게시글 확인">
+                                </div>
+                                <div class="explain">
+                                    <p class="mg-bt-4rem">
+                                        <span class="font-bold">게시글 수정</span><br>
+                                        현재 조회중인 글의 작성자인 경우에만 수정버튼이 보이게 됩니다.<br>
+                                        수정한 글 제목,내용은 DB에서 UPDATE를 통해 처리됩니다.<br>
+                                        아쉽지만 첨부파일의 수정처리는 구현하지 못했습니다.<br>
+                                    </p>
+                                    <p class="mg-tp-4rem">
+                                        <span class="font-bold">게시글 삭제</span><br>
+                                        현재 조회중인 글의 작성자인 경우에만 삭제버튼이 보이게 됩니다.<br>
+                                        사용자가 삭제 요청시 서버는 DB에서 해당글을 DELETE처리 하여 삭제합니다.<br>
+                                        관계된 댓글, 첨부파일 또한 모두 삭제 됩니다<br>
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 댓글 조회, 작성</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 테이블_00.PNG" alt="댓글 DB 테이블">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/DB_table_reply_relationship.PNG" alt="댓글 DB 테이블 관계도">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 조회_00.PNG" alt="댓글 조회">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 작성_00.PNG" alt="댓글 작성하기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 작성_01.PNG" alt="댓글 작성확인">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        댓글 기능 구현을 위해 DB에 <span class="font-bold">댓글 테이블을 생성</span>하였습니다.<br>
+                                        <span class="color-red font-bold" data-tooltip="
+                                        - Asynchronous Javascript And XML 의 약자로 자바스크립트의 라이브러리 중 하나이다.<br>
+                                        - 자바스크립트를 통해서 비동기식으로 서버에 데이터를 요청하여 필요한 데이터를 받아와 전체 페이지를 새로 고치지 않고 변경이 필요한 페이지 부분만을 고치는 기법<br>
+                                        - Ajax의 주목적으로는 화면 전환 없이 클라이언트와 서버간의 정보를 교환하기 위해서이다.
+                                        ">Ajax</span>를 활용한 비동기처리로 댓글 기능을 구현했습니다.
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">댓글 조회</span><br>
+                                        게시글 상제 조회하면 해당 게시글에 작성된 댓글또한 조회가 가능합니다.<br>
+                                        게시글의 BNO값과 같은 BNO값을 가지는 댓글 데이터들을 조회(SELECT)하여 모두 출력합니다.<br>
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">댓글 작성</span><br>
+                                        게시글에 댓글을 작성할 경우 댓글의 BNO값은 현 게시글의 BNO값을 참조하고,
+                                        댓글의 ID값은 사용자의 ID값을 참조하여 댓글 테이블에 저장(INSERT)합니다.<br>
+                                        댓글 테이블의 기본 키 인 RNO값은 시퀀스를 통해 발급 받습니다.<br>
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 댓글 수정, 삭제</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 수정,삭제_00.PNG" alt="댓글 클릭시 모달창 오픈">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 수정_00.PNG" alt="댓글 수정,삭제 권한 확인">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 수정_01.PNG" alt="댓글 수정하기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 수정_02.PNG" alt="댓글 수정확인">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 삭제_00.PNG" alt="댓글 삭제하기">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/댓글 삭제_01.PNG" alt="댓글 삭제확인">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        댓글을 클릭하게되면 <span class="font-bold">모달창을 통해서 수정, 삭제 기능을 수행</span>할 수 있습니다.
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">댓글 수정</span><br>
+                                        댓글 작성자와 수정 요청자가 일치하는지 비교(ID값을 비교)후 댓글 수정이 가능합니다.<br>
+                                        댓글 수정 요청시 RNO값을 이용해 해당하는 댓글 데이터를 수정(UPDATE)합니다.
+                                    </p>
+                                    <p>
+                                        <span class="font-bold">댓글 삭제</span><br>
+                                        댓글 작성자와 삭제 요청자가 일치하는지 비교(ID값을 비교)후 댓글 삭제가 가능합니다.<br>
+                                        댓글 삭제 요청시 RNO값을 이용해 해당하는 댓글 데이터를 삭제(DELETE)합니다.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 첨부파일 업로드</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/DB_table_attach.PNG" alt="첨부파일 DB 테이블">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/DB_table_attach_relationship.PNG" alt="첨부파일 DB 테이블 관계도">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/attach_00.PNG" alt="파일 업로드 클래스 생성자">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/attach_01.PNG" alt="파일업로드 & mutipartRequest 생성 & List<attach> 생성">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/attach_03.PNG" alt="mutipartRequest를 이용해 글작성">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        파일첨부 기능 구현을 위해 DB에 <span class="font-bold">파일첨부 테이블을 생성</span>했습니다.<br>
+                                        cos라이브러리를 이용해 서버측 기능을 구현했습니다.
+                                    </p>
+                                    <p>
+                                        첨부파일 업로드시 서버에서는 HttpServletRequest가 아닌 <span class="color-red font-bold" data-tooltip="
+                                            웹 클라이언트가 요청을 보낼 때, http 프로토콜의 바디 부분에 데이터를 여러 부분으로 나눠서 보내는 것.<br><br>
+                                            웹 클라이언트가 서버에게 파일을 업로드할 때, http 프로토콜의 바디 부분에 파일정보를 담아서 전송을 하는데,
+                                            파일을 한번에 여러개 전송을 하면 body 부분에 파일이 여러개의 부분으로 연결되어 전송된다. 
+                                            이렇게 여러 부분으로 나뉘어서 전송되는 것을 Multipart data라고 한다.<br><br>
+                                            보통 파일을 전송할 때 사용한다.
+                                        ">MultipartRequest</span>로 데이터를 받아 처리합니다.<br>
+                                        MultipartRequest를 이용해 첨부파일들을 서버PC에 업로드 하고, 업로드 파일에 대한
+                                        필수 데이터들은 attach객체로 만들어 DB서버에 Insert합니다.
+                                    </p>
+                                    <p>
+                                        파일확장자를 구분하여 이미지 파일인 경우 썸네일파일을 생성하여 업로드 경로에 저장합니다. 
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 풀 스택 - 첨부파일 다운로드</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/attach_04.PNG" alt="첨부파일 다운로드">
+                                    <img class="modal-img" src="resource/portfolio-img/servlet-jsp_web/attach_05.PNG" alt="첨부파일 다운로드 서블릿 클래스">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                       사용자가 게시글의 첨부파일을 클릭하여 다운로드 요청을 하게 되면,
+                                       서버에서는 다운로드 요청을 처리하기 위해 응답헤더를 설정하게 됩니다.
+                                    </p>
+                                    <p>
+                                        응답헤더의 <span class="color-red font-bold" data-tooltip="
+                                        MIME 타입이란 클라이언트에게 전송된 문서의 다양성을 알려주기 위한 메커니즘이다.<br>
+                                        웹에서 파일의 확장자는 별  의미가 없다. 그러므로, 각 문서와 함께 올바른 MIME 타입을 전송하도록,
+                                        서버가 정확히 설정하는 것이 중요하다. <br>
+                                        브라우저들은 리소스를 내려받았을 때 해야 할 기본 동작이 무엇인지를 결정하기 위해 대게 MIME 타입을 사용한다.
+                                        ">MimType</span>과 <span class="color-red font-bold" data-tooltip="
+                                        HTTP Response Header에 들어가는 Content-Disposition은 <br>
+                                        HTTP Response Body에 오는 컨텐츠의 기질/성향을 알려주는 속성이다. <br>
+                                        default 값은 inline으로 web에 전달되는 data라고 생각하면 된다. <br>
+                                        특수한 경우는 Content-Dispostion에 attachment를 주는 경우로, 이때 filename과 함께 주게 되면 Body에 오는 값을 다운로드 받으라는 뜻이 된다.
+                                        ">Content-DisPosition</span>을 설정후 <br>
+                                        출력스트림을 통해 파일 다운로드 요청에 대한 응답을 하게 됩니다.
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section portfolio s-j-to-spring" data-title="Servlet/JSP 프로젝트를 Spring Framework로 전환">
+            <div class="slides">
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Servlet/JSP 프로젝트를 -> Spring Framework로 전환</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring-home_01.png" alt="홈 화면 상단">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring-home_02.png" alt="홈 화면 하단">
+                                </div>
+                                <div class="explain">
+                                    <p class="font-bold">전환 작업을 통해서 Spring Framework의 특징을 알 수 있었습니다.</p>
+                                    <p>
+                                        <span class="font-bold" data-tooltip="
+                                        각각의 객체 생성, 소멸과 같은 라이프 사이클을 관리하며 스프링으로부터
+                                        필요한 객체를 얻어올 수 있다.
+                                        ">경량 컨테이너로서 자바 객체를 직접 관리</span>,<br>
+                                        <span class="font-bold" data-tooltip="
+                                        일반적인 J2EE 프레임워크에 비해 구현을 위해 특정한 인터페이스를
+                                        구현하거나 상속을 받을 필요가 없어 기존에 존재하는 라이브러리 등을 지원하기에
+                                        용이하고 객체가 가볍다.
+                                        ">Plain Old Java Object 방식의 프레임워크</span>,<br>
+                                        <span class="color-red font-bold" data-tooltip="
+                                        컨트롤의 제어권이 사용자가 아니라 프레임워크에 있어서 필요에 따라 스프링에서
+                                        사용자의 코드를 호출한다.">제어 반전(IoC : Inversion of Control) 지원</span>,<br>
+                                        <span class="color-red font-bold" data-tooltip="
+                                        각각의 계층이나 서비스들 간에 의존성이 존재할 경우 프레임워크가 서로 연결시켜 준다.
+                                        ">의존성 주입(DI : Dependency Injection) 지원</span>,<br>
+                                        <span class="color-red font-bold" data-tooltip="
+                                        트랜잭션이나 로깅, 보안과 같이 여러 모듈에서 공통적으로 사용하는 기능의 경우
+                                        해당 기능을 분리하여 관리할 수 있다.
+                                        ">관점 지향 프로그래밍(AOP : Aspect-Oriented Programming) 지원</span>,<br>
+                                        <span class="font-bold" data-tooltip="
+                                        iBATIS 나 하이버네이트 등 이미 완성도가 높은 데이터베이스 처리 라이브러리와 연결할 수
+                                        있는 인터페이스를 제공한다.
+                                        ">영속성과 관련된 다양한 서비스 지원</span>,<br>
+                                        <span class="font-bold" data-tooltip="
+                                        스프링 프레임워크에 통합하기 위해 간단하게 기존 라이브러리를 감싸는 정도로 
+                                        스프링에서 사용이 가능하기 때문에 수많은 라이브러리가 이미 스프링에서 지원되고 있고
+                                        스프링에서 사용되는 라이브러리를 별도로 분리하기도 용이하다.
+                                        ">높은 확장성</span> 등의 특징이 있다는 것을 알 수 있었습니다.
+                                        <!-- <span class="color-red font-bold" data-tooltip="
+                                        IoC 컨테이너는 스프링의 가장 중요하고 핵심적인 기능으로서 자바의 리플렉션을 이용해서 
+                                        객체의 생명주기를 관리하고 의존성 주입(Dependency Injection)을 통해 각 계층이나 서비스들간의 의존성을 맞춰준다. 
+                                        이러한 기능들은 주로 환경설정을 담당하는 XML 파일에 의해 설정되고 수행된다.
+                                        ">IoC(Inversion of Control) 컨테이너</span><br>
+                                        <span class="color-red font-bold" data-tooltip="
+                                        한 객체가 어떤 객체(구체 클래스)에 의존할 것인지는 별도의 관심사이다. 
+                                        Spring에서는 DI 컨테이너를 통해 서로 강하게 결합되어 있는 두 클래스를 분리하고, 
+                                        두 객체 간의 관계를 결정해 줌으로써 결합도를 낮추고 유연성을 확보하고자 하였다. 
+                                        의존성 주입으로 애플리케이션 실행 시점에 객체를 생성하고 
+                                        관계를 결정해 줌으로써 다른 구체 클래스에 의존하는 코드를 제거하며 서로 다른 두 객체의 결합을 약하게 만들어 주었다. 
+                                        또한 이러한 방법은 상속보다 훨씬 유연하다. 
+                                        단, 여기서 주의해야 하는 것은 다른 빈을 주입받으려면 자기 자신이 반드시 컨테이너의 빈이여야 한다는 것이다.
+                                        ">DI(dependency Injection) 의존성 주입</span><br>
+                                        <span class="color-red font-bold" data-tooltip="
+                                        스프링은 로깅이나 보안, 트랜잭션 등 핵심적인 비지니스 로직과 관련이 없으나 
+                                        여러 곳에서 공통적으로 쓰이는 기능들을 분리하여 개발하고 실행 시에 서로 조합할 수 있는 관점 지향 프로그래밍(AOP)을 지원한다. 
+                                        기존에 널리 사용되고 있는 강력한 관점 지향 프로그래밍 프레임워크인 AspectJ도 내부적으로 사용할 수 있으며, 
+                                        스프링 자체적으로 지원하는 실행시(Runtime)에 조합하는 방식도 지원한다.
+                                        ">AOP(Aspect-Oriented Programming) 관점 지향 프로그래밍</span><br> -->
+                                    </p>
+                                    <hr class="wid-100">
+                                    <ul class="pd-lt-1vw mg-0">
+                                        <li><span class="font-bold">전환기간:</span> 1주</li>
+                                        <li><span class="font-bold">제작인원:</span> 1명</li>
+                                        <li><span class="font-bold">웹 주소 :</span> <a href="https://jsp-to-spring.ifonlygaram.net" target="_blank">https://jsp-to-spring.ifonlygaram.net</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Spring Framework IoC 컨테이너와 의존성 주입</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/servlet-dependency&new_instance 00.PNG" alt="Servlet/JSP의 객체 생성 및 의존성 연결">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring-DI&uesBean 00.PNG" alt="Spring의 Bean등록 및 생성자를 통한 의존성 주입">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/component-scan.PNG" alt="root-context.xml에 빈 탐색 태그 작성">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        Servlet/JSP에서는 객체의 생성은 new() 연산자를 통해 생성하고, 객체간의 연결은 개발자가 직접 맺어주었습니다.
+                                    </p>
+                                    <p>
+                                        하지만, Spring Framework에서는 IoC컨테이너가 객체의 생성과 연결을 책임지게 됩니다.
+                                    </p>
+                                    <p>
+                                        IoC컨테이너가 관리하는 객체(Bean)로 등록하기 위해서 @Controller, @service, @Repository 등의 어노테이션을 목적에 맞게 자바 클래스에 추가하고,
+                                        의존성 주입(Dependency Injection)이 필요한 객체는 Setter 주입, 생성자 주입, 필드주입 등의 방식을 사용했습니다 .
+                                    </p>
+                                    <p>
+                                        컨테이너가 Bean객체를 탐색하기 위해 xml파일(<span class="font-bold" data-tooltip="
+                                        일반적으로 데이터 저장소(Repositories) 및 비즈니스 서비스(Services)와 같은 
+                                        여러 요청에 대해서 공유해야 하는 bean들을 정의하게 된다.
+                                        ">root-context</span>, <span class="font-bold" data-tooltip="
+                                        servlet에 대한 context 설정을 작성하며, 
+                                        Controllers, HandlerMapping, ViewResolver와 같은 웹과 연관되어 있는 bean들을 정의하게 된다.<br>
+                                        servlet context에서 root context에 등록된 bean들에 대한 참조가 가능하지만, 
+                                        root context에서 servlet context에 등록된 bean들에 대한 참조는 불가능하다.
+                                        ">servlet-context</span>)에 component-scan 태그를 추가했습니다. 
+                                    </p>
+                                    <!-- <p> 
+                                        IoC컨테이너가 관리하는 Bean객체들은 기본적으로 싱글톤으로 생성되기 때문에 비용절약 면에서 유리해지고
+                                        의존성 주입을 통해 객체들간의 의존성을 줄이고 코드의 재사용성을 높힐 수 있습니다.
+                                    </p> -->
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Spring Framework MVC Controller</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/servlet controller.PNG" alt="Servlet/JSP의 Contorller 오브젝트(서블릿)들">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring controller.PNG" alt="spring의 Controller 오브젝트(빈)들" data-height="30vh">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring contorller method.PNG" alt="메서드 단위로 URL 처리">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring contorller parameter 00.PNG" alt="다양한 타입의 파라미터 처리">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        Servlet/JSP에서는 특별한 방법을 사용하지 않는 한, URL 하나 당 하나의 Controller 오브젝트로 요청/응답 처리를 하였지만,
+                                        Spring Framework에서는 소수의 Controller 오브젝트에서 @RequestMapping을 이용해 다수의 URL을 메서드 단위로 처리(생산성 향상)
+                                    </p>
+                                    <p>
+                                        HttpServletRequest, HttpServletResponse를 거의 사용할 필요 없이 필요한 기능 구현
+                                    </p>
+                                    <p>
+                                        다양한 타입의 파라미터 처리, 다양한 타입의 리턴 타입 사용 가능
+                                    </p>
+                                    <p>
+                                        GET 방식, POST 방식 등 전송 방식에 대한 처리를 어노테이션으로 처리 가능
+                                    </p>
+                                    <p>
+                                        상속/인터페이스 방식 대신에 어노테이션만으로도 필요한 설정 가능
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Spring Framework Maven Dependency</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/Servlet-JSP Library.PNG" alt="Servlet/JSP에선 직접 라이브러파일을 추가했었음">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/maven dependency.PNG" alt="maven을 활용한 라이브러리 의존성관리">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/maven dependencies.PNG" alt="pom.xml에 작성했던 dependency태그들이 실제 파일로 관리됨 ">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        Servlet/JSP 프로젝트에선 라이브러리 관리를 직접 했습니다. 
+                                    </p>
+                                    <P>
+                                        그러나 프로젝트의 규모가 커지면 라이브러리의 관리가 어려워지므로 스프링 프로젝트에선 메이븐을 활용해보았습니다. 
+                                    </P>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Spring Framework DB 커넥션 풀 사용</h1>
+                            <article>
+                                <div class="images">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/servlet Connection.png" alt="Servlet/JSP 프로젝트 - 연결 요청마다 getConnection 호출">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/servlet getConnection.png" alt="getConnection 호출시 매번 DB와 연결 ">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring connection pool bean.png" alt="hikariCP 커넥션 풀 bean등록">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring hikariCP connection.PNG" alt="커넥션 풀의 커넥션을 요청">
+                                    <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/connection pool img.png" alt="">
+                                </div>
+                                <div class="explain">
+                                    <p>
+                                        Servlet/JSP 프로젝트에선 DB와 통신시 DB와 매번 연결하는 방식이었습니다.
+                                    </p>
+                                    <P>
+                                        Spring Framework 프로젝트에선 HikariCP라이브러리를 사용했습니다.
+                                    </P>
+                                    <p>
+                                        미리 커넥션 객체를 생성하여 커넥션 풀에 저장하고, 연결요청시 커넥션 풀에 있는 커넥션 객체를 사용, 
+                                        연결 종료후 커넥션 풀에 반환하는 구조를 이용해 성능향샹을 기대할 수 있게됐습니다.  
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section portfolio" data-title="Spring FrameWork 팀 프로젝트">
+            <div class="slides">
+                <div class="slide">
+                    <div class="wrap">
+                        <div class="inner-wrap">
+                            <h1>Spring Framework 팀 프로젝트</h1>
+                            <article>
+                                <div class="images">
+
+                                </div>
+                                <div class="explain">
+
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section" style="background-color: crimson;" data-title="포트폴리오 웹사이트 제작"><h1>section6</h1></div>
+    </div>
+    <div id="modal">
+        <div class="img-title"></div>
+        <div class="img-view">
+        </div>
+        <div class="close-cursor">X</div>
+        <button class="left-arrow">&laquo;</button>
+        <button class="right-arrow">&raquo;</button>
+        <div class="slides-index">
+            <span class="left-index"></span> / <span class="right-index"></span>
+        </div>
+    </div>
+    <div class="tooltip">
+        <div class="tooltip-box"></div>
+        <div class="tooltip-tail"> </div>
+    </div>
+    <script>
+        //세션번호와 세션의 스크롤 탑 값을 가지는 객체 정의
+        function section(element,no, scrollTop){
+            this.element = element;
+            this.no = no;
+            this.scrollTop = scrollTop;
+            this.slides = [];
+            this.slideIndex = 0;
+        }
+        function section_slide(element, no, scrollLeft){
+            this.element = element;
+            this.no = no;
+            this.scrollLeft = scrollLeft;
+        }
+        
+
+        // 비순수함수를 의도적으로 사용하기 위해 객체형태로 사용해봄( C의 포인터처럼 함수의 파라미터로 넘긴 값을 함수내에서 변경하기위함. )
+        var move = {
+            scrolling: false,
+            sliding: false,
+            isImgScroll: false,
+            imgScrolling : false,
+            isModalScroll: false         
+        }
+        var myFullpage = $("#my-fullpage");
+        var html = $("html, body");
+        var winElement = $(window);
+        var currSecNum = 0;     // 현재 보여지고 있는 섹션 Index
+        var secAniTime = 500;   // 섹션 애니메이션 시간
+        var secStopTime = 25;   // 섹션 애니메이션 정지시간
+
+        // Ready
+        $(function(){
+            // 풀 페이지 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
+            var pageHeight = myFullpage.outerHeight();
+            var pageWidth = myFullpage.outerWidth();
+
+            // 브라우저 크기가 바뀌어도 현재 섹션 및 슬라이드 위치를 유지
+            winElement.resize(function(){
+                pageHeight = myFullpage.outerHeight();
+                pageWidth = myFullpage.outerWidth();
+            
+                if(sections){
+                    for(var i = 0; i < pageLength; i++){
+                        sections[i].scrollTop = (i) * pageHeight;
+                        if(sections[i].slides.length > 0) {
+                            // 슬라이드가 있는 경우 슬라이드 left다시 설정
+                            slideSetUp(sections[i], sections[i].element.find(".slide"));
+
+                            // slide-nav에 scrollLeft값 다시 지정
+                            var slideNav = sections[i].element.children(".slides-nav").find("li");
+                            for(var j = 0; j < slideNav.length; j++) {
+                                slideNav.eq(j).attr("data-scrollLeft", sections[i].slides[j].scrollLeft);
+                            }
+                        }
+                    }
+
+                    // 위에서 지정한 scroll값을 이용해 실제 요소 위치를 브라우저 크기에 맞게 재지정
+                    var currSection = sections[currSecNum];
+                    if(currSection.slides.length > 0){
+                        var slideIndex = currSection.slideIndex;
+                        var currSlides = currSection.element.children(".slides");
+                        currSlides.css({"left": -currSection.slides[slideIndex].scrollLeft}); // 슬라이드 위치 재지정
+                        html.animate({scrollTop: currSection.scrollTop}, 0); // 섹션 위치 재지정 
+                    }
+                }   
+            });
+            
+            // 문서로딩 완료후 세션 개수를 파악하고 각 세션마다 스크롤 탑의 값을 구해본다, 섹션 객체를 생성()
+            var pageLength = myFullpage.children().length;
+            var sections = [];
+            for(var i = 0; i < pageLength; i++){
+                var s = new section(myFullpage.find(".section").eq(i), i+1, i * pageHeight);
+                var slides = s.element.find(".slide");
+
+                // 섹션에 슬라이드가 있는 경우 
+                if(slides.length > 0){
+                    slideSetUp(s, slides);
+                    //가로슬라드 전용 버튼및 네비게이션 아이콘 추가 및 네비게이션용 li태그에 scrollLeft 값 저장
+                    var str = "";
+                    str += "<button class='left-arrow'>&laquo;</button>";
+                    str += "<button class='right-arrow'>&raquo;</button>";
+                    str += "<ul class='slides-nav'></ul><div class='slides-nav-title'></div>"
+                    myFullpage.find(".section").eq(i).append(str);
+
+                    str = "";
+                    for(var j = 0; j < s.slides.length; j++ ) {
+                        var slide = s.slides[j].element;
+                        var slideTitle = slide.find("h1").text();
+                        if(j == 0) 
+                            str +="<li data-focus='true' data-scrollLeft='"+ s.slides[j].scrollLeft + "' data-title='" + slideTitle + "' data-no='"+ s.slides[j].no +"'></li>";
+                        else 
+                            str +="<li data-focus='false' data-scrollLeft='"+ s.slides[j].scrollLeft + "' data-title='" + slideTitle + "' data-no='"+ s.slides[j].no +"'></li>";
+                    }
+                    myFullpage.find(".section").eq(i).find(".slides-nav").append(str);
+                }                
+                sections.push(s);
+            }
+
+            // 슬라이드가 있는 섹션의 경우 슬라이드 css를 셋팅 해준다.
+            function slideSetUp(section, slides) {
+                for(var i = 0; i < slides.length; i++){
+                    // 슬라이드가 이미 만들어져 있는 경우
+                    if(section.slides.length == slides.length) {
+                        var left = section.slides[i].scrollLeft = i * pageWidth;
+                        section.slides[i].element.css({"left": left});
+                    }
+                    else {
+                        var slide = new section_slide(slides.eq(i), i, i * pageWidth);
+                        slide.element.css({"left": slide.scrollLeft});
+                        section.slides.push(slide);
+                    }
+                }
+            }
+
+            // 섹션 네비게이션 생성하기
+            if(sections) {
+                var sectionList = myFullpage.find(".section"); //$(".my-fullpage .section");
+                var str = "";
+                str += "<ul class='section-nav'></ul>";
+                myFullpage.append(str);
+                str = "";
+                for(var i = 0; i < sectionList.length; i++) {
+                    if(i === 0) 
+                        // str += "<li class='curr-section' data-number='" + i + "' title='"+ $(sectionList[i]).data("title") +"'>" + $(sectionList[i]).data("title") + "</li>";
+                        str += "<li class='curr-section' data-number='" + i + "' title='"+ sectionList.eq(i).data("title") +"'>" + sectionList.eq(i).data("title") + "</li>";
+                    else 
+                        // str += "<li class='mouse-out' data-number='" + i + "' title='"+ $(sectionList[i]).data("title") +"'>" + $(sectionList[i]).data("title") + "</li>";
+                        str += "<li class='mouse-out' data-number='" + i + "' title='"+ sectionList.eq(i).data("title") +"'>" + sectionList.eq(i).data("title") + "</li>";
+                }
+                // $(".my-fullpage .section-nav").append(str);
+                myFullpage.find(".section-nav").append(str);
+            }
+            
+            // 프로필 뒷면을 확인 안하고 스크롤이동시 프로필 뒷면을 보여줌
+            function EdProfileBackCheck(isFlash) {
+                currSecNum = 0; // 휠이나 키보드에 영향받은 섹션넘버 변수를 다시 0으로 초기화
+                EdProfileTurn();
+                setTimeout(function(){
+                    move.scrolling = false;
+                }, 1000);
+                
+                if(!isFlash) return;
+                //애니메이션 시간동안 뒤집기 버튼 점멸
+                $(function flash(){
+                    if(!move.scrolling) return;
+                    $(".Ed-btn").animate({"opacity": 0}, 100, function(){
+                        $(".Ed-btn").animate({"opacity": 1}, 250, flash);
+                    });
+                });
+            }
+
+            var sectionNav_li = $(".section-nav li");
+            var clickSecNum = 0; // 섹션네비를 클릭하면 해당하는 섹션번호를 저장함 
+            // 섹션 네비게이션 클릭시 이벤트
+            sectionNav_li.click(function(){
+                if(!profile_isBackCheck){
+                    EdProfileBackCheck()
+                    return;
+                }
+
+                // 스크롤 중일땐 실행 안함
+                if(move.scrolling) return;
+
+                var currLi = $(this);
+                clickSecNum = currLi.data("number");
+                currSecNum = clickSecNum;
+
+                // 애니메이션 flag true
+                scrolling = true;
+
+                // 애니메이션이 끝나는 시간(+추가시간)에 맞춰서 false
+                setTimeout(function(){
+                    scrolling = false;
+                    currLi.removeClass().addClass("curr-section");
+                }, secAniTime);
+                $("html, body").animate({scrollTop: sections[currLi.data("number")].scrollTop}, secAniTime);
+
+                // 섹션 네비게이션 색상 번경 및 폰트 강조위치 변경
+                sectionNav_li.removeClass().addClass("mouse-out");
+                currLi.removeClass().addClass("curr-section");
+            });
+
+            // 섹션 네비 마우스 오버시 색상변경
+            sectionNav_li.hover(function(){
+                $(this).removeClass().addClass("mouse-over");
+            }, function(){ 
+                var thisLi = $(this);
+                // 마우스 오버에서 벗어날때 
+                if(thisLi.data("number") === clickSecNum)
+                    thisLi.removeClass().addClass("curr-section");
+                else 
+                    thisLi.removeClass().addClass("mouse-out");
+            });
+
+            //현재 어느 섹션에 스크롤이 위치해있는지 계산 (브라우저 크기 변경시 부정확성으로 인해 사용안함)
+            function currSection( sections, currScrollTop, pageHeight) {
+                var currSec = 0;
+                for(var i in sections) {
+                    // 각 세션의 scroll min, scroll max 값을 현재 scrollTop의 위치와 비교
+                    var min = sections[i].scrollTop;
+                    var max = sections[i].scrollTop + pageHeight;
+                    if(currScrollTop >= min  && currScrollTop < max) {
+                        currSec = i;
+                    }
+                }
+                return Number(currSec);
+            }
+            
+            // 이전,다음 섹션 이동 및 애니메이션 처리
+            function sectionSequence(afterSectionNum) {
+                // 프로필 뒷면을 확인 안하고 스크롤이동시 프로필 뒷면을 보여줌
+                if(!profile_isBackCheck){
+                    EdProfileBackCheck(true);
+                    return;
+                }
+                
+                // 이동할 섹션이 있는 경우 섹션 이동
+                if(sections[afterSectionNum]) {
+                    // 섹션 네비게이션과 호환성을 위해 섹션번호 저장
+                    clickSecNum = afterSectionNum;
+
+                    // 애니메이션이 끝나는 시간(+추가시간)에 맞춰서 false
+                    setTimeout(function(){
+                        move.scrolling = false;
+                    }, secAniTime);
+
+                    // 섹션 애니메이션
+                    html.animate({
+                        scrollTop: sections[afterSectionNum].scrollTop
+                    }, secAniTime);
+
+                    // 이동할 섹션이 마지막에 있던 슬라이드로 위치지정
+                    var afterSection = sections[afterSectionNum];
+                    var afterSlides = afterSection.element.children(".slides");
+                    if(afterSlides.hasClass("slides")){
+                        afterSlides.css({"left": -afterSection.slides[afterSection.slideIndex].scrollLeft});
+                    }
+
+                    // 섹션 네비게이션 색상 번경 및 폰트 강조위치 변경
+                    sectionNav_li.removeClass().addClass("mouse-out");
+                    sectionNav_li.eq(afterSectionNum).removeClass().addClass("curr-section");
+                }
+            }
+
+            // 스크롤이 이동시 다음 섹션 전환 애니메이션
+            window.addEventListener("wheel", function(e){
+                // 이미지 스크롤인 경우 '섹션 스크롤기능', '기본 스크롤기능', '모달 슬라이드'는 실행하지 않음
+                if(move.isImgScroll){
+                    e.preventDefault();
+                    return;
+                } 
+
+                // 스크롤, 슬라이딩중 일땐 샐행하지 않음
+                if(move.scrolling || move.sliding) return;
+                
+                // 모달창에서 스크롤시 슬라이드 적용
+                if(modal.css("display") == "block") {
+                    modalWheelSequence(e);
+                    return;
+                }
+
+                // -- 이곳부터 섹션 휠 스크롤링 적용
+                move.scrolling = true;
+
+                //휠 다운 일때 -120, 휠 업 일때 120 값을 가지는 e.whellDelta
+                var moveCondition = sectionMoveCondition(e.wheelDelta < 0, e.wheelDelta > 0);
+
+                // moveCondition값이 true일 때만 섹션 이동
+                if(moveCondition) sectionSequence(currSecNum);
+            }, {passive: false});
+
+            // 키보드 위,아래 방향키 입력시 섹션 전환 애니메이션
+            $(document).keydown(function(e) {
+                // 위,아래 방향키 입력시 기본 keyDown이벤트 막기, 다른버튼입력인 경우 실행안함
+                if(e.keyCode == 40 || e.keyCode == 38) e.preventDefault();
+                else return;
+
+                // 스크롤, 슬라이딩중 일땐 샐행하지 않음
+                if(move.scrolling || move.sliding) return;
+                move.scrolling = true;
+
+                // 방향키 코드 40 == 아래, 38 == 위
+                var moveCondition = sectionMoveCondition(e.keyCode == 40, e.keyCode == 38);
+
+                // moveCondition값이 true일때만 섹션 이동
+                if(moveCondition) sectionSequence(currSecNum);
+            });
+
+            // 파라미터 조건에 따라 section 위,아래 방향 결정 및 현재 슬라이드 인덱스 파악
+            function sectionMoveCondition(condition_1, condition_2) {
+                // 아래로 이동
+                if(condition_1) {
+                    currSecNum += 1;
+                    if(currSecNum > sections.length -1) {
+                        currSecNum = sections.length -1;
+                        move.scrolling = false;
+                        return false;
+                    }
+                }
+                //위로 이동
+                else if(condition_2) {
+                    currSecNum -= 1;
+                    if(currSecNum < 0) {
+                        currSecNum = 0;
+                        move.scrolling = false;
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            // 이전,다음 슬라이드 이동 및 애니메이션 처리
+            function slideSequence(currSecNum, direction) {
+                // var currSection = myFullpage.find(".section").eq(currSecNum);
+                var currSection = sections[currSecNum].element;
+                if(currSection.children(".slides").length == 0) return; // 슬라이드가 없는 섹션에서는 작동 안함
+
+                // 슬라이드 중일땐 버튼이 눌려도 아무작동 안하게 방지
+                if(move.sliding || move.scrolling) return;
+                move.sliding = true;
+
+                var slides = currSection.children(".slides");
+                var limit = slides.children(".slide").width() * (slides.children().length -1);
+                var currNav = currSection.children(".slides-nav").children("[data-focus='true']");
+               
+
+
+                // 다음 슬라이드 이동시
+                if(direction === "next") {
+                    // 슬라이드 '마지막번째미만'에선 하나씩 우측이동
+                    if(slides.offset().left > -limit){
+                        slides.animate({ left: slides.offset().left - slides.children(".slide").width() }, secAniTime);
+                        currNav.attr("data-focus", "false").next().attr("data-focus", "true"); // 슬라이드 네비 색상 변경
+                    }
+                    // 슬라이드 '마지막번째'에선 첫번째 슬라이드로 이동 
+                    else if(slides.offset().left == -limit){
+                        slides.animate({ left: 0 }, secAniTime); 
+                        currNav.attr("data-focus", "false").end().children("li").first().attr("data-focus", "true"); // 슬라이드 네비 색상 변경
+                    }
+                }
+                // 이전 슬라이드 이동시
+                else if(direction === "prev") {
+                     // 슬라이드 '두번째이상'에선 슬라이드 하나씩 좌측이동
+                    if(slides.offset().left < 0){
+                        slides.animate({ left: slides.offset().left + slides.children(".slide").width() }, secAniTime);
+                        currNav.attr("data-focus", "false").prev().attr("data-focus", "true"); // 슬라이드 네비 색상 변경
+                    }
+                    // 슬라이드 '첫번째'에선 슬라이드 마지막으로 이동
+                    else if(slides.offset().left == 0) {
+                        slides.animate({left:  -(slides.children(".slide").width() * (slides.children().length -1))}, secAniTime);
+                        currNav.attr("data-focus", "false").end().children("li").last().attr("data-focus", "true"); // 슬라이드 네비 색상 변경
+                    }
+                }
+                else {
+                    alert("error: slide direction lost");
+                }
+                slideArrowHideOn(move);
+
+                // 현재 섹션에서 보여지는 슬라이드 번호 구하기
+                sections[currSecNum].slideIndex = currSection.children(".slides-nav").find("li[data-focus='true']").data("no");
+            }
+
+            // 슬라이드중 슬라이드 버튼 가리기
+            function slideArrowHideOn(move) {
+                // 슬라이드 이동중엔 좌,우 이동 버튼 안보이게
+                var arrow_btn = $(".left-arrow, .right-arrow");
+                arrow_btn
+                    .css({"transition": "0s"})
+                    .css({"opacity":0});
+                 // 슬라이이드 이동이 끝난뒤 
+                 setTimeout(function(){
+                    move.sliding = false;
+                    // 좌,우 슬라이드 이동버튼 보이게
+                    arrow_btn
+                        .css({"transition": "0.3s"})
+                        .css({"opacity":1}); 
+                }, secAniTime + secStopTime);    
+            }
+
+            // 슬라이드 우 버튼 클릭시 슬라이드 이동
+            myFullpage.find(".section").on("click", ".right-arrow", function(){
+                slideSequence(currSecNum, "next");
+            });
+            
+            // 슬라이드 좌 버튼 클릭시 슬라이드 이동
+            myFullpage.find(".section").on("click", ".left-arrow", function(){
+                slideSequence(currSecNum, "prev");
+            });
+
+            // 키보드 좌우 방향키 입력시 슬라이드 애니메이션
+            $(document).keydown(function(e) {
+                //죄우 방향키 입력일 경우 기본 keyDown이벤트 막기, 다른버튼입력인 경우 실행안함
+                if(e.keyCode == 39 || e.keyCode == 37) e.preventDefault();
+                else return;
+
+                // 모달 켜져있는 경우 모달 슬라이드만 동작
+                if(modal.css("display") == "block") {
+                    // 오른쪽 방향키
+                    if(e.keyCode == 39) {
+                        modalSlideSequence(-modal.width());
+                    }
+                    // 왼쪽 방향키
+                    else if(e.keyCode == 37) {
+                        modalSlideSequence(modal.width());
+                    }
+                    return;
+                }
+
+                // 오른쪽 방향키 입력시 섹션 슬라이드
+                if(e.keyCode == 39) {
+                    // 프로필 섹션에서는 카드 뒤집기 애니메이션 적용
+                    if(currSecNum == 0){
+                        EdProfileTurn();
+                        return;
+                    } 
+                    slideSequence(currSecNum, "next");
+                }
+                // 왼쪽 방향 입력시 섹션 슬라이드
+                else if(e.keyCode == 37) {
+                    // 프로필 섹션에서는 카드 뒤집기 애니메이션 적용
+                    if(currSecNum == 0) {
+                        EdProfileTurn(true); // 왼쪽으로 회전함
+                        return;
+                    }
+                    slideSequence(currSecNum, "prev");
+                }
+            });
+
+            // 슬라이드 네비에 마우스 오버시 해당 슬라이드 타이틀 보여주기 
+            var snTimer;
+            var navTitle;
+            var slideNav_li = $(".slides-nav li");
+            slideNav_li.hover( function(){
+                var thisLi = $(this);
+                if(thisLi.attr("data-focus") == "true") return;
+                navTitle = thisLi.closest(".section").children(".slides-nav-title");
+                var li = thisLi;
+
+                // 일정시간후 타이틀 보여주기
+                snTimer = setTimeout(function(){
+                    if(thisLi.attr("data-focus") == "true") return;
+                    navTitle.text(li.data("title")); //먼저 텍스트를 채워넣어 높이를 자동으로 지정하게한다.
+
+                    var top = (li.offset().top - navTitle.parent().offset().top) - (navTitle.outerHeight(true));
+                    var rem1 = 1 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+                    navTitle.css({
+                        "display": "block",
+                        "top": top + rem1,
+                        "left": (li.offset().left - navTitle.parent().offset().left) - navTitle.outerWidth(true) / 2,
+                        "opacity": 0
+                    }).stop().animate({
+                        "top": top,
+                        "opacity": 1
+                    }, 200);
+                },300);
+                
+            }
+            , function(){
+                if($(this).attr("data-focus") == "true") return;
+                clearTimeout(snTimer); // setTimeout 실행중지
+                navTitle.text("")
+                .css({
+                    "display": "none"
+                });
+            });
+
+            // 슬라이드 네비게이션 클릭시 해당 슬라이드로 애니메이션
+            slideNav_li.click(function() {
+                //애니메이션 실행 스택 중복 방지
+                if(move.sliding) return; 
+                move.sliding = true;
+
+                var thisLi = $(this);
+                var slides = thisLi.parents(".section").children(".slides");
+                var slideNav = thisLi.parents(".slides-nav").children("li");
+                
+                slides.animate({left: -thisLi.attr("data-scrollLeft")}, secAniTime);
+                slideNav.attr("data-focus", "false");
+                thisLi.attr("data-focus", "true");
+
+                //슬라이드 이동시 sections 객체 slideIndex값 갱신
+                sections[currSecNum].slideIndex = thisLi.data("no");
+                navTitle.text("")
+                .css({
+                    "display": "none"
+                });
+                setTimeout(function(){move.sliding = false;}, secAniTime + secStopTime);
+                slideArrowHideOn(move);
+            });
+
+            // 모달 관련 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+            var modal = $("#modal");   
+            var modal_aniTime = 300;    //모달 애니메이션 시간 
+            
+            // 모달 이미지 슬라이드 방향 조정 
+            function modalSlideSequence(sequenceValue, pickIndex){
+                var modal_images = modal.find("img");
+                if(modal_images.length <= 1 || move.sliding) return;
+                move.sliding = true;
+                
+                // 입력된 방향으로 슬라이드
+                for(var i = 0; i < modal_images.length; i++) {
+                    modal_images.eq(i)
+                    .css({"left": parseInt(modal_images.eq(i).css("left")) + sequenceValue });
+                }
+
+                var currViewIdx = currModalIndex(modal_images);
+                if(pickIndex) currViewIdx = pickIndex;
+            
+                // 모달 인덱스 처리
+                if(sequenceValue < 0) {
+                    currViewIdx++;
+                    if(currViewIdx > modal_images.length-2) //최대치 넘어가면 다시 1로 (무한 슬라이드이기 때문)
+                        currViewIdx = 1;
+                }
+                else if(sequenceValue > 0) {
+                    currViewIdx--;
+                    if(currViewIdx < 1) // 최소치보다 작아지면 최대치로 (무한 슬라이드이기 때문)
+                        currViewIdx = modal_images.length-2;
+                }
+                modal.children(".img-title").html(modal_images.eq(currViewIdx).attr("alt")); // 모달 이미지 타이틀 변경
+                modal.find(".left-index").text(currViewIdx);
+                modal.find(".right-index").text(modal_images.length - 2);
+
+                // 무한슬라이드 처리 및 슬라이드 인덱스 처리
+                setTimeout(function(){
+                    currViewIdx = currModalIndex(modal_images);
+                    if(currViewIdx == 0 || currViewIdx == (modal_images.length - 1)) { // 양쪽 끝에서 넘길경우
+                        modal_images.css("transition", "0s")
+                                    .each(function(){
+                                        var img = $(this);
+                                        img.css({"left": parseInt(img.css("left")) + (sequenceValue * -(modal_images.length - 2))})
+                                            .css("left");
+                                    })
+                                    .css("transition", "0.5s");
+                    }
+                    move.sliding = false;
+                    
+                    // 슬라이드 인덱스 처리 (반응속도 느려서 타임아웃함수 밖에서 처리함) 코드는 간결한데 흠..
+                    // modal.find(".left-index").text(currModalIndex(modal_images));
+                    // modal.find(".right-index").text(modal_images.length - 2);
+
+                    modal.children(".slides-index, .img-title").css({"opacity": 1});
+                }, 500);
+
+                // 슬라이드중 버튼 가렸다 보이게하기
+                slideArrowHideOn(move);
+            } // end
+
+            // 모달 이미지 초기설정
+            function modalSetUp(images, pickImg) {
+                var setLeft = modal.width() / 2; // 모달 가운데에 이미지 위치
+    
+                for(var i = 0; i < images.length; i++) {
+                    modal.children(".img-view").append("<img>"); // 이미지 개수만큼 모달 img 태그 생성
+                    var modal_img = modal.find("img").eq(i);
+                    var img = images.eq(i);
+
+                    // 모달내 이미지의 src, alt 지정 및 left, height 지정
+                    modal_img.attr({
+                        "src": img.attr("src"),
+                        "alt": img.attr("alt")
+                    })
+                    .css({
+                        "left": setLeft,
+                        "height": img.data("height"),
+                        "min-height": img.data("height")
+                    })
+
+                    setLeft += modal.width(); // 다음 이미지 위치값 증가
+                }
+
+                // 무한 슬라이드 효과를 위해서 임시 img 생성
+                modal.children(".img-view")
+                            .prepend("<img class='prevImg tempImg'>")
+                            .children(".prevImg")
+                                .attr({
+                                    "src": images.eq(images.length - 1).attr("src"),
+                                    "alt": images.eq(images.length - 1).attr("alt")
+                                })
+                                .css({
+                                    "left":  -(modal.width()/2),
+                                    "height": images.eq(images.length - 1).data("height")
+                                })
+                            .end()    
+                            .append("<img class='nextImg tempImg'>")
+                            .children(".nextImg")
+                                .attr({
+                                    "src": images.eq(0).attr("src"),
+                                    "alt": images.eq(0).attr("alt")
+                                })
+                                .css({
+                                    "left":  setLeft,
+                                    "height": images.eq(0).data("height")
+                                })
+                
+                // 클릭한 이미지를 사용자가 바로 볼 수 있게 위치 시킴
+                for(var i = 0; i < modal.find("img").length; i++) {
+                    if(pickImg == images[i]) {
+                        modalSlideSequence(-i * modal.width(), i);
+                    }
+                }
+
+            }
+
+            // 모달에서 몇번째 이미지가 보여지고있는지 확인
+            function currModalIndex(images) {
+                for(var i = 0; i < images.length; i++) {
+                    var img = images.eq(i);
+
+                    var modal_left = parseInt(modal.css("left"));
+                    var modal_right = modal_left + parseInt(modal.outerWidth(true));
+                    var img_left = parseInt(img.css("left"));
+
+                    // 모달 안에 위치한 이미지 == 현재 보여지고 있는 이미지
+                    if(img_left > modal_left && img_left < modal_right) {
+                        return i;
+                    }
+                }
+                // on("load") 를 이용해 이미지 로딩이후 정확한 수치값 구하는법
+                // $(images).on("load", $(img), function(){
+                //     if($(this).hasClass("tempImg")) return;
+                //     console.log(this.offsetWidth);
+                //     console.log($(this).offset().left);
+
+                // })
+            }
+
+            // 모달 끄기
+            function closeModal(modal, closeAniSec) {
+                modal.animate({opacity: 0}, closeAniSec);
+                modal.children(".slides-index, .img-title").css({"opacity": 0});
+                setTimeout(function(){
+                    modal.css("display", "none").find("img").remove();
+                    move.isModalScroll = false;
+                }, closeAniSec);
+            }
+
+            // 이미지 클릭시 모달창 작동
+            $(".modal-img").click(function(e){
+                modalSetUp($(this).parent().children(), this); // 모달 이미지 위치및 속성 지정
+                modal.css("display", "block").animate({opacity: 1}, modal_aniTime);
+
+                // 커스텀 커서 위치 갱신
+                modal.children(".close-cursor").css({
+                    "left": (e.pageX - scrollX) + "px",
+                    "top": (e.pageY - scrollY) + "px"
+                });
+            });
+            
+            // 모달창 이미지 외부 화면 클릭시 창 종료
+            $(document).click(function(e){
+                var target = $(e.target);
+                if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+                    closeModal(modal, modal_aniTime);
+                }
+            });
+            // 모달창 외부에서 커스텀 커서 사용
+            winElement.mousemove(function(e){
+                if(modal.css("display") === "none") return;
+                // var target = $(e.target); // 마우스를 움직일때마다 비용낭비가 심하다
+                // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+
+                //Jquery 사용안하고 바닐라JS로 비용절약
+                if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
+                    modal.children(".close-cursor").css({
+                        "display": "block",
+                        "left": (e.pageX - scrollX) + "px",
+                        "top": (e.pageY - scrollY) +"px"
+                    });
+                }
+                else {
+                    modal.children(".close-cursor").css({
+                        "display": "none"
+                    });
+                }
+            })
+
+            // 모달창 close버튼 클릭시 창 종료
+            modal.on("click", ".close-btn", function(){
+                closeModal(modal, modal_aniTime);
+            });
+            
+            // esc키 입력시 모달창 종료
+            $(document).keydown(function(e){
+                // esc키 입력시 모달창 종료
+                if(e.keyCode === 27) {
+                    if(modal.css("display") === "block") {
+                        closeModal(modal, modal_aniTime)
+                    }
+                }
+            });
+            
+            // 모달 버튼 입력시 슬라이드
+            modal.find(".left-arrow").click(function(){
+                modalSlideSequence(modal.width());
+            })
+            modal.find(".right-arrow").click(function(){
+                modalSlideSequence(-modal.width());
+            })
+
+            // 모달에서 마우스 휠 조작시 슬라이드
+            function modalWheelSequence(event) {
+                if(event.wheelDelta < 0) {
+                    modalSlideSequence(-modal.width());
+                }
+                else if(event.wheelDelta > 0) {
+                    modalSlideSequence(modal.width());
+                }
+            }
+
+            // 기타 기능 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
+            // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
+            var video = $("video");
+
+            // 브라우저 크기에 따라 비디오 css 변경
+            function vidoesStateSet(video) {
+                for(var i = 0; i < video.length; i++) {
+                    var thisVideo = video.eq(i);
+                    if(thisVideo.height() == screen.availHeight) {
+                        thisVideo.attr("data-state", "default");
+                        return;
+                    }
+                    else if(winElement.width() < screen.width){
+                        thisVideo.attr("data-state", "default");
+                        thisVideo.css("height", thisVideo.height() - ((thisVideo.height() / 14) * 4));
+                       
+                    }
+                    else {
+                        thisVideo.attr("data-state", "window");
+                        thisVideo.css("height", thisVideo.height() + (thisVideo.height() * 0.4));
+                    }
+                }
+            }
+
+            // 비디오 로드 후 비디오 크기 및 data속성 지정
+            video[0].onloadeddata = function(){
+                vidoesStateSet(video);
+            }
+
+            // 비디오 전체화면 전환시 컨트롤 패널 css변경
+            winElement.resize(function() {
+                // vidoesStateSet(video);
+            });
+
+            // 페이지 새로고침시 스크롤위치 초기화 // 스크롤을 없애는 css적용으로 사용할 필요가 없어짐*
+            // window.onbeforeunload = function() {
+            //     html.animate({scrollTop: sections[0].scrollTop}, 0);
+            // }
+
+            /*툴팁 on/off*/
+            $(".explain span[data-tooltip]").hover(function(){
+                var thisTooltip = $(this);
+                // on
+                var title = thisTooltip.html().split("<")[0];
+                var explain = thisTooltip.data("tooltip");
+                thisTooltip.css("text-decoration", "underline");
+
+                if(!explain) {
+                    explain = "error : 요소의 data-tooltip 속성 값이 없습니다!!";
+                }
+                else {
+                    explain = "- " + title + " -<br>" + explain;
+                }
+
+                // 가상의 block 태그를 만들어 툴팁 내용을 넣고 그에 알맞는 width height 가져오기
+                if(!thisTooltip.children(".temp")[0]) {
+                    var tempDiv = "<div class='temp'>";
+                    thisTooltip.append(tempDiv);
+                    thisTooltip.children(".temp").html(explain);
+                }
+
+                // 툴팁박스 title과 내용, CSS 너비 높이 지정
+                $(".tooltip-box").attr("title",title).html(explain)
+                    .css({
+                        "width": thisTooltip.children(".temp").outerWidth(),
+                        "height": thisTooltip.children(".temp").outerHeight()
+                    });
+                
+                // 최상위 툴팁 태그 CSS 너비,높이,디스플레이 on 설정
+                $(".tooltip").css({
+                    "width": $(".tooltip-box").outerWidth(),
+                    "height": $(".tooltip-box").outerHeight(),
+                    "display": "block",
+                    "opacity": 0
+                });
+                $(".tooltip").stop().animate({"opacity": 1}, 300);
+
+                // 최상위 툴팁 태그 포지션 top, left 설정
+                var boxTop = thisTooltip.offset().top - ($(".tooltip-box").outerHeight() + ($(".tooltip-tail").outerHeight()/2) + 16);
+                var boxLeft = (thisTooltip.offset().left + (thisTooltip.width()/2)) - ($(".tooltip-box").outerWidth()/2);
+                $(".tooltip").offset({top: boxTop, left: boxLeft});
+
+            }, function(){
+                // off
+                $(".tooltip-box").attr("title", "").html("");
+                $(".tooltip").css("display", "none");
+                $(this).css("text-decoration", "none");
+            });
+           
+        });
+
+        // 섹션 슬라이드 이미지 로드후 이미지뷰어 높이에 맞게 각 이미지 높이를 수정
+        window.onload = function(){
+            var images = myFullpage.find(".images");
+
+            // 섹션 슬라이드 이미지의 크기를 재조정
+            function imgsResize(images){
+                for(var i = 0; i < images.length; i++){
+                    images.eq(i).children("img").each(function(){
+                        $(this).css({
+                            "height": images.eq(i).height() * 0.45,
+                            "margin-bottom": images.eq(i).height() * 0.05
+                        });
+                    });
+                }
+            }
+           
+            // 이미지 크기 지정
+            imgsResize(images);
+
+            // 브라우저 리사이즈시 이미지 크기 변경
+            winElement.resize(function(){
+                imgsResize(images);
+            });
+
+            // 이미지 위에 마우스 오버시 이미지스크롤 활성화
+            images.hover(function(){
+                if($(this).children("img").length <= 2) return;
+                move.isImgScroll = true;
+            }, function(){
+                move.isImgScroll = false;
+            });
+
+            // 이미지 여러개인 경우 커스텀 휠 이벤트 적용
+            images.on("mousewheel", function(e){
+                if(!move.isImgScroll || move.imgScrolling) return;
+                move.imgScrolling = true;
+                var thisImages = $(this);
+                var delta = e.originalEvent.wheelDelta; // 휠 델타값으로 휠업, 휠다운 구분
+                e.preventDefault(); // 기본 이벤트 막기
+
+                // 휠 다운
+                if(delta < 0){
+                    thisImages.stop().animate({
+                        scrollTop: thisImages.scrollTop() + thisImages.height()
+                    }, secAniTime);
+                }
+                // 휠 업
+                else if(delta > 0){
+                    thisImages.stop().animate({
+                        scrollTop: thisImages.scrollTop() - thisImages.height()
+                    }, secAniTime);
+                }
+                setTimeout(function(){
+                    move.imgScrolling = false;
+                }, secAniTime + secStopTime);
+            })
+        }
+    </script>
+</body>
+</html>

@@ -235,7 +235,7 @@ h1 {
     transform: translate(-50%, -50%);
     cursor: default;
     z-index: 3;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 #modal .img-title {
     position: absolute;

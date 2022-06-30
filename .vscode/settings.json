@@ -1,0 +1,4 @@
+{
+    "js/ts.implicitProjectConfig.target": "ES2020",
+    "javascript.validate.enable": true
+}

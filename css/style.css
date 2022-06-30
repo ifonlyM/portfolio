@@ -288,6 +288,7 @@ h1 {
 /* 프로필  */
 .profile h1 {
     text-align: center;
+    margin-bottom: 5vh;
 }
 .profile .Ed-front article div:first-child{
     text-align: center;
@@ -301,22 +302,35 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
 }
+.about-email a{
+    text-decoration: none;
+    color: black;
+}
+.about-email a:hover{
+    text-decoration: none;
+    color: cornflowerblue;
+}
 .profile-list ul {
     list-style: none;
-    margin: 0;
+    margin: 0 0 4vh 0;
     padding: 0;
     font-size: 1.4rem;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
 }
 .profile-list ul:first-child{
-    font-size: 1.7rem;
+    font-size: 1.6rem;
 }
-.profile-list ul:last-child li:first-child{
+.profile-list ul:last-child{
+    list-style: inside;
+    margin: 0;
+}
+.profile-list h4{
     font-size: 1.8rem;
+    margin: 0 0 1vh 0;
 }
 .profile-list ul li{
-    margin-bottom: 2vh;
+    margin-bottom: 1.5vh;
 }
 .profile-list ul li:last-child {
     margin-bottom: 0;

@@ -708,40 +708,6 @@ $(function(){
         }
     }
 
-    // 기타 기능 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
-    // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
-    var video = $("video");
-
-    // 브라우저 크기에 따라 비디오 css 변경
-    function vidoesStateSet(video) {
-        for(var i = 0; i < video.length; i++) {
-            var thisVideo = video.eq(i);
-            if(thisVideo.height() == screen.availHeight) {
-                thisVideo.attr("data-state", "default");
-                return;
-            }
-            else if(winElement.width() < screen.width){
-                thisVideo.attr("data-state", "default");
-                thisVideo.css("height", thisVideo.height() - ((thisVideo.height() / 14) * 4));
-            
-            }
-            else {
-                thisVideo.attr("data-state", "window");
-                thisVideo.css("height", thisVideo.height() + (thisVideo.height() * 0.4));
-            }
-        }
-    }
-
-    // 비디오 로드 후 비디오 크기 및 data속성 지정
-    video[0].onloadeddata = function(){
-        vidoesStateSet(video);
-    }
-
-    // 비디오 전체화면 전환시 컨트롤 패널 css변경
-    winElement.resize(function() {
-        // vidoesStateSet(video);
-    });
-
     // 페이지 새로고침시 스크롤위치 초기화 // 스크롤을 없애는 css적용으로 사용할 필요가 없어짐*
     // window.onbeforeunload = function() {
     //     html.animate({scrollTop: sections[0].scrollTop}, 0);
@@ -799,6 +765,7 @@ $(function(){
 
 });
 
+// 기타 기능 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
 // 섹션 슬라이드 이미지 로드후 이미지뷰어 높이에 맞게 각 이미지 높이를 수정
 window.onload = function(){
     var images = myFullpage.find(".images");
@@ -854,5 +821,30 @@ window.onload = function(){
         setTimeout(function(){
             move.imgScrolling = false;
         }, secAniTime + secStopTime);
-    })
+    });
+
+    // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
+    var video = $("video");
+
+    // 브라우저 크기에 따라 비디오 css 변경
+    function vidoesStateSet(video) {
+        for(var i = 0; i < video.length; i++) {
+            var thisVideo = video.eq(i);
+            if(thisVideo.height() == screen.availHeight) {
+                thisVideo.attr("data-state", "default");
+                return;
+            }
+            else if(winElement.width() < screen.width){
+                thisVideo.attr("data-state", "default");
+                thisVideo.css("height", thisVideo.height() - ((thisVideo.height() / 14) * 4));
+            
+            }
+            else {
+                thisVideo.attr("data-state", "window");
+                thisVideo.css("height", thisVideo.height() + (thisVideo.height() * 0.4));
+            }
+        }
+    }
+
+    vidoesStateSet(video);
 }

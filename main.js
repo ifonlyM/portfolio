@@ -822,7 +822,9 @@ window.onload = function(){
             move.imgScrolling = false;
         }, secAniTime + secStopTime);
     });
+}
 
+document.onload = function(){
     // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
     var video = $("video");
 

@@ -761,12 +761,36 @@ $(function(){
         $(".tooltip").css("display", "none");
         $(this).css("text-decoration", "none");
     });
+    
+    // // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
+    var video = document.querySelectorAll("video");
 
+    for(var i = 0; i < video.length; i++){
+
+        video[i].addEventListener("loadeddata" ,function(){
+            var $video = $(this);
+            $video.css("height", $video.height() + ($video.height() * 0.4));
+            $video.attr("data-state", "window");
+        });
+
+        video[i].addEventListener("webkitfullscreenchange",function(){
+            if(this.webkitDisplayingFullscreen){
+                console.log("풀스크린");
+                this.setAttribute("data-state", "default");
+            }
+            else{
+                console.log("윈도우");
+                this.setAttribute("data-state", "window");
+            }
+        });  
+    }
 });
+
+
 
 // 기타 기능 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
 // 섹션 슬라이드 이미지 로드후 이미지뷰어 높이에 맞게 각 이미지 높이를 수정
-window.onload = function(){
+winElement.on("load",function(){
     var images = myFullpage.find(".images");
 
     // 섹션 슬라이드 이미지의 크기를 재조정
@@ -821,25 +845,4 @@ window.onload = function(){
             move.imgScrolling = false;
         }, secAniTime + secStopTime);
     });
-
-    // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
-    var video = $("video");
-
-    // 브라우저 크기에 따라 비디오 css 변경
-    for(var i = 0; i < video.length; i++) {
-        var thisVideo = video.eq(i);
-        if(thisVideo.height() == screen.availHeight) {
-            thisVideo.attr("data-state", "default");
-            return;
-        }
-        else if(winElement.width() < screen.width){
-            thisVideo.attr("data-state", "default");
-            thisVideo.css("height", thisVideo.height() - ((thisVideo.height() / 14) * 4));
-        
-        }
-        else {
-            thisVideo.attr("data-state", "window");
-            thisVideo.css("height", thisVideo.height() + (thisVideo.height() * 0.4));
-        }
-    }
-}
+});

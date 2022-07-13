@@ -521,9 +521,9 @@ video {
     width: 100%;
     position: relative;
 }
-video[data-state='default']::-webkit-media-controls-panel{
-    /* width: 100%; */
-}
+/* video[data-state='default']::-webkit-media-controls-panel{
+    top: 0;
+} */
 video[data-state='window']::-webkit-media-controls-panel {
     position: absolute;
     background: rgba(0, 0, 0, 0.4);

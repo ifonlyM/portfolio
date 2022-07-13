@@ -12,7 +12,6 @@ function section_slide(element, no, scrollLeft){
     this.scrollLeft = scrollLeft;
 }
 
-
 // 비순수함수를 의도적으로 사용하기 위해 객체형태로 사용해봄( C의 포인터처럼 함수의 파라미터로 넘긴 값을 함수내에서 변경하기위함. )
 var move = {
     scrolling: false,
@@ -822,31 +821,25 @@ window.onload = function(){
             move.imgScrolling = false;
         }, secAniTime + secStopTime);
     });
-}
 
-document.onload = function(){
     // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
     var video = $("video");
 
     // 브라우저 크기에 따라 비디오 css 변경
-    function vidoesStateSet(video) {
-        for(var i = 0; i < video.length; i++) {
-            var thisVideo = video.eq(i);
-            if(thisVideo.height() == screen.availHeight) {
-                thisVideo.attr("data-state", "default");
-                return;
-            }
-            else if(winElement.width() < screen.width){
-                thisVideo.attr("data-state", "default");
-                thisVideo.css("height", thisVideo.height() - ((thisVideo.height() / 14) * 4));
-            
-            }
-            else {
-                thisVideo.attr("data-state", "window");
-                thisVideo.css("height", thisVideo.height() + (thisVideo.height() * 0.4));
-            }
+    for(var i = 0; i < video.length; i++) {
+        var thisVideo = video.eq(i);
+        if(thisVideo.height() == screen.availHeight) {
+            thisVideo.attr("data-state", "default");
+            return;
+        }
+        else if(winElement.width() < screen.width){
+            thisVideo.attr("data-state", "default");
+            thisVideo.css("height", thisVideo.height() - ((thisVideo.height() / 14) * 4));
+        
+        }
+        else {
+            thisVideo.attr("data-state", "window");
+            thisVideo.css("height", thisVideo.height() + (thisVideo.height() * 0.4));
         }
     }
-
-    vidoesStateSet(video);
 }

@@ -640,10 +640,12 @@ $(function(){
         modal.css("display", "block").animate({opacity: 1}, modal_aniTime);
 
         // 커스텀 커서 위치 갱신
-        modal.children(".close-cursor").css({
-            "left": (e.pageX - scrollX) + "px",
-            "top": (e.pageY - scrollY) + "px"
-        });
+        // ### 2024-10-26: 커스텀 커서 사용 안함 ###
+        //
+        // modal.children(".close-cursor").css({
+        //     "left": (e.pageX - scrollX) + "px",
+        //     "top": (e.pageY - scrollY) + "px"
+        // });
     });
     
     // 모달창 이미지 외부 화면 클릭시 창 종료
@@ -653,26 +655,31 @@ $(function(){
             closeModal(modal, modal_aniTime);
         }
     });
-    // 모달창 외부에서 커스텀 커서 사용
-    winElement.mousemove(function(e){
-        if(modal.css("display") === "none") return;
-        // var target = $(e.target); // 마우스를 움직일때마다 비용낭비가 심하다
-        // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
 
-        //Jquery 사용안하고 바닐라JS로 비용절약
-        if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
-            modal.children(".close-cursor").css({
-                "display": "block",
-                "left": (e.pageX - scrollX) + "px",
-                "top": (e.pageY - scrollY) +"px"
-            });
-        }
-        else {
-            modal.children(".close-cursor").css({
-                "display": "none"
-            });
-        }
-    })
+    // 모달창 외부에서 커스텀 커서 사용 
+    // ### 2024-10-26: 사용안하기로 결정 ###
+    //
+    // winElement.mousemove(function(e){
+    //     if(modal.css("display") === "none") return;
+    //
+    //     // 마우스를 움직일때마다 비용낭비가 심하다
+    //     // var target = $(e.target); 
+    //     // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+    //
+    //     //Jquery 사용안하고 바닐라JS로 비용절약
+    //     if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
+    //         modal.children(".close-cursor").css({
+    //             "display": "block",
+    //             "left": (e.pageX - scrollX) + "px",
+    //             "top": (e.pageY - scrollY) +"px"
+    //         });
+    //     }
+    //     else {
+    //         modal.children(".close-cursor").css({
+    //             "display": "none"
+    //         });
+    //     }
+    // })
 
     // 모달창 close버튼 클릭시 창 종료
     modal.on("click", ".close-btn", function(){

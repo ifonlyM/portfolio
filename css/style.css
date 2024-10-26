@@ -225,7 +225,7 @@ h1 {
 #modal .img-view{
     height: 100vh;
     position: relative;
-    cursor: none;
+    cursor: pointer;
 }
 #modal .img-view img {
     min-height: 60vh;

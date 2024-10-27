@@ -76,7 +76,7 @@ $(function(){
             slideSetUp(s, slides);
             //가로슬라드 전용 버튼및 네비게이션 아이콘 추가 및 네비게이션용 li태그에 scrollLeft 값 저장
             var str = "";
-            str += "<button class='left-arrow'>&laquo;</button>";
+            str += "<button class='left-arrow' style='display:none;'>&laquo;</button>";
             str += "<button class='right-arrow'>&raquo;</button>";
             str += "<ul class='slides-nav'></ul><div class='slides-nav-title'></div>"
             myFullpage.find(".section").eq(i).append(str);
@@ -235,6 +235,9 @@ $(function(){
             // 섹션 네비게이션 색상 번경 및 폰트 강조위치 변경
             sectionNav_li.removeClass().addClass("mouse-out");
             sectionNav_li.eq(afterSectionNum).removeClass().addClass("curr-section");
+
+            // 섹션 이동중에는 슬라이드 버튼 안보이게
+            slideArrowHideOn(move);
         }
     }
 
@@ -355,6 +358,31 @@ $(function(){
 
         // 현재 섹션에서 보여지는 슬라이드 번호 구하기
         sections[currSecNum].slideIndex = currSection.children(".slides-nav").find("li[data-focus='true']").data("no");
+
+
+        // 슬라이드 첫번째에서만 좌측 이동버튼 가리기
+        if(sections[currSecNum].slideIndex === 0){
+            currSection.children(".left-arrow").css({
+                "display" : "none"
+            });
+        }
+        else {
+            currSection.children(".left-arrow").css({
+                "display" : "block"
+            });
+        }
+
+        // 슬라이드 마지막에서만 우측 이동버튼 가리기
+        if(sections[currSecNum].slideIndex === currSection.find(".slide").length -1){
+            currSection.children(".right-arrow").css({
+                "display" : "none"
+            });
+        }
+        else {
+            currSection.children(".right-arrow").css({
+                "display" : "block"
+            });
+        }
     }
 
     // 슬라이드중 슬라이드 버튼 가리기
@@ -484,6 +512,32 @@ $(function(){
         });
         setTimeout(function(){move.sliding = false;}, secAniTime + secStopTime);
         slideArrowHideOn(move);
+
+        
+        var currSection = sections[currSecNum].element;
+        // 슬라이드 첫번째에서만 좌측 이동버튼 안보이게
+        if(sections[currSecNum].slideIndex === 0){
+            currSection.children(".left-arrow").css({
+                "display" : "none"
+            });
+        }
+        else {
+            currSection.children(".left-arrow").css({
+                "display" : "block"
+            });
+        }
+
+        // 슬라이드 마지막에서만 우측 이동버튼 안보이게
+        if(sections[currSecNum].slideIndex === currSection.find(".slide").length -1){
+            currSection.children(".right-arrow").css({
+                "display" : "none"
+            });
+        }
+        else {
+            currSection.children(".right-arrow").css({
+                "display" : "block"
+            });
+        }
     });
 
     // 모달 관련 ------------------------------------------------------------------------------------------------------------------------------------------------------------

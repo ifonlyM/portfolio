@@ -571,3 +571,4 @@ video[data-state='window']::-webkit-media-controls-panel {
 .wid-100 { width: 100%;}
 .color-red { color: red;}
 .font-bold {font-weight: bold;}
+.font-semi_bold {font-weight: 500;}

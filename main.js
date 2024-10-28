@@ -822,10 +822,10 @@ $(function(){
         $(".tooltip").css("display", "none");
         $(this).css("text-decoration", "none");
     });
-    
-    // // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
-    var video = document.querySelectorAll("video");
 
+    // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
+    var video = document.querySelectorAll("video");
+        
     for(var i = 0; i < video.length; i++){
 
         video[i].addEventListener("loadeddata" ,function(){
@@ -833,7 +833,7 @@ $(function(){
             $video.css("height", $video.height() + ($video.height() * 0.4));
             $video.attr("data-state", "window");
         });
-
+        
         video[i].addEventListener("webkitfullscreenchange",function(){
             if(this.webkitDisplayingFullscreen){
                 console.log("풀스크린");
@@ -845,6 +845,7 @@ $(function(){
             }
         });  
     }
+
 });
 
 

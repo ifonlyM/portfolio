@@ -1,0 +1,273 @@
+<div class="section profile" data-title="ABOUT">
+    <div class="wrap Ed-container">
+        <div class="inner-wrap Ed-item Ed-front">
+                <h1>매일 노력하고 경청하는 개발자 문현석입니다</h1>
+                <article>
+                    <div>
+                        <img id="ID-Photo" src="resource/image/img-01.jpg" alt="증명사진">
+                    </div>
+                    <div class="profile-list">
+                        <ul>
+                            <li>이름: 문현석</li>
+                            <li>나이: 30 (1993.11.12)</li>
+                            <li>휴대전화: 010-2652-8284</li>
+                            <li class="about-email">E-mail: <a href="mailto:ifonlymun@gmail.com">ifonlymun@gmail.com</a></li>
+                            <li class="about-email">GitHub: <a href="https://github.com/ifonlyM">https://github.com/ifonlyM</a></li>
+                        </ul>
+                        <ul>
+                            <h4>프로젝트 경험</h4>
+                            <li>자바 팀프로젝트</li>
+                            <li>Servlet/JSP 개인프로젝트</li>
+                            <li>Servlet/JSP 프로젝트를 SPRING FRAME WORK로 전환</li>
+                            <li>SPRING FRAME WORK 팀프로젝트</li>
+                            <li>포트폴리오 웹사이트 제작</li>
+                        </ul>
+                    </div>
+                </article>
+        </div> <!--End of Front-->
+        <div class="inner-wrap Ed-item Ed-back">
+            <h1>SKILLS</h1>
+            <article>
+                <div class="skill-group">
+                    <h2>Frontend</h2>
+                    <img src="resource/image/html5.svg" alt="html5">
+                    <img src="resource/image/css3.svg" alt="css3(1)">
+                    <img src="resource/image/javascript.svg" alt="javascript">
+                    <img src="resource/image/jquery.svg" alt="jquery">
+                </div>
+                <div class="skill-group">
+                    <h2>Backend</h2>
+                    <img src="resource/image/java.svg" alt="java" style="width: 7vw; max-width: none;">
+                    <img src="resource/image/servlet&jsp.png" alt="Servlet&JSP" style="width: 7vw; max-width: none;">
+                    <img src="resource/image/spring.svg" alt="SpringFrameWork" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                    <img src="resource/image/oracle.svg" alt="oracle" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                </div>
+                <div class="skill-group-wrap">
+                    <div class="skill-group">
+                        <h2>Deployment</h2>
+                        <img src="resource/image/amazon-web-services.svg" alt="아마존 웹서비스" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                    </div>
+                    <div class="skill-group">
+                        <h2>Certificate</h2>
+                        <figure>
+                            <img src="resource/image/certificate.png" alt="정보처리 산업기사 자격증" style="width: 7vw; max-width: none; margin: 3vh auto;">
+                            <figcaption>
+                                정보처리 산업기사
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+        </div><!--End of Back-->
+        <!-- <div class="profile-nav">
+            <ul>
+                <li style="background-color: black;"></li>
+                <li></li>
+            </ul>
+        </div> -->
+        <button class="Ed-btn" title="뒤집어보기" onclick="EdProfileTurn()">
+            <img src="resource/image/turn-left.png" alt="뒤집기">
+        </button>
+        <script>
+            /* 버튼을 클릭했을때 한방향으로 뒤집어지는 효과를 위해 script사용 */
+            var angle = 0;
+            var profile_isFront = true;
+            var profile_isBackCheck = false;
+            var Ed_front = $(".Ed-front");
+            var Ed_back = $(".Ed-back");
+            var Ed_btn = $(".Ed-btn");
+
+            // 프로필 뒤집어야 하는경우 작동, 프로필 y축 180도 회전 및 내비 색상변경
+            function EdProfileTurn(turnLeft){
+                if(turnLeft) {
+                    angle -= 180;
+                    Ed_front.css({"transform": "rotateY("+angle+"deg)"});
+                    Ed_back.css({"transform" : "rotateY("+ (angle - 180) +"deg)"});
+                }
+                else {
+                    angle += 180;
+                    Ed_front.css({"transform": "rotateY("+angle+"deg)"});
+                    Ed_back.css({"transform" : "rotateY("+ (angle - 180) +"deg)"});
+                }
+
+                //프로필섹션 front, back 상태 설정 및 내비 색상 변경
+                if(profile_isFront){
+                    // $(".profile-nav li").eq(0).css("background-color","lightgray");
+                    // $(".profile-nav li").eq(1).css("background-color","black");
+                    profile_isFront = false;
+                    profile_isBackCheck = true;
+                }
+                else {
+                    // $(".profile-nav li").eq(0).css("background-color","black");
+                    // $(".profile-nav li").eq(1).css("background-color","lightgray");
+                    profile_isFront = true;
+                }
+                
+                // 프로필 카드 뒤집기시 버튼 투명하게 변경
+                Ed_btn.stop().animate({"opacity": 0}, 300);
+                setTimeout(function(){
+                    Ed_btn.stop().animate({"opacity": 1}, 250);
+                }, 1250);
+            }
+
+            //프로필 내비 클릭시 뒤집기
+            // $(".profile-nav li").click(function(){
+            //     if(profile_isFront) {
+            //         if($(this)[0] == $(".profile-nav li").eq(1).get(0)) { // 객체 비교시 주의!
+            //             EdProfileTurn();
+            //         }
+            //     }
+            //     else {
+            //         if($(this)[0] == $(".profile-nav li").eq(0).get(0)) {
+            //             EdProfileTurn(true);
+            //         }
+            //     }
+            // });
+        </script>
+    </div>
+</div>
+
+
+<div class="section portfolio SmartAPC" data-title="SmartAPC">
+    <div class="slides">
+        <div class="slide">
+            <div class="wrap">
+                <div class="inner-wrap">
+                    <h1>SmartAPC</h1>
+                    <article>
+                        <div class="images">
+                            <img src="resource/portfolio-img/hosfit/hosfit_person_home.png" class="modal-img" alt="개인 사용자 홈">
+                            <img src="resource/portfolio-img/hosfit/hosfit_hospital_home.png" class="modal-img" alt="병원 사용자 홈">
+                            <img src="resource/portfolio-img/hosfit/hosfit_company_home.png" class="modal-img" alt="기업 사용자 홈">
+                            <img src="resource/portfolio-img/hosfit/hosfit_admin_home.png" class="modal-img" alt="관리자 홈">
+                        </div>
+                        <div class="explain">
+                            <strong>글로벌 의료진들과 환자의 진료상담을 Zoom 및 다양한 통신매체를 활용하여 중계하는 플랫폼</strong><br>
+                            <p class="mg-bt-1rem">
+                                <span class="font-semi_bold">서비스 유형:</span> 하이브리드 앱<br><br>
+                                <span class="font-semi_bold">담당 역할:</span> DB 설계, 백엔드 API 개발, 클라우드 서버 구축 및 관리<br><br>
+                                <span class="font-semi_bold">담당 기간:</span> 2022.11 - 2023.05<br>
+                            </p>
+                            <hr class="wid-100 mg-0">
+                            <strong>개발환경</strong><br>
+                            <ul class="pd-lt-1vw mg-0">
+                                <li><span class="font-semi_bold">Language:</span> Java8</li>
+                                <li><span class="font-semi_bold">FrameWork:</span> Spring Framework 5.2.3</li>
+                                <li><span class="font-semi_bold">Version Control:</span> git</li>
+                                <li><span class="font-semi_bold">Build tools:</span> maven 4.0.0</li>
+                                <li><span class="font-semi_bold">Deployment tools:</span> File Zila, PuTTY</li>
+                                <li><span class="font-semi_bold">Infrastructure:</span> AWS EC2 (Amazon Linux 2, Apache, Tomcat 8.5), AWS RDS (PostgreSQL), AWS Client VPN</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="wrap">
+                <div class="inner-wrap">
+                    <h1>주요 경험</h1>
+                    <article>
+                        <div class="images">
+                            <img src="resource/portfolio-img/hosfit/hosfit_tables.png" class="modal-img" alt="데이터 테이블 다이어그램">
+                            <img src="resource/portfolio-img/hosfit/SpringMVC_WEB_API.png" class="modal-img" alt="Web API">
+                            <img src="resource/portfolio-img/hosfit/Swagger-UI2_일부분.PNG" class="modal-img" alt="Swagger-UI 일부">
+                            <img src="resource/portfolio-img/hosfit/hosfit_niceauth.png" class="modal-img" alt="나이스 본인인증 API 일부">
+                            <img src="resource/portfolio-img/hosfit/PuTTY_FileZila.png" class="modal-img" alt="배포도구-PuTTY & FileZila">
+                        </div>
+                        <div class="explain">
+                            <ul class="pd-lt-1vw">
+                                <li>Spring MVC에서 제공하는 인터페이스인 HandlerMethodArgumentResolver를 구현하여
+                                    사용자 인증 및 메타데이터를 관리하는 반복적인 코드를 줄이고, 코드 재사용성을 확보했습니다.
+                                    이 후 작업하는 사내 신규 프로젝트에 모두 이 방법을 적용하여 개발 하였습니다.</li>
+                                <li>Enum을 활용한, Entity의 상태 값 관리
+                                    기존 사내 프로젝트는 Entity의 상태 값이나, 코드 값을 "01", "02", "03"… 같은 문자열로 비즈니스 로직에 작성 해왔었음.
+                                    Enum을 활용하여 상태 명, 코드 명으로 비즈니스 로직을 작성할 수 있게끔 프로젝트에 적용함.<br>
+                                    Ex: "05" -≫ eScheduleState.FINISHED.getCode()</li>
+                                <li>API 에러 핸들링 프로세스 구축
+                                    기존 사내 프로젝트는 서버에러에 대한 대처 프로세스가 없었음. (서버에러 발생시 그냥 404 페이지 보여주고 끝)
+                                    Enum을 활용하여 에러코드를 정립하고, 컨트롤러 단에서 @ExceptionHandler() 을 활용해 HTTP Status, 에러코드, 에러사유
+                                    등 에러 관련 데이터를 반환하여 프론트엔드 단에서 에러 발생에 대처 가능하도록 프로세스 구축</li>
+                                <li>AWS EC2, RDS, Client VPN 서비스 사용</li>
+                                <li>zoom 마켓에 앱 등록 신청 및 심사 피드백에 대한 모든 대응</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="section portfolio CurisAll" data-title="CurisAll">
+    <div class="slides">
+        <div class="slide">
+            <div class="wrap">
+                <div class="inner-wrap">
+                    <h1>CurisAll</h1>
+                    <article>
+                        <div class="images">
+                            <img src="resource/portfolio-img/hosfit/hosfit_person_home.png" class="modal-img" alt="개인 사용자 홈">
+                            <img src="resource/portfolio-img/hosfit/hosfit_hospital_home.png" class="modal-img" alt="병원 사용자 홈">
+                            <img src="resource/portfolio-img/hosfit/hosfit_company_home.png" class="modal-img" alt="기업 사용자 홈">
+                            <img src="resource/portfolio-img/hosfit/hosfit_admin_home.png" class="modal-img" alt="관리자 홈">
+                        </div>
+                        <div class="explain">
+                            <strong>글로벌 의료진들과 환자의 진료상담을 Zoom 및 다양한 통신매체를 활용하여 중계하는 플랫폼</strong><br>
+                            <p class="mg-bt-1rem">
+                                <span class="font-semi_bold">서비스 유형:</span> 하이브리드 앱<br><br>
+                                <span class="font-semi_bold">담당 역할:</span> DB 설계, 백엔드 API 개발, 클라우드 서버 구축 및 관리<br><br>
+                                <span class="font-semi_bold">담당 기간:</span> 2022.11 - 2023.05<br>
+                            </p>
+                            <hr class="wid-100 mg-0">
+                            <strong>개발환경</strong><br>
+                            <ul class="pd-lt-1vw mg-0">
+                                <li><span class="font-semi_bold">Language:</span> Java8</li>
+                                <li><span class="font-semi_bold">FrameWork:</span> Spring Framework 5.2.3</li>
+                                <li><span class="font-semi_bold">Version Control:</span> git</li>
+                                <li><span class="font-semi_bold">Build tools:</span> maven 4.0.0</li>
+                                <li><span class="font-semi_bold">Deployment tools:</span> File Zila, PuTTY</li>
+                                <li><span class="font-semi_bold">Infrastructure:</span> AWS EC2 (Amazon Linux 2, Apache, Tomcat 8.5), AWS RDS (PostgreSQL), AWS Client VPN</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="wrap">
+                <div class="inner-wrap">
+                    <h1>주요 경험</h1>
+                    <article>
+                        <div class="images">
+                            <img src="resource/portfolio-img/hosfit/hosfit_tables.png" class="modal-img" alt="데이터 테이블 다이어그램">
+                            <img src="resource/portfolio-img/hosfit/SpringMVC_WEB_API.png" class="modal-img" alt="Web API">
+                            <img src="resource/portfolio-img/hosfit/Swagger-UI2_일부분.PNG" class="modal-img" alt="Swagger-UI 일부">
+                            <img src="resource/portfolio-img/hosfit/hosfit_niceauth.png" class="modal-img" alt="나이스 본인인증 API 일부">
+                            <img src="resource/portfolio-img/hosfit/PuTTY_FileZila.png" class="modal-img" alt="배포도구-PuTTY & FileZila">
+                        </div>
+                        <div class="explain">
+                            <ul class="pd-lt-1vw">
+                                <li>Spring MVC에서 제공하는 인터페이스인 HandlerMethodArgumentResolver를 구현하여
+                                    사용자 인증 및 메타데이터를 관리하는 반복적인 코드를 줄이고, 코드 재사용성을 확보했습니다.
+                                    이 후 작업하는 사내 신규 프로젝트에 모두 이 방법을 적용하여 개발 하였습니다.</li>
+                                <li>Enum을 활용한, Entity의 상태 값 관리
+                                    기존 사내 프로젝트는 Entity의 상태 값이나, 코드 값을 "01", "02", "03"… 같은 문자열로 비즈니스 로직에 작성 해왔었음.
+                                    Enum을 활용하여 상태 명, 코드 명으로 비즈니스 로직을 작성할 수 있게끔 프로젝트에 적용함.<br>
+                                    Ex: "05" -≫ eScheduleState.FINISHED.getCode()</li>
+                                <li>API 에러 핸들링 프로세스 구축
+                                    기존 사내 프로젝트는 서버에러에 대한 대처 프로세스가 없었음. (서버에러 발생시 그냥 404 페이지 보여주고 끝)
+                                    Enum을 활용하여 에러코드를 정립하고, 컨트롤러 단에서 @ExceptionHandler() 을 활용해 HTTP Status, 에러코드, 에러사유
+                                    등 에러 관련 데이터를 반환하여 프론트엔드 단에서 에러 발생에 대처 가능하도록 프로세스 구축</li>
+                                <li>AWS EC2, RDS, Client VPN 서비스 사용</li>
+                                <li>zoom 마켓에 앱 등록 신청 및 심사 피드백에 대한 모든 대응</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,165 +19,57 @@
 </head>
 <body>
     <div id="my-fullpage">
-        <div class="section profile" data-title="ABOUT">
-            <div class="wrap Ed-container">
-                <div class="inner-wrap Ed-item Ed-front">
-                        <h1>매일 노력하고 경청하는 개발자 문현석입니다</h1>
-                        <article>
-                            <div>
-                                <img id="ID-Photo" src="resource/image/img-01.jpg" alt="증명사진">
-                            </div>
-                            <div class="profile-list">
-                                <ul>
-                                    <li>이름: 문현석</li>
-                                    <li>나이: 30 (1993.11.12)</li>
-                                    <li>휴대전화: 010-2652-8284</li>
-                                    <li class="about-email">E-mail: <a href="mailto:ifonlymun@gmail.com">ifonlymun@gmail.com</a></li>
-                                    <li class="about-email">GitHub: <a href="https://github.com/ifonlyM">https://github.com/ifonlyM</a></li>
-                                </ul>
-                                <ul>
-                                    <h4>프로젝트 경험</h4>
-                                    <li>자바 팀프로젝트</li>
-                                    <li>Servlet/JSP 개인프로젝트</li>
-                                    <li>Servlet/JSP 프로젝트를 SPRING FRAME WORK로 전환</li>
-                                    <li>SPRING FRAME WORK 팀프로젝트</li>
-                                    <li>포트폴리오 웹사이트 제작</li>
-                                </ul>
-                            </div>
-                        </article>
-                </div> <!--End of Front-->
-                <div class="inner-wrap Ed-item Ed-back">
-                    <h1>SKILLS</h1>
-                    <article>
-                        <div class="skill-group">
-                            <h2>Frontend</h2>
-                            <img src="resource/image/html5.svg" alt="html5">
-                            <img src="resource/image/css3.svg" alt="css3(1)">
-                            <img src="resource/image/javascript.svg" alt="javascript">
-                            <img src="resource/image/jquery.svg" alt="jquery">
-                        </div>
-                        <div class="skill-group">
-                            <h2>Backend</h2>
-                            <img src="resource/image/java.svg" alt="java" style="width: 7vw; max-width: none;">
-                            <img src="resource/image/servlet&jsp.png" alt="Servlet&JSP" style="width: 7vw; max-width: none;">
-                            <img src="resource/image/spring.svg" alt="SpringFrameWork" style="width: 7vw; max-width: none; margin: 3vh auto;">
-                            <img src="resource/image/oracle.svg" alt="oracle" style="width: 7vw; max-width: none; margin: 3vh auto;">
-                        </div>
-                        <div class="skill-group-wrap">
-                            <div class="skill-group">
-                                <h2>Deployment</h2>
-                                <img src="resource/image/amazon-web-services.svg" alt="아마존 웹서비스" style="width: 7vw; max-width: none; margin: 3vh auto;">
-                            </div>
-                            <div class="skill-group">
-                                <h2>Certificate</h2>
-                                <figure>
-                                    <img src="resource/image/certificate.png" alt="정보처리 산업기사 자격증" style="width: 7vw; max-width: none; margin: 3vh auto;">
-                                    <figcaption>
-                                        정보처리 산업기사
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                    </article>
-                </div><!--End of Back-->
-                <!-- <div class="profile-nav">
-                    <ul>
-                        <li style="background-color: black;"></li>
-                        <li></li>
-                    </ul>
-                </div> -->
-                <button class="Ed-btn" title="뒤집어보기" onclick="EdProfileTurn()">
-                    <img src="resource/image/turn-left.png" alt="뒤집기">
-                </button>
-                <script>
-                    /* 버튼을 클릭했을때 한방향으로 뒤집어지는 효과를 위해 script사용 */
-                    var angle = 0;
-                    var profile_isFront = true;
-                    var profile_isBackCheck = false;
-                    var Ed_front = $(".Ed-front");
-                    var Ed_back = $(".Ed-back");
-                    var Ed_btn = $(".Ed-btn");
-
-                    // 프로필 뒤집어야 하는경우 작동, 프로필 y축 180도 회전 및 내비 색상변경
-                    function EdProfileTurn(turnLeft){
-                        if(turnLeft) {
-                            angle -= 180;
-                            Ed_front.css({"transform": "rotateY("+angle+"deg)"});
-                            Ed_back.css({"transform" : "rotateY("+ (angle - 180) +"deg)"});
-                        }
-                        else {
-                            angle += 180;
-                            Ed_front.css({"transform": "rotateY("+angle+"deg)"});
-                            Ed_back.css({"transform" : "rotateY("+ (angle - 180) +"deg)"});
-                        }
-
-                        //프로필섹션 front, back 상태 설정 및 내비 색상 변경
-                        if(profile_isFront){
-                            // $(".profile-nav li").eq(0).css("background-color","lightgray");
-                            // $(".profile-nav li").eq(1).css("background-color","black");
-                            profile_isFront = false;
-                            profile_isBackCheck = true;
-                        }
-                        else {
-                            // $(".profile-nav li").eq(0).css("background-color","black");
-                            // $(".profile-nav li").eq(1).css("background-color","lightgray");
-                            profile_isFront = true;
-                        }
-                        
-                        // 프로필 카드 뒤집기시 버튼 투명하게 변경
-                        Ed_btn.stop().animate({"opacity": 0}, 300);
-                        setTimeout(function(){
-                            Ed_btn.stop().animate({"opacity": 1}, 250);
-                        }, 1250);
-                    }
-
-                    //프로필 내비 클릭시 뒤집기
-                    // $(".profile-nav li").click(function(){
-                    //     if(profile_isFront) {
-                    //         if($(this)[0] == $(".profile-nav li").eq(1).get(0)) { // 객체 비교시 주의!
-                    //             EdProfileTurn();
-                    //         }
-                    //     }
-                    //     else {
-                    //         if($(this)[0] == $(".profile-nav li").eq(0).get(0)) {
-                    //             EdProfileTurn(true);
-                    //         }
-                    //     }
-                    // });
-                </script>
-            </div>
-        </div>
+        
+        
+        
         <div class="section portfolio Hosfit" data-title="Hosfit">
             <div class="slides">
                 <div class="slide">
                     <div class="wrap">
                         <div class="inner-wrap">
-                            <h1>Hosfit</h1>
+                            <h1 class="slide-title">Hosfit</h1>
                             <article>
                                 <div class="images">
                                     <img src="resource/portfolio-img/hosfit/hosfit_person_home.png" class="modal-img" alt="개인 사용자 홈">
                                     <img src="resource/portfolio-img/hosfit/hosfit_hospital_home.png" class="modal-img" alt="병원 사용자 홈">
                                     <img src="resource/portfolio-img/hosfit/hosfit_company_home.png" class="modal-img" alt="기업 사용자 홈">
                                     <img src="resource/portfolio-img/hosfit/hosfit_admin_home.png" class="modal-img" alt="관리자 홈">
-                                    <!-- <img src="resource/portfolio-img/hosfit/hosfit_tables.png" class="modal-img" alt="DB 테이블 다이어그램"> -->
                                 </div>
                                 <div class="explain">
-                                    <strong>병원, 환자, 기업 간의 효율적인 의료 서비스를 제공하는 플랫폼</strong><br>
-                                    <p class="mg-bt-1rem">
-                                        <span class="font-semi_bold">서비스 유형:</span> 웹 서비스<br><br>
-                                        <span class="font-semi_bold">담당 역할:</span> 백엔드 API 유지, 보수, 개발<br><br>
-                                        <span class="font-semi_bold">담당 기간:</span> 2022.08 - 2022.12<br>
-                                    </p>
-                                    <hr class="wid-100 mg-0">
-                                    <strong>개발환경</strong><br>
-                                    <ul class="pd-lt-1vw mg-0">
-                                        <li><span class="font-semi_bold">Language:</span> Java8</li>
-                                        <li><span class="font-semi_bold">FrameWork:</span> Spring Framework 5.2.3</li>
-                                        <li><span class="font-semi_bold">Version Control:</span> git</li>
-                                        <li><span class="font-semi_bold">Build tools:</span> maven 4.0.0</li>
-                                        <li><span class="font-semi_bold">Deployment tools:</span> File Zila, PuTTY</li>
-                                        <li><span class="font-semi_bold">Infrastructure:</span> LG U+ 클라우드N 컴퓨팅(Linux Centos 7, Apache, Tomcat 8.5), 온프레미스 DB 서버 (PostgreSQL 9.4)</li>
-                                    </ul>
+                                    <div>
+                                        <h4 class="explain-title">병원, 환자, 기업 간의 효율적인 의료 서비스를 중계하는 플랫폼</h4>
+                                        <p>
+                                            <span class="font-semi_bold">서비스 유형:</span> 웹 서비스<br><br>
+                                            <span class="font-semi_bold">담당 역할:</span> 백엔드 API 유지, 보수, 개발<br><br>
+                                            <span class="font-semi_bold">담당 기간:</span> 2022.08 - 2022.12
+                                        </p>
+                                    </div>
+                                    <hr class="wid-100">
+                                    <div>
+                                        <h4 class="tech-stack_title">기술 스택</h4>
+                                        <ul class="tech-stack_list">
+                                            <li class="tech-stack_java">Java</li>
+                                            <li class="tech-stack_spring">Spring</li>
+                                            <li class="tech-stack_mybatis">Mybatis</li>
+                                            <li class="tech-stack_postgresql">PostgreSQL</li>
+                                            <li class="tech-stack_maven">Maven</li>
+                                            <li class="tech-stack_centos7">CentOS 7</li>
+                                            <li class="tech-stack_apache">Apache</li>
+                                            <li class="tech-stack_tomcat">Tomcat</li>
+                                            <li class="tech-stack_git">Git</li>
+                                        </ul>
+                                    </div>
+                                    <hr class="wid-100">
+                                    <div>
+                                        <p class="mg-bt-1rem font-bold">주요 경험</p>
+                                        <ul class="row-list">
+                                            <li>100여개 이상의 데이터 테이블 분석 후 개발</li>
+                                            <li>SpringMVC를 이용한 Web API 개발</li>
+                                            <li>API 문서화 도구로 Swagger-UI 2 사용</li>
+                                            <li>NICE 본인인증 API 연동</li>
+                                            <li>배포 도구를 이용해 war파일을 서버에 배포</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </article>
                         </div>
@@ -186,23 +78,21 @@
                 <div class="slide">
                     <div class="wrap">
                         <div class="inner-wrap">
-                            <h1>주요 경험</h1>
+                            <h1>100여개 이상의 데이터 테이블 분석 후 개발</h1>
                             <article>
                                 <div class="images">
-                                    <img src="resource/portfolio-img/hosfit/hosfit_tables.png" class="modal-img" alt="데이터 테이블 다이어그램">
-                                    <img src="resource/portfolio-img/hosfit/SpringMVC_WEB_API.png" class="modal-img" alt="Web API">
-                                    <img src="resource/portfolio-img/hosfit/Swagger-UI2_일부분.PNG" class="modal-img" alt="Swagger-UI 일부">
-                                    <img src="resource/portfolio-img/hosfit/hosfit_niceauth.png" class="modal-img" alt="나이스 본인인증 API 일부">
-                                    <img src="resource/portfolio-img/hosfit/PuTTY_FileZila.png" class="modal-img" alt="배포도구-PuTTY & FileZila">
+                                    <img src="resource/portfolio-img/hosfit/100plus.png" class="modal-img" alt="100+">
+                                    <img src="resource/portfolio-img/hosfit/hosfit_tables.png" class="modal-img" alt="ERD 다이어그램">
                                 </div>
                                 <div class="explain">
-                                    <ul class="pd-lt-1vw">
-                                        <li>100여개 이상의 데이터 테이블 분석</li>
-                                        <li>SpringMVC를 이용한 Web API 실무개발</li>
-                                        <li>API 문서화 도구로 Swagger-UI 2 사용</li>
-                                        <li>NICE 본인인증 API 연동</li>
-                                        <li>배포 도구를 이용해 war파일을 서버에 배포</li>
-                                    </ul>
+                                    첫 회사인 seize the day에 입사 후, 처음 맡았던 프로젝트가 Hosfit이었습니다.<br><br>
+                                    이미 개발 중인 프로젝트에 투입돼서 빠르게 적응해야 했는데요.<br><br>
+                                    ERD 다이어그램을 보고 정신이 아득(?)해졌습니다.<br><br>
+                                    취업 준비 중에 개발했던 프로젝트에 사용된 테이블은 많아 봐야 30여 개 수준에 그쳤지만, Hosfit의 테이블은 100개가 넘어갔습니다.<br><br>
+                                    이게 백엔드 개발자 한 명에서 감당할 수 있는 분량일까? 내 전임자는 신(?)인가 여러 생각이 들었지만 어떻게든 적응해야 했습니다.<br><br>
+                                    프로젝트 분석만 한 달 정도 하고 싶었지만, 백엔드 개발 담당자가 바뀌고 버그픽스 및 개발이 느려졌다는 얘기 또한 나와선 안 됐습니다.<br><br>
+                                    당장 대응해야 하는 문제들부터 우선순위를 정하고, 해당 문제들 위주의 비지니스 로직과 데이터 분석을 실행하고 하나하나 대응해 나갔습니다.<br><br>
+                                    이렇게 한 달여의 시간이 지난 후부터는 모든 버그픽스 및 개발 일정을 근무시간 내에소화할 수 있게 되었습니다!
                                 </div>
                             </article>
                         </div>
@@ -213,7 +103,7 @@
         <div class="section portfolio fullpage" data-title="포트폴리오 웹사이트 제작">
             <div class="wrap">
                 <div class="inner-wrap">
-                    <h1>포트폴리오 웹사이트 제작</h1>
+                    <h1 class="slide-title">포트폴리오 웹사이트 제작</h1>
                     <article>
                         <div class="images">
                             <img src="resource/portfolio-img/portpolio-web/포트폴리오 웹 화면00.PNG" class="modal-img" alt="포트폴리오 웹 화면 00">
@@ -224,29 +114,32 @@
                             <img src="resource/portfolio-img/portpolio-web/slide navigation.png" class="modal-img" alt="슬라이드 네비게이션">
                         </div>
                         <div class="explain">
-                            <strong>포트폴리오 웹 사이트를 제작했습니다.</strong><br>
-                            <p class="mg-bt-1rem">
-                                풀페이지 섹션, 슬라이드 방식을 사용한 포트폴리오 웹 사이트 입니다.<br>
-                                이미 존재하는 <a href="https://alvarotrigo.com/fullPage" target="_blank">fullPage JS</a> 라이브러리가 있었지만,
-                                제가 <span class="color-red font-bold">직접 구현</span>해보고 싶어 제작하게 되었습니다.<br><br>
-                            
-                                풀페이지 작성을 원하는 HTML요소에 알맞는 id, class를 추가하는 것으로
-                                쉽게 풀페이지 화면 구성을 가능하게 했습니다.<br><br>
-
-                                풀페이지 HTML요소를 비교적 쉽게 제어하기 위해서 
-                                풀페이지 기능에 필요한 데이터를 갖는 객체를 정의하여 기능구현에 활용하였습니다.<br><br>
-                            
-                                사용자의 화면탐색에 편의성을 더하는 네비게이션 기능을 섹션과 슬라이드에 각각 적용해보았습니다.
-                            </p>
-                            
-                            <hr class="wid-100 mg-0">
-                            <ul class="pd-lt-1vw mg-0">
-                                <li><span class="font-bold">주요기능:</span> 풀페이지 섹션, 슬라이드</li>
-                                <li><span class="font-bold">제작기간:</span> 4주</li>
-                                <li><span class="font-bold">제작인원:</span> 1명</li>
-                                <li><span class="font-bold">URL :</span> <a href="https://portpolio.onlyif.dev" target="_blank">https://portpolio.onlyif.dev</a></li>
-                                <li><span class="font-bold">GitHub :</span> <a href="https://github.com/ifonlyM/portfolio" target="_blank">https://github.com/ifonlyM/portfolio</a></li>
-                            </ul>
+                            <div>
+                                <h4 class="explain-title">포트폴리오 웹 사이트를 직접 제작했습니다.</h4>
+                                <p>
+                                    풀페이지 섹션, 슬라이드 방식을 사용한 포트폴리오 웹 사이트 입니다.<br>
+                                    이미 존재하는 <a href="https://alvarotrigo.com/fullPage" target="_blank">fullPage JS</a> 라이브러리가 있었지만,
+                                    제가 <span class="color-red font-bold">직접 구현</span>해보고 싶어 제작하게 되었습니다.<br><br>
+                                    
+                                    풀페이지 작성을 원하는 HTML요소에 알맞는 id, class를 추가하는 것으로
+                                    쉽게 풀페이지 화면 구성을 가능하게 했습니다.<br><br>
+                                    
+                                    풀페이지 HTML요소를 비교적 쉽게 제어하기 위해서 
+                                    풀페이지 기능에 필요한 데이터를 갖는 객체를 정의하여 기능구현에 활용하였습니다.<br><br>
+                                    
+                                    사용자의 화면탐색에 편의성을 더하는 네비게이션 기능을 섹션과 슬라이드에 각각 적용해보았습니다.
+                                </p>
+                            </div>
+                            <hr class="wid-100">
+                            <div>
+                                <ul class="row-list">
+                                    <li><span class="font-bold">주요기능:</span> 풀페이지 섹션, 슬라이드</li>
+                                    <li><span class="font-bold">제작기간:</span> 4주</li>
+                                    <li><span class="font-bold">제작인원:</span> 1명</li>
+                                    <li><span class="font-bold">URL :</span> <a href="https://portpolio.onlyif.dev" target="_blank">https://portpolio.onlyif.dev</a></li>
+                                    <li><span class="font-bold">GitHub :</span> <a href="https://github.com/ifonlyM/portfolio" target="_blank">https://github.com/ifonlyM/portfolio</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -257,7 +150,7 @@
                 <div class="slide">
                     <div class="wrap">
                         <div class="inner-wrap">
-                            <h1>Spring Framework 팀 프로젝트</h1>
+                            <h1 class="slide-title">Spring Framework 팀 프로젝트</h1>
                             <article>
                                 <div class="images">
                                     <img src="resource/portfolio-img/spring-team_web/home_00.PNG" class="modal-img" alt="홈 화면 상단">
@@ -265,30 +158,34 @@
                                     <img src="resource/portfolio-img/spring-team_web/home_02.PNG" class="modal-img" alt="홈 화면 하단">
                                 </div>
                                 <div class="explain">
-                                    <p class="mt-bt-2rem">
-                                        <strong>피트니스 클럽 웹 애플리케이션</strong><br><br>
-                                        팀원들과 기존 회원제 게시판에서 추가적인 기능을 더한 웹 애플리케이션을
-                                        제작 해보았습니다.<br>
-                                        추가적인 기능으로는 PT예약 기능, 트레이너 경력 , 회원, 매출, 블랙리스트, 게시글 관리기능이 있습니다.<br>
-                                        이번 팀 프로젝트를 통해서 
-                                        <span class="color-red font-bold" data-tooltip="
-                                        Spring Security 는 엔터프라이즈 애플리케이션에 대한 인증 , 권한 부여 및 
-                                        기타 보안 기능을 제공하는 Java / Java EE 프레임워크입니다 .
-                                        ">Spring Security</span>와 
-                                        <span class="color-red font-bold" data-tooltip="
-                                        마이바티스(MyBatis)는 자바 퍼시스턴스 프레임워크의 하나로 XML 서술자나 애너테이션(annotation)을 사용하여 저장 프로시저나 SQL문으로 객체들을 연결시킨다.<br>
-                                        마이바티스는 IBATIS 3.0의 포크이며 IBATIS의 원 개발자들이 포함된 팀에 의해 유지보수되고 있다.
-                                        ">MyBatis</span>를 처음 적용해보았고 jUnit을 이용한 단위 테스트를 시행했습니다. 
-                                    </p>
+                                    <div>
+                                        <h4 class="explain-title">피트니스 클럽 웹 애플리케이션</h4>
+                                        <p>
+                                            팀원들과 기존 회원제 게시판에서 추가적인 기능을 더한 웹 애플리케이션을
+                                            제작 해보았습니다.<br><br>
+                                            추가적인 기능으로는 PT예약 기능, 트레이너 경력 , 회원, 매출, 블랙리스트, 게시글 관리기능이 있습니다.<br><br>
+                                            이번 팀 프로젝트를 통해서 
+                                            <span class="color-red font-bold" data-tooltip="
+                                            Spring Security 는 엔터프라이즈 애플리케이션에 대한 인증 , 권한 부여 및 
+                                            기타 보안 기능을 제공하는 Java / Java EE 프레임워크입니다 .
+                                            ">Spring Security</span>와 
+                                            <span class="color-red font-bold" data-tooltip="
+                                            마이바티스(MyBatis)는 자바 퍼시스턴스 프레임워크의 하나로 XML 서술자나 애너테이션(annotation)을 사용하여 저장 프로시저나 SQL문으로 객체들을 연결시킨다.<br>
+                                            마이바티스는 IBATIS 3.0의 포크이며 IBATIS의 원 개발자들이 포함된 팀에 의해 유지보수되고 있다.
+                                            ">MyBatis</span>를 처음 적용해보았고 jUnit을 이용한 단위 테스트를 시행했습니다. 
+                                        </p>
+                                    </div>
                                     <hr class="wid-100">
-                                    <ul class="pd-lt-1vw">
-                                        <li><span class="font-bold">주요기능:</span> 회원제 게시판 기능, PT예약 기능, <span data-tooltip="트레이너 경력, 회원, 매출, 블랙리스트, 게시글관리 ">각종 관리자 기능</span></li>
-                                        <li><span class="font-bold">나의파트:</span> PT예약, 트레이너 경력 관리 </li>
-                                        <li><span class="font-bold">제작기간:</span> 4주</li>
-                                        <li><span class="font-bold">제작인원:</span> 4명</li>
-                                        <li><span class="font-bold">URL :</span> <a href="https://spring.ifonlygaram.net" target="_blank">https://spring.ifonlygaram.net</a></li>
-                                        <li><span class="font-bold">GitHub:</span> <a href="https://github.com/ifonlyM/human" target="_blank">https://github.com/ifonlyM/human</a></li>
-                                    </ul>
+                                    <div>
+                                        <ul class="row-list">
+                                            <li><span class="font-bold">주요기능:</span> 회원제 게시판 기능, PT예약 기능, <span data-tooltip="트레이너 경력, 회원, 매출, 블랙리스트, 게시글관리 ">각종 관리자 기능</span></li>
+                                            <li><span class="font-bold">나의파트:</span> PT예약, 트레이너 경력 관리 </li>
+                                            <li><span class="font-bold">제작기간:</span> 4주</li>
+                                            <li><span class="font-bold">제작인원:</span> 4명</li>
+                                            <li><span class="font-bold">URL :</span> <a href="https://spring.ifonlygaram.net" target="_blank">https://spring.ifonlygaram.net</a></li>
+                                            <li><span class="font-bold">GitHub:</span> <a href="https://github.com/ifonlyM/human" target="_blank">https://github.com/ifonlyM/human</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </article>
                         </div>
@@ -568,71 +465,81 @@
                 <div class="slide">
                     <div class="wrap">
                         <div class="inner-wrap">
-                            <h1>Servlet/JSP 프로젝트를 -> Spring Framework로 전환</h1>
+                            <h1 class="slide-title">Servlet/JSP 프로젝트를 Spring Framework로 전환</h1>
                             <article>
                                 <div class="images">
                                     <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring-home_01.png" alt="홈 화면 상단">
                                     <img class="modal-img" src="resource/portfolio-img/jsp-to-spring_web/spring-home_02.png" alt="홈 화면 하단">
                                 </div>
                                 <div class="explain">
-                                    <p class="font-bold">전환 작업을 통해서 Spring Framework의 특징을 알 수 있었습니다.</p>
-                                    <p>
-                                        <span class="font-bold" data-tooltip="
-                                        각각의 객체 생성, 소멸과 같은 라이프 사이클을 관리하며 스프링으로부터
-                                        필요한 객체를 얻어올 수 있다.
-                                        ">경량 컨테이너로서 자바 객체를 직접 관리</span>,<br>
-                                        <span class="font-bold" data-tooltip="
-                                        일반적인 J2EE 프레임워크에 비해 구현을 위해 특정한 인터페이스를
-                                        구현하거나 상속을 받을 필요가 없어 기존에 존재하는 라이브러리 등을 지원하기에
-                                        용이하고 객체가 가볍다.
-                                        ">Plain Old Java Object 방식의 프레임워크</span>,<br>
-                                        <span class="color-red font-bold" data-tooltip="
-                                        컨트롤의 제어권이 사용자가 아니라 프레임워크에 있어서 필요에 따라 스프링에서
-                                        사용자의 코드를 호출한다.">제어 반전(IoC : Inversion of Control) 지원</span>,<br>
-                                        <span class="color-red font-bold" data-tooltip="
-                                        각각의 계층이나 서비스들 간에 의존성이 존재할 경우 프레임워크가 서로 연결시켜 준다.
-                                        ">의존성 주입(DI : Dependency Injection) 지원</span>,<br>
-                                        <span class="color-red font-bold" data-tooltip="
-                                        트랜잭션이나 로깅, 보안과 같이 여러 모듈에서 공통적으로 사용하는 기능의 경우
-                                        해당 기능을 분리하여 관리할 수 있다.
-                                        ">관점 지향 프로그래밍(AOP : Aspect-Oriented Programming) 지원</span>,<br>
-                                        <span class="font-bold" data-tooltip="
-                                        iBATIS 나 하이버네이트 등 이미 완성도가 높은 데이터베이스 처리 라이브러리와 연결할 수
-                                        있는 인터페이스를 제공한다.
-                                        ">영속성과 관련된 다양한 서비스 지원</span>,<br>
-                                        <span class="font-bold" data-tooltip="
-                                        스프링 프레임워크에 통합하기 위해 간단하게 기존 라이브러리를 감싸는 정도로 
-                                        스프링에서 사용이 가능하기 때문에 수많은 라이브러리가 이미 스프링에서 지원되고 있고
-                                        스프링에서 사용되는 라이브러리를 별도로 분리하기도 용이하다.
-                                        ">높은 확장성</span> 등의 특징이 있다는 것을 알 수 있었습니다.
-                                        <!-- <span class="color-red font-bold" data-tooltip="
-                                        IoC 컨테이너는 스프링의 가장 중요하고 핵심적인 기능으로서 자바의 리플렉션을 이용해서 
-                                        객체의 생명주기를 관리하고 의존성 주입(Dependency Injection)을 통해 각 계층이나 서비스들간의 의존성을 맞춰준다. 
-                                        이러한 기능들은 주로 환경설정을 담당하는 XML 파일에 의해 설정되고 수행된다.
-                                        ">IoC(Inversion of Control) 컨테이너</span><br>
-                                        <span class="color-red font-bold" data-tooltip="
-                                        한 객체가 어떤 객체(구체 클래스)에 의존할 것인지는 별도의 관심사이다. 
-                                        Spring에서는 DI 컨테이너를 통해 서로 강하게 결합되어 있는 두 클래스를 분리하고, 
-                                        두 객체 간의 관계를 결정해 줌으로써 결합도를 낮추고 유연성을 확보하고자 하였다. 
-                                        의존성 주입으로 애플리케이션 실행 시점에 객체를 생성하고 
-                                        관계를 결정해 줌으로써 다른 구체 클래스에 의존하는 코드를 제거하며 서로 다른 두 객체의 결합을 약하게 만들어 주었다. 
-                                        또한 이러한 방법은 상속보다 훨씬 유연하다. 
-                                        단, 여기서 주의해야 하는 것은 다른 빈을 주입받으려면 자기 자신이 반드시 컨테이너의 빈이여야 한다는 것이다.
-                                        ">DI(dependency Injection) 의존성 주입</span><br>
-                                        <span class="color-red font-bold" data-tooltip="
-                                        스프링은 로깅이나 보안, 트랜잭션 등 핵심적인 비지니스 로직과 관련이 없으나 
-                                        여러 곳에서 공통적으로 쓰이는 기능들을 분리하여 개발하고 실행 시에 서로 조합할 수 있는 관점 지향 프로그래밍(AOP)을 지원한다. 
-                                        기존에 널리 사용되고 있는 강력한 관점 지향 프로그래밍 프레임워크인 AspectJ도 내부적으로 사용할 수 있으며, 
-                                        스프링 자체적으로 지원하는 실행시(Runtime)에 조합하는 방식도 지원한다.
-                                        ">AOP(Aspect-Oriented Programming) 관점 지향 프로그래밍</span><br> -->
-                                    </p>
+                                    <div>
+                                        <h4 class="explain-title">전환 작업을 통해서 Spring Framework의 특징을 알 수 있었습니다.</h4>
+                                        <p>
+                                            <span class="mg-bt-1rem" data-tooltip="
+                                            각각의 객체 생성, 소멸과 같은 라이프 사이클을 관리하며 스프링으로부터
+                                            필요한 객체를 얻어올 수 있다.
+                                            ">경량 컨테이너로서 자바 객체를 직접 관리</span>,<br>
+
+                                            <span class="mg-bt-1rem" data-tooltip="
+                                            일반적인 J2EE 프레임워크에 비해 구현을 위해 특정한 인터페이스를
+                                            구현하거나 상속을 받을 필요가 없어 기존에 존재하는 라이브러리 등을 지원하기에
+                                            용이하고 객체가 가볍다.
+                                            ">Plain Old Java Object 방식의 프레임워크</span>,<br>
+
+                                            <span class="color-red mg-bt-1rem" data-tooltip="
+                                            컨트롤의 제어권이 사용자가 아니라 프레임워크에 있어서 필요에 따라 스프링에서
+                                            사용자의 코드를 호출한다.">제어 반전(IoC : Inversion of Control) 지원</span>,<br>
+
+                                            <span class="color-red mg-bt-1rem" data-tooltip="
+                                            각각의 계층이나 서비스들 간에 의존성이 존재할 경우 프레임워크가 서로 연결시켜 준다.
+                                            ">의존성 주입(DI : Dependency Injection) 지원</span>,<br>
+
+                                            <span class="color-red mg-bt-1rem" data-tooltip="
+                                            트랜잭션이나 로깅, 보안과 같이 여러 모듈에서 공통적으로 사용하는 기능의 경우
+                                            해당 기능을 분리하여 관리할 수 있다.
+                                            ">관점 지향 프로그래밍(AOP : Aspect-Oriented Programming) 지원</span>,<br>
+
+                                            <span class="mg-bt-1rem" data-tooltip="
+                                            iBATIS 나 하이버네이트 등 이미 완성도가 높은 데이터베이스 처리 라이브러리와 연결할 수
+                                            있는 인터페이스를 제공한다.
+                                            ">영속성과 관련된 다양한 서비스 지원</span>,<br>
+
+                                            <span data-tooltip="
+                                            스프링 프레임워크에 통합하기 위해 간단하게 기존 라이브러리를 감싸는 정도로 
+                                            스프링에서 사용이 가능하기 때문에 수많은 라이브러리가 이미 스프링에서 지원되고 있고
+                                            스프링에서 사용되는 라이브러리를 별도로 분리하기도 용이하다.
+                                            ">높은 확장성</span> 등의 특징이 있다는 것을 알 수 있었습니다.
+                                            <!-- <span class="color-red font-bold" data-tooltip="
+                                            IoC 컨테이너는 스프링의 가장 중요하고 핵심적인 기능으로서 자바의 리플렉션을 이용해서 
+                                            객체의 생명주기를 관리하고 의존성 주입(Dependency Injection)을 통해 각 계층이나 서비스들간의 의존성을 맞춰준다. 
+                                            이러한 기능들은 주로 환경설정을 담당하는 XML 파일에 의해 설정되고 수행된다.
+                                            ">IoC(Inversion of Control) 컨테이너</span><br>
+                                            <span class="color-red font-bold" data-tooltip="
+                                            한 객체가 어떤 객체(구체 클래스)에 의존할 것인지는 별도의 관심사이다. 
+                                            Spring에서는 DI 컨테이너를 통해 서로 강하게 결합되어 있는 두 클래스를 분리하고, 
+                                            두 객체 간의 관계를 결정해 줌으로써 결합도를 낮추고 유연성을 확보하고자 하였다. 
+                                            의존성 주입으로 애플리케이션 실행 시점에 객체를 생성하고 
+                                            관계를 결정해 줌으로써 다른 구체 클래스에 의존하는 코드를 제거하며 서로 다른 두 객체의 결합을 약하게 만들어 주었다. 
+                                            또한 이러한 방법은 상속보다 훨씬 유연하다. 
+                                            단, 여기서 주의해야 하는 것은 다른 빈을 주입받으려면 자기 자신이 반드시 컨테이너의 빈이여야 한다는 것이다.
+                                            ">DI(dependency Injection) 의존성 주입</span><br>
+                                            <span class="color-red font-bold" data-tooltip="
+                                            스프링은 로깅이나 보안, 트랜잭션 등 핵심적인 비지니스 로직과 관련이 없으나 
+                                            여러 곳에서 공통적으로 쓰이는 기능들을 분리하여 개발하고 실행 시에 서로 조합할 수 있는 관점 지향 프로그래밍(AOP)을 지원한다. 
+                                            기존에 널리 사용되고 있는 강력한 관점 지향 프로그래밍 프레임워크인 AspectJ도 내부적으로 사용할 수 있으며, 
+                                            스프링 자체적으로 지원하는 실행시(Runtime)에 조합하는 방식도 지원한다.
+                                            ">AOP(Aspect-Oriented Programming) 관점 지향 프로그래밍</span><br> -->
+                                        </p>
+                                    </div>
                                     <hr class="wid-100">
-                                    <ul class="pd-lt-1vw mg-0">
-                                        <li><span class="font-bold">전환기간:</span> 1주</li>
-                                        <li><span class="font-bold">제작인원:</span> 1명</li>
-                                        <li><span class="font-bold">URL :</span> <a href="https://jsp-to-spring.ifonlygaram.net" target="_blank">https://jsp-to-spring.ifonlygaram.net</a></li>
-                                        <li><span class="font-bold">GitHub :</span> <a href="https://github.com/ifonlyM/JSP-to-Spring" target="_blank">https://github.com/ifonlyM/JSP-to-Spring</a></li>
-                                    </ul>
+                                    <div>
+                                        <ul class="row-list">
+                                            <li><span class="font-bold">전환기간:</span> 1주</li>
+                                            <li><span class="font-bold">제작인원:</span> 1명</li>
+                                            <li><span class="font-bold">URL :</span> <a href="https://jsp-to-spring.ifonlygaram.net" target="_blank">https://jsp-to-spring.ifonlygaram.net</a></li>
+                                            <li><span class="font-bold">GitHub :</span> <a href="https://github.com/ifonlyM/JSP-to-Spring" target="_blank">https://github.com/ifonlyM/JSP-to-Spring</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </article>
                         </div>

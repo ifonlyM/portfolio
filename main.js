@@ -149,10 +149,10 @@ $(function(){
     var clickSecNum = 0; // 섹션네비를 클릭하면 해당하는 섹션번호를 저장함 
     // 섹션 네비게이션 클릭시 이벤트
     sectionNav_li.click(function(){
-        if(!profile_isBackCheck){
-            EdProfileBackCheck()
-            return;
-        }
+        // if(!profile_isBackCheck){
+        //     EdProfileBackCheck()
+        //     return;
+        // }
 
         // 스크롤 중일땐 실행 안함
         if(move.scrolling) return;
@@ -205,10 +205,10 @@ $(function(){
     // 이전,다음 섹션 이동 및 애니메이션 처리
     function sectionSequence(afterSectionNum) {
         // 프로필 뒷면을 확인 안하고 스크롤이동시 프로필 뒷면을 보여줌
-        if(!profile_isBackCheck){
-            EdProfileBackCheck(true);
-            return;
-        }
+        // if(!profile_isBackCheck){
+        //     EdProfileBackCheck(true);
+        //     return;
+        // }
         
         // 이동할 섹션이 있는 경우 섹션 이동
         if(sections[afterSectionNum]) {
@@ -301,7 +301,7 @@ $(function(){
             currSecNum -= 1;
             if(currSecNum < 0) {
                 currSecNum = 0;
-                EdProfileTurn(true);
+                //EdProfileTurn(true);
                 move.scrolling = false;
                 return false;
             }
@@ -875,7 +875,7 @@ winElement.on("load",function(){
         imgsResize(images);
     });
 
-    // 이미지 위에 마우스 오버시 이미지스크롤 활성화
+    // 이미지 위에 마우스 오버시 이미지스크롤만 활성화
     images.hover(function(){
         if($(this).children("img").length <= 2) return;
         move.isImgScroll = true;

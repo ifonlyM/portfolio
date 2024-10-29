@@ -9,6 +9,7 @@ html, body {
     height: 100%;
     margin: 0px;
     overflow: hidden; /* 스크롤 생성 방지*/
+    font-size: 18px;
 }
 #my-fullpage {
     width: 100%;
@@ -28,24 +29,143 @@ html::-webkit-scrollbar {
     padding: 5vh 10vw;
 }
 .inner-wrap{
+    padding: 5vh 0 10vh;
     min-width: 80vw;
     height: 75vh;
     border-radius: 10px;    
     box-shadow: 0 0 5px 0px rgba(63, 63, 63, 0.623);
-    padding: 5vh 0 10vh;
+    background-color: white;
 }
-article {
+p {
+    padding: 0;
+    margin: 0;
+}
+
+/* 기본 레이아웃 공통 */
+.slide-title {
+    text-align: center;
+    z-index: 1;
+    margin: 0px;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: clamp(1.5rem, 2.5rem, 3.5rem);
+    font-weight: 500;
+}
+.section article {
+    padding: 2.5rem 0 0;
+    height: auto;
     width: 100%;
-    padding: 5vh 0 0;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     justify-content: space-evenly;
 }
-h1 {
-    margin: 0px;
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 2.5vw;
+.explain {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 31vw;
+    height: 65vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.explain-title {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+.explain .row-list { 
+    padding-left: 1.3rem;
+    margin: 0;
+}
+.explain .row-list li { 
+    margin-bottom: 1rem; 
+}
+.explain .row-list li:last-child{
+    margin-bottom: 0;
+}
+
+.tech-stack_title {
+    margin: 0 0 .5rem;
+}
+.tech-stack_list {
+    margin: .5rem 0rem;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: .5rem;
+}
+.explain .tech-stack_list li {
+    margin: 0;
+    padding: .2rem .4rem;
+    border-radius: .5rem;
     font-weight: 500;
+    font-size: .875rem;
+}
+.tech-stack_java { background-color: #ea2d2e; color:white; }
+.tech-stack_spring { background-color: #6cb52d; color: white; }
+.tech-stack_mybatis { background-color: #2b2222; color: white;}
+.tech-stack_postgresql { background-color: #31648c; color: white;}
+.tech-stack_maven { background-color: #cc2038; color: white;}
+.tech-stack_centos7 { background-color: #a14f8c; color: white;}
+.tech-stack_apache { background-color: #d12127; color: white;}
+.tech-stack_tomcat { background-color: #d2a41f; color: black;}
+.tech-stack_git { background-color: black; color: white;}
+
+.explain a {
+    text-decoration: none;
+    font-weight: bold;
+}
+.explain a:hover { 
+    text-decoration: underline;
+}
+
+/* 슬라이드 이미지 관련 */
+.images{
+    width: 27vw;
+    height: 65vh;
+    overflow: scroll;
+    margin-left: 5vw;
+
+    /*스크롤바 왼쪽 위치*/
+    /* direction: rtl;  */
+}
+.images img {
+    display: block;
+    object-fit: contain;
+    height: 45%;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+.images::-webkit-scrollbar, .explain::-webkit-scrollbar {
+    width: 0.5rem;  /* 스크롤바의 너비 */
+    height: 90%;
+}
+.images::-webkit-scrollbar-thumb, .explain::-webkit-scrollbar-thumb {
+    height: 0rem; /* 스크롤바의 길이 */
+    /* background-color: rgba(61, 61, 61, 0.5); */
+    background-color: rgb(255, 255, 255);
+    box-shadow: inset 0 0 5px rgb(151, 151, 151);
+    border-radius: 4px;
+}
+.images::-webkit-scrollbar-track, .explain::-webkit-scrollbar-track {
+    /*스크롤바 뒷 배경 색상*/
+    background: none;  
+    background-color: whitesmoke;
+}
+.row-Img {
+    width: 40%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+.row-Img:hover {
+    transform: scale( 1.3, 1.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 6px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* 섹션 네비 */
@@ -95,40 +215,6 @@ h1 {
     text-overflow : ellipsis;
     clear : both;
     font-weight: bolder;
-}
-
-/* 3d 효과 설정 */
-.Ed-container{
-    background-color: whitesmoke;
-    perspective: 5000px;
-}
-.Ed-item{
-    background-color: white;
-    backface-visibility: hidden;
-    transition: 1.5s;
-}
-.Ed-container .Ed-item.Ed-front{
-    position: absolute;
-    transform: rotateY(0deg);
-}
-.Ed-container .Ed-item.Ed-back{
-    transform: rotateY(-180deg);
-}
-.Ed-btn{
-    background-color: transparent;
-    border:none;
-    position: absolute;
-    left: 88.4%;
-    bottom: 1%;
-    cursor: pointer;
-}
-.Ed-btn img{
-    width: 4vw;
-    object-fit: contain;
-    transition: 0.2s;
-}
-.Ed-btn img:hover {
-    width: 4.5vw;
 }
 
 /* 슬라이드 설정 */
@@ -290,6 +376,48 @@ h1 {
     transition: 0.3s;
 }
 
+/* 툴팁 관련 CSS */
+.explain span[data-tooltip] {
+    cursor: help;
+    display: inline-block;
+}
+/* 툴팁 박스의 높이 너비를 조정하기위한 temporary 클래스 */
+.explain span[data-tooltip] .temp {
+    max-width: 40vw;
+    font-family: 'Noto Sans KR', sans-serif;
+    /* font-weight: 500; */
+    font-size: 1rem;
+    display: none;
+}
+.tooltip {
+    position: relative;
+    display: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px 0 rgb(85, 85, 85);
+}
+.tooltip-box {
+    position: absolute;
+    background-color: #f5f5f5;
+    padding: 0.5rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    z-index: 2;
+}
+.tooltip-tail {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin: 0 auto;
+    transform: rotate(45deg ) translate(-70%, 0);
+    background-color: #f5f5f5;
+    z-index: 1;
+    box-shadow: 4px 4px 10px 0px rgb(85, 85, 85);
+}
+
 /* 프로필  */
 .profile h1 {
     text-align: center;
@@ -395,131 +523,38 @@ h1 {
     display: inline-block;
 }
 
-/* 포트폴리오 섹션 공통 */
-.portfolio {
-    position: relative;
-}
-.portfolio h1 {
-    text-align: center;
-    z-index: 1;
-}
-
-/* .section에 백그라운드 컬러를 적용시켰음. */
-/* .portfolio .slide{
+/* 3d 효과 설정 */
+.Ed-container{
     background-color: whitesmoke;
-} */
-
-.portfolio .inner-wrap {
+    perspective: 5000px;
+}
+.Ed-item{
     background-color: white;
+    backface-visibility: hidden;
+    transition: 1.5s;
 }
-.portfolio article {
-    padding: 2.5rem 0 0;
-    height: auto;
-}
-.explain {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 31vw;
-    height: 65vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1.1rem;
-}
-.explain hr{ margin-bottom: 3vh;}
-.explain ul li { margin-bottom: 2vh; }
-.explain a {
-    text-decoration: none;
-    font-weight: bold;
-}
-.explain a:hover { text-decoration: underline;}
-
-/* 툴팁 관련 CSS */
-.explain span[data-tooltip] {
-    cursor: help;
-    display: inline-block;
-}
-/* 툴팁 박스의 높이 너비를 조정하기위한 temporary 클래스 */
-.explain span[data-tooltip] .temp {
-    max-width: 40vw;
-    font-family: 'Noto Sans KR', sans-serif;
-    /* font-weight: 500; */
-    font-size: 1rem;
-    display: none;
-}
-.tooltip {
-    position: relative;
-    display: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px 0 rgb(85, 85, 85);
-}
-.tooltip-box {
+.Ed-container .Ed-item.Ed-front{
     position: absolute;
-    background-color: #f5f5f5;
-    padding: 0.5rem;
-    padding-bottom: 1rem;
-    border-radius: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1rem;
-    z-index: 2;
+    transform: rotateY(0deg);
 }
-.tooltip-tail {
-    width: 2rem;
-    height: 2rem;
+.Ed-container .Ed-item.Ed-back{
+    transform: rotateY(-180deg);
+}
+.Ed-btn{
+    background-color: transparent;
+    border:none;
     position: absolute;
-    top: 100%;
-    left: 50%;
-    margin: 0 auto;
-    transform: rotate(45deg ) translate(-70%, 0);
-    background-color: #f5f5f5;
-    z-index: 1;
-    box-shadow: 4px 4px 10px 0px rgb(85, 85, 85);
+    left: 88.4%;
+    bottom: 1%;
+    cursor: pointer;
 }
-
-/* 슬라이드 이미지 관련 */
-.portfolio .images{
-    width: 27vw;
-    height: 65vh;
-    overflow: auto;
-    margin-left: 5vw;
-    /*스크롤바 왼쪽 위치*/
-    /* direction: rtl;  */
-}
-.portfolio .images img {
-    display: block;
+.Ed-btn img{
+    width: 4vw;
     object-fit: contain;
-    height: 45%;
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 5%;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all ease 0.3s;
+    transition: 0.2s;
 }
-.images::-webkit-scrollbar, .explain::-webkit-scrollbar {
-    width: 0.5rem;  /* 스크롤바의 너비 */
-    height: 90%;
-}
-.images::-webkit-scrollbar-thumb, .explain::-webkit-scrollbar-thumb {
-    height: 2rem; /* 스크롤바의 길이 */
-    background: rgb(61, 61, 61); /* 스크롤바의 색상 */
-    border-radius: 10px;
-}
-.images::-webkit-scrollbar-track, .explain::-webkit-scrollbar-track {
-    /*스크롤바 뒷 배경 색상*/
-    /* background: none;   */
-    background-color: whitesmoke;
-}
-.row-Img {
-    width: 40%;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: all ease 0.3s;
-}
-.row-Img:hover {
-    transform: scale( 1.3, 1.3);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 6px 4px rgba(0, 0, 0, 0.5);
+.Ed-btn img:hover {
+    width: 4.5vw;
 }
 
 /* video custom */
@@ -566,7 +601,10 @@ video[data-state='window']::-webkit-media-controls-panel {
 .mg-0 { margin: 0; }
 .pd-lt-1vw {
     padding: 0;
-    padding-left: 1.2vw;
+    padding-left: 1rem;
+}
+.pd-tb-2vh{
+    padding: 2vh 0 2vh 0;
 }
 .wid-100 { width: 100%;}
 .color-red { color: red;}

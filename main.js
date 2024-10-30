@@ -17,6 +17,7 @@ var move = {
     scrolling: false,
     sliding: false,
     isImgScroll: false,
+    isExpScroll: false,
     imgScrolling : false,
     isModalScroll: false         
 }
@@ -249,8 +250,8 @@ $(function(){
             return;
         } 
 
-        // 스크롤, 슬라이딩중 일땐 샐행하지 않음
-        if(move.scrolling || move.sliding) return;
+        // 스크롤, 슬라이딩중, 설명부 스크롤 일땐 샐행하지 않음
+        if(move.scrolling || move.sliding || move.isExpScroll) return;
         
         // 모달창에서 스크롤시 슬라이드 적용
         if(modal.css("display") == "block") {
@@ -785,7 +786,7 @@ $(function(){
             explain = "error : 요소의 data-tooltip 속성 값이 없습니다!!";
         }
         else {
-            explain = "- " + title + " -<br>" + explain;
+            // explain = "- " + title + " -<br>" + explain;
         }
 
         // 가상의 block 태그를 만들어 툴팁 내용을 넣고 그에 알맞는 width height 가져오기
@@ -907,4 +908,22 @@ winElement.on("load",function(){
             move.imgScrolling = false;
         }, secAniTime + secStopTime);
     });
+
+    // 설명부 스크롤 있을때 섹션 스크롤 방지하기
+    var explain = myFullpage.find(".explain");
+
+    // 설명부 위에 마우스 오버시 설명부스크롤만 활성화
+    explain.hover(function(){
+        var $explain = $(this);
+
+        // 스크롤이 없는 경우 
+        if($explain.prop('scrollHeight') <= $explain.prop('clientHeight')){
+            return;
+        } 
+        move.isExpScroll = true;
+
+    }, function(){
+        move.isExpScroll = false;
+    });
+
 });

@@ -52,7 +52,8 @@ p {
     font-weight: 500;
 }
 .section article {
-    padding: 2.5rem 0 0;
+    /* padding: 2.5rem 0 0; */
+    margin: 5vh 0 0;
     height: auto;
     width: 100%;
     /* overflow: hidden; */
@@ -112,9 +113,12 @@ p {
 .tech-stack_apache { background-color: #d12127; color: white;}
 .tech-stack_tomcat { background-color: #d2a41f; color: black;}
 .tech-stack_git { background-color: black; color: white;}
+.tech-stack_AWS { background-color: #232f3e; color: #ff9900;}
+.tech-stack_AML2 { background-color: #ff9900; color: black;}
+.tech-stack_jenkins { background-color: #335061; color: white;}
 
 .explain a {
-    text-decoration: none;
+    text-decoration: #31648c;
     font-weight: bold;
 }
 .explain a:hover { 
@@ -397,8 +401,8 @@ p {
     display: none;
     position: relative;
     border-radius: 10px;
-    box-shadow: 0 4px 10px 0 rgb(85, 85, 85);
     line-height: 1.5rem;
+    box-shadow: 0px 0px 5px 1px black;
 }
 .tooltip-box {
     position: absolute;
@@ -419,25 +423,27 @@ p {
     transform: rotate(45deg ) translate(-70%, 0);
     background-color: #f5f5f5;
     z-index: 1;
-    box-shadow: 4px 4px 10px 0px rgb(85, 85, 85);
+    box-shadow: 0px 0px 5px 1px black;
 }
 
 /* 프로필  */
 .profile h1 {
     text-align: center;
-    margin-bottom: 5vh;
+    margin-bottom: 10vh;
 }
 .profile .Ed-front article div:first-child{
     text-align: center;
 }
 .profile #ID-Photo{
+    padding-left: 8vw;
     width: 20vw;
     object-fit: contain;
 }
 .profile-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding-left: 1.6rem;
+    line-height: 4rem;
+    font-size: clamp(0.5rem, 1.5vw, 2rem);
+    font-family: 'Noto Sans KR', sans-serif;
 }
 .about-email a{
     text-decoration: none;
@@ -614,4 +620,4 @@ video[data-state='window']::-webkit-media-controls-panel {
 .color-red { color: red;}
 .font-bold {font-weight: bold;}
 .font-semi_bold {font-weight: 600;}
-.long_desc { line-height: 2.5rem;}
+.long_desc { line-height: 2rem;}

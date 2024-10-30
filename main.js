@@ -434,19 +434,19 @@ $(function(){
         // 오른쪽 방향키 입력시 섹션 슬라이드
         if(e.keyCode == 39) {
             // 프로필 섹션에서는 카드 뒤집기 애니메이션 적용
-            if(currSecNum == 0){
-                EdProfileTurn();
-                return;
-            } 
+            // if(currSecNum == 0){
+            //     EdProfileTurn();
+            //     return;
+            // } 
             slideSequence(currSecNum, "next");
         }
         // 왼쪽 방향 입력시 섹션 슬라이드
         else if(e.keyCode == 37) {
             // 프로필 섹션에서는 카드 뒤집기 애니메이션 적용
-            if(currSecNum == 0) {
-                EdProfileTurn(true); // 왼쪽으로 회전함
-                return;
-            }
+            // if(currSecNum == 0) {
+            //     // EdProfileTurn(true); // 왼쪽으로 회전함
+            //     return;
+            // }
             slideSequence(currSecNum, "prev");
         }
     });

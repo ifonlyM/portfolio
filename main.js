@@ -361,41 +361,36 @@ $(function(){
         sections[currSecNum].slideIndex = currSection.children(".slides-nav").find("li[data-focus='true']").data("no");
 
 
-        // 슬라이드 첫번째에서만 좌측 이동버튼 가리기
+        // 슬라이드 첫 페이지에서는 좌측 이동버튼 가리기
         if(sections[currSecNum].slideIndex === 0){
-            currSection.children(".left-arrow").css({
-                "display" : "none"
-            });
+            currSection.children(".left-arrow").css("display", "none");
         }
         else {
-            currSection.children(".left-arrow").css({
-                "display" : "block"
-            });
+            currSection.children(".left-arrow").css("display", "block");
         }
 
-        // 슬라이드 마지막에서만 우측 이동버튼 가리기
+        // 슬라이드 마지막 페이지에서는 우측 이동버튼 가리기
         if(sections[currSecNum].slideIndex === currSection.find(".slide").length -1){
-            currSection.children(".right-arrow").css({
-                "display" : "none"
-            });
+            currSection.children(".right-arrow").css("display", "none");
         }
         else {
-            currSection.children(".right-arrow").css({
-                "display" : "block"
-            });
+            currSection.children(".right-arrow").css("display", "block");
         }
     }
 
     // 슬라이드중 슬라이드 버튼 가리기
     function slideArrowHideOn(move) {
-        // 슬라이드 이동중엔 좌,우 이동 버튼 안보이게
         var arrow_btn = $(".left-arrow, .right-arrow");
+
+        // 슬라이드 이동중엔 좌,우 이동 버튼 안보이게
         arrow_btn
             .css({"transition": "0s"})
             .css({"opacity":0});
+
         // 슬라이이드 이동이 끝난뒤 
         setTimeout(function(){
             move.sliding = false;
+
             // 좌,우 슬라이드 이동버튼 보이게
             arrow_btn
                 .css({"transition": "0.3s"})
@@ -694,6 +689,10 @@ $(function(){
         modalSetUp($(this).parent().children(), this); // 모달 이미지 위치및 속성 지정
         modal.css("display", "block").animate({opacity: 1}, modal_aniTime);
 
+        // 섹션(모달 뒤 화면)의 이동 버튼 가리기
+        var currSection = sections[currSecNum].element;
+        currSection.children(".right-arrow, .left-arrow").css("display", "none");
+
         // 커스텀 커서 위치 갱신
         // ### 2024-10-26: 커스텀 커서 사용 안함 ###
         //
@@ -707,7 +706,28 @@ $(function(){
     $(document).click(function(e){
         var target = $(e.target);
         if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+
             closeModal(modal, modal_aniTime);
+
+            // 섹션(모달 뒤 화면)의 이동 버튼 보이기
+            var currSection = sections[currSecNum].element;
+            sections[currSecNum].slideIndex = currSection.children(".slides-nav").find("li[data-focus='true']").data("no");
+
+            // 섹션의 슬라이드가 첫 페이지일땐 우측 버튼만 보이게
+            if(sections[currSecNum].slideIndex === 0){
+                currSection.children(".left-arrow").css("display", "none");
+            }
+            else {
+                currSection.children(".left-arrow").css("display", "block");
+            }
+
+            // 섹션의 슬라이드가 마지막 페이지일땐 좌측 버튼만 보이게
+            if(sections[currSecNum].slideIndex === currSection.find(".slide").length -1){
+                currSection.children(".right-arrow").css("display", "none");
+            }
+            else {
+                currSection.children(".right-arrow").css("display", "block");
+            }
         }
     });
 

@@ -271,6 +271,7 @@ p {
     transform: translate( 0, -50%);
     font-size: 8rem;
     font-weight: bolder;
+    line-height: 5rem;
     color: rgb(38,38,38);
     background-color: transparent;
     border: none;
@@ -287,11 +288,11 @@ p {
 }
 .left-arrow {
     left: 3.5%;
-    top: 90.5%;
+    top: 89%;
 }
 .right-arrow {
     right: 3.5%;
-    top: 90.5%;
+    top: 89%;
 }
 
 /* 모달 */
@@ -360,6 +361,7 @@ p {
 }
 #modal .left-arrow, #modal .right-arrow {
     color: whitesmoke;
+    top: 50%;
 }
 #modal .left-arrow:hover {
     color: aliceblue;

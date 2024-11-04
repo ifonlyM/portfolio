@@ -28,9 +28,8 @@ var currSecNum = 0;     // 현재 보여지고 있는 섹션 Index
 var secAniTime = 500;   // 섹션 애니메이션 시간
 var secStopTime = 25;   // 섹션 애니메이션 정지시간
 
-// Ready
-$(function(){
-    // 풀 페이지 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
+// 풀 페이지 관련 스크립트 -------------------------------------------------------------------------------------------------------------------------------------------------------
+function myFullPageSetUp() {
     var pageHeight = myFullpage.outerHeight();
     var pageWidth = myFullpage.outerWidth();
 
@@ -43,6 +42,7 @@ $(function(){
             for(var i = 0; i < pageLength; i++){
                 sections[i].scrollTop = (i) * pageHeight;
                 if(sections[i].slides.length > 0) {
+
                     // 슬라이드가 있는 경우 슬라이드 left다시 설정
                     slideSetUp(sections[i], sections[i].element.find(".slide"));
 
@@ -74,29 +74,40 @@ $(function(){
 
         // 섹션에 슬라이드가 있는 경우 
         if(slides.length > 0){
+
+            // 슬라이드가있는 섹션의 경우 슬라이드 css를 셋팅 해준다.
             slideSetUp(s, slides);
+
             //가로슬라드 전용 버튼및 네비게이션 아이콘 추가 및 네비게이션용 li태그에 scrollLeft 값 저장
             var str = "";
             str += "<button class='left-arrow' style='display:none;'>&laquo;</button>";
             str += "<button class='right-arrow'>&raquo;</button>";
             str += "<ul class='slides-nav'></ul><div class='slides-nav-title'></div>"
-            myFullpage.find(".section").eq(i).append(str);
 
-            str = "";
-            for(var j = 0; j < s.slides.length; j++ ) {
-                var slide = s.slides[j].element;
-                var slideTitle = slide.find("h1").text();
-                if(j == 0) 
-                    str +="<li data-focus='true' data-scrollLeft='"+ s.slides[j].scrollLeft + "' data-title='" + slideTitle + "' data-no='"+ s.slides[j].no +"'></li>";
-                else 
-                    str +="<li data-focus='false' data-scrollLeft='"+ s.slides[j].scrollLeft + "' data-title='" + slideTitle + "' data-no='"+ s.slides[j].no +"'></li>";
+            // 없는 경우 append
+            if(s.element.children(".slides-nav").length == 0) {
+
+                //myFullpage.find(".section").eq(i).append(str);
+                s.element.append(str);
+
+                str = "";
+                for(var j = 0; j < s.slides.length; j++ ) {
+                    var slide = s.slides[j].element;
+                    var slideTitle = slide.find("h1").text();
+                    if(j == 0) 
+                        str +="<li data-focus='true' data-scrollLeft='"+ s.slides[j].scrollLeft + "' data-title='" + slideTitle + "' data-no='"+ s.slides[j].no +"'></li>";
+                    else 
+                        str +="<li data-focus='false' data-scrollLeft='"+ s.slides[j].scrollLeft + "' data-title='" + slideTitle + "' data-no='"+ s.slides[j].no +"'></li>";
+                }
+                //myFullpage.find(".section").eq(i).find(".slides-nav").append(str);
+                s.element.find(".slides-nav").append(str);
             }
-            myFullpage.find(".section").eq(i).find(".slides-nav").append(str);
+
         }                
         sections.push(s);
     }
 
-    // 슬라이드가 있는 섹션의 경우 슬라이드 css를 셋팅 해준다.
+    // 슬라이드가있는 섹션의 경우 슬라이드 css를 셋팅 해준다.
     function slideSetUp(section, slides) {
         for(var i = 0; i < slides.length; i++){
             // 슬라이드가 이미 만들어져 있는 경우
@@ -117,15 +128,20 @@ $(function(){
         var sectionList = myFullpage.find(".section"); //$(".my-fullpage .section");
         var str = "";
         str += "<ul class='section-nav'></ul>";
-        myFullpage.append(str);
-        str = "";
-        for(var i = 0; i < sectionList.length; i++) {
-            if(i === 0) 
-                str += "<li class='curr-section' data-number='" + i + "' title='"+ sectionList.eq(i).data("title") +"'>" + sectionList.eq(i).data("title") + "</li>";
-            else 
-                str += "<li class='mouse-out' data-number='" + i + "' title='"+ sectionList.eq(i).data("title") +"'>" + sectionList.eq(i).data("title") + "</li>";
+
+        // 없는 경우 만들어 주기
+        if(myFullpage.children(".section-nav").length == 0){
+
+            myFullpage.append(str);
+            str = "";
+            for(var i = 0; i < sectionList.length; i++) {
+                if(i === 0) 
+                    str += "<li class='curr-section' data-number='" + i + "' title='"+ sectionList.eq(i).data("title") +"'>" + sectionList.eq(i).data("title") + "</li>";
+                else 
+                    str += "<li class='mouse-out' data-number='" + i + "' title='"+ sectionList.eq(i).data("title") +"'>" + sectionList.eq(i).data("title") + "</li>";
+            }
+            myFullpage.find(".section-nav").append(str);
         }
-        myFullpage.find(".section-nav").append(str);
     }
     
     // 프로필 뒷면을 확인 안하고 스크롤이동시 프로필 뒷면을 보여줌
@@ -148,6 +164,7 @@ $(function(){
 
     var sectionNav_li = $(".section-nav li");
     var clickSecNum = 0; // 섹션네비를 클릭하면 해당하는 섹션번호를 저장함 
+
     // 섹션 네비게이션 클릭시 이벤트
     sectionNav_li.click(function(){
         // if(!profile_isBackCheck){
@@ -536,6 +553,165 @@ $(function(){
         }
     });
 
+    
+
+    // 페이지 새로고침시 스크롤위치 초기화 // 스크롤을 없애는 css적용으로 사용할 필요가 없어짐*
+    // window.onbeforeunload = function() {
+    //     html.animate({scrollTop: sections[0].scrollTop}, 0);
+    // }
+
+    /*툴팁 on/off*/
+    $(".explain span[data-tooltip]").hover(function(){
+        var thisTooltip = $(this);
+        // on
+        var title = thisTooltip.html().split("<")[0];
+        var explain = thisTooltip.data("tooltip");
+        thisTooltip.css("text-decoration", "underline");
+
+        if(!explain) {
+            explain = "error : 요소의 data-tooltip 속성 값이 없습니다!!";
+        }
+        else {
+            // explain = "- " + title + " -<br>" + explain;
+        }
+
+        // 가상의 block 태그를 만들어 툴팁 내용을 넣고 그에 알맞는 width height 가져오기
+        if(!thisTooltip.children(".temp")[0]) {
+            var tempDiv = "<div class='temp'>";
+            thisTooltip.append(tempDiv);
+            thisTooltip.children(".temp").html(explain);
+        }
+
+        // 툴팁박스 title과 내용, CSS 너비 높이 지정
+        $(".tooltip-box").attr("title",title).html(explain)
+            .css({
+                "width": thisTooltip.children(".temp").outerWidth(),
+                "height": thisTooltip.children(".temp").outerHeight()
+            });
+        
+        // 최상위 툴팁 태그 CSS 너비,높이,디스플레이 on 설정
+        $(".tooltip").css({
+            "width": $(".tooltip-box").outerWidth(),
+            "height": $(".tooltip-box").outerHeight(),
+            "display": "block",
+            "opacity": 0
+        });
+        $(".tooltip").stop().animate({"opacity": 1}, 300);
+
+        // 최상위 툴팁 태그 포지션 top, left 설정
+        var boxTop = thisTooltip.offset().top - ($(".tooltip-box").outerHeight() + ($(".tooltip-tail").outerHeight()/2) + 16);
+        var boxLeft = (thisTooltip.offset().left + (thisTooltip.width()/2)) - ($(".tooltip-box").outerWidth()/2);
+        $(".tooltip").offset({top: boxTop, left: boxLeft});
+
+    }, function(){
+        // off
+        $(".tooltip-box").attr("title", "").html("");
+        $(".tooltip").css("display", "none");
+        $(this).css("text-decoration", "none");
+    });
+
+    // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
+    var video = document.querySelectorAll("video");
+        
+    for(var i = 0; i < video.length; i++){
+
+        video[i].addEventListener("loadeddata" ,function(){
+            var $video = $(this);
+            $video.css("height", $video.height() + ($video.height() * 0.4));
+            $video.attr("data-state", "window");
+        });
+        
+        video[i].addEventListener("webkitfullscreenchange",function(){
+            if(this.webkitDisplayingFullscreen){
+                console.log("풀스크린");
+                this.setAttribute("data-state", "default");
+            }
+            else{
+                console.log("윈도우");
+                this.setAttribute("data-state", "window");
+            }
+        });  
+    }
+
+    // 기타 기능 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
+    // 섹션 슬라이드 이미지 로드후 이미지뷰어 높이에 맞게 각 이미지 높이를 수정
+    winElement.on("load",function(){
+        var images = myFullpage.find(".images");
+
+        // 섹션 슬라이드 이미지의 크기를 재조정
+        function imgsResize(images){
+            for(var i = 0; i < images.length; i++){
+                images.eq(i).children("img").each(function(){
+                    $(this).css({
+                        "height": images.eq(i).height() * 0.45,
+                        "margin-bottom": images.eq(i).height() * 0.05
+                    });
+                });
+            }
+        }
+
+        // 이미지 크기 지정
+        imgsResize(images);
+
+        // 브라우저 리사이즈시 이미지 크기 변경
+        winElement.resize(function(){
+            imgsResize(images);
+        });
+
+        // 이미지 위에 마우스 오버시 이미지스크롤만 활성화
+        images.hover(function(){
+            if($(this).children("img").length <= 2) return;
+            move.isImgScroll = true;
+        }, function(){
+            move.isImgScroll = false;
+        });
+
+        // 이미지 여러개인 경우 커스텀 휠 이벤트 적용
+        images.on("mousewheel", function(e){
+            if(!move.isImgScroll || move.imgScrolling) return;
+            move.imgScrolling = true;
+            var thisImages = $(this);
+            var delta = e.originalEvent.wheelDelta; // 휠 델타값으로 휠업, 휠다운 구분
+            e.preventDefault(); // 기본 이벤트 막기
+
+            // 휠 다운
+            if(delta < 0){
+                thisImages.stop().animate({
+                    scrollTop: thisImages.scrollTop() + thisImages.height()
+                }, secAniTime);
+            }
+            // 휠 업
+            else if(delta > 0){
+                thisImages.stop().animate({
+                    scrollTop: thisImages.scrollTop() - thisImages.height()
+                }, secAniTime);
+            }
+            setTimeout(function(){
+                move.imgScrolling = false;
+            }, secAniTime + secStopTime);
+        });
+
+        // 설명부 스크롤 있을때 섹션 스크롤 방지하기
+        var explain = myFullpage.find(".explain");
+
+        // 설명부 위에 마우스 오버시 설명부스크롤만 활성화
+        explain.hover(function(){
+            var $explain = $(this);
+
+            // 스크롤이 없는 경우 
+            if($explain.prop('scrollHeight') <= $explain.prop('clientHeight')){
+                return;
+            } 
+            move.isExpScroll = true;
+
+        }, function(){
+            move.isExpScroll = false;
+        });
+
+    });
+}
+
+function modalSetUp() {
     // 모달 관련 ------------------------------------------------------------------------------------------------------------------------------------------------------------
     var modal = $("#modal");   
     var modal_aniTime = 300;    //모달 애니메이션 시간 
@@ -596,7 +772,7 @@ $(function(){
     } // end
 
     // 모달 이미지 초기설정
-    function modalSetUp(images, pickImg) {
+    function modalStartSetUp(images, pickImg) {
         var setLeft = modal.width() / 2; // 모달 가운데에 이미지 위치
 
         for(var i = 0; i < images.length; i++) {
@@ -686,7 +862,7 @@ $(function(){
 
     // 이미지 클릭시 모달창 작동
     $(".modal-img").click(function(e){
-        modalSetUp($(this).parent().children(), this); // 모달 이미지 위치및 속성 지정
+        modalStartSetUp($(this).parent().children(), this); // 모달 이미지 위치및 속성 지정
         modal.css("display", "block").animate({opacity: 1}, modal_aniTime);
 
         // 섹션(모달 뒤 화면)의 이동 버튼 가리기
@@ -731,31 +907,6 @@ $(function(){
         }
     });
 
-    // 모달창 외부에서 커스텀 커서 사용 
-    // ### 2024-10-26: 사용안하기로 결정 ###
-    //
-    // winElement.mousemove(function(e){
-    //     if(modal.css("display") === "none") return;
-    //
-    //     // 마우스를 움직일때마다 비용낭비가 심하다
-    //     // var target = $(e.target); 
-    //     // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
-    //
-    //     //Jquery 사용안하고 바닐라JS로 비용절약
-    //     if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
-    //         modal.children(".close-cursor").css({
-    //             "display": "block",
-    //             "left": (e.pageX - scrollX) + "px",
-    //             "top": (e.pageY - scrollY) +"px"
-    //         });
-    //     }
-    //     else {
-    //         modal.children(".close-cursor").css({
-    //             "display": "none"
-    //         });
-    //     }
-    // })
-
     // 모달창 close버튼 클릭시 창 종료
     modal.on("click", ".close-btn", function(){
         closeModal(modal, modal_aniTime);
@@ -789,161 +940,43 @@ $(function(){
         }
     }
 
-    // 페이지 새로고침시 스크롤위치 초기화 // 스크롤을 없애는 css적용으로 사용할 필요가 없어짐*
-    // window.onbeforeunload = function() {
-    //     html.animate({scrollTop: sections[0].scrollTop}, 0);
-    // }
+    // 모달창 외부에서 커스텀 커서 사용 
+    // ### 2024-10-26: 사용안하기로 결정 ###
+    //
+    // winElement.mousemove(function(e){
+    //     if(modal.css("display") === "none") return;
+    //
+    //     // 마우스를 움직일때마다 비용낭비가 심하다
+    //     // var target = $(e.target); 
+    //     // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+    //
+    //     //Jquery 사용안하고 바닐라JS로 비용절약
+    //     if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
+    //         modal.children(".close-cursor").css({
+    //             "display": "block",
+    //             "left": (e.pageX - scrollX) + "px",
+    //             "top": (e.pageY - scrollY) +"px"
+    //         });
+    //     }
+    //     else {
+    //         modal.children(".close-cursor").css({
+    //             "display": "none"
+    //         });
+    //     }
+    // })
+}
 
-    /*툴팁 on/off*/
-    $(".explain span[data-tooltip]").hover(function(){
-        var thisTooltip = $(this);
-        // on
-        var title = thisTooltip.html().split("<")[0];
-        var explain = thisTooltip.data("tooltip");
-        thisTooltip.css("text-decoration", "underline");
-
-        if(!explain) {
-            explain = "error : 요소의 data-tooltip 속성 값이 없습니다!!";
-        }
-        else {
-            // explain = "- " + title + " -<br>" + explain;
-        }
-
-        // 가상의 block 태그를 만들어 툴팁 내용을 넣고 그에 알맞는 width height 가져오기
-        if(!thisTooltip.children(".temp")[0]) {
-            var tempDiv = "<div class='temp'>";
-            thisTooltip.append(tempDiv);
-            thisTooltip.children(".temp").html(explain);
-        }
-
-        // 툴팁박스 title과 내용, CSS 너비 높이 지정
-        $(".tooltip-box").attr("title",title).html(explain)
-            .css({
-                "width": thisTooltip.children(".temp").outerWidth(),
-                "height": thisTooltip.children(".temp").outerHeight()
-            });
-        
-        // 최상위 툴팁 태그 CSS 너비,높이,디스플레이 on 설정
-        $(".tooltip").css({
-            "width": $(".tooltip-box").outerWidth(),
-            "height": $(".tooltip-box").outerHeight(),
-            "display": "block",
-            "opacity": 0
-        });
-        $(".tooltip").stop().animate({"opacity": 1}, 300);
-
-        // 최상위 툴팁 태그 포지션 top, left 설정
-        var boxTop = thisTooltip.offset().top - ($(".tooltip-box").outerHeight() + ($(".tooltip-tail").outerHeight()/2) + 16);
-        var boxLeft = (thisTooltip.offset().left + (thisTooltip.width()/2)) - ($(".tooltip-box").outerWidth()/2);
-        $(".tooltip").offset({top: boxTop, left: boxLeft});
-
-    }, function(){
-        // off
-        $(".tooltip-box").attr("title", "").html("");
-        $(".tooltip").css("display", "none");
-        $(this).css("text-decoration", "none");
-    });
-
-    // 비디오 로드가 완료되었을때 비디오 높이 재설정후 비디오 컨트롤러에 css 적용 
-    var video = document.querySelectorAll("video");
-        
-    for(var i = 0; i < video.length; i++){
-
-        video[i].addEventListener("loadeddata" ,function(){
-            var $video = $(this);
-            $video.css("height", $video.height() + ($video.height() * 0.4));
-            $video.attr("data-state", "window");
-        });
-        
-        video[i].addEventListener("webkitfullscreenchange",function(){
-            if(this.webkitDisplayingFullscreen){
-                console.log("풀스크린");
-                this.setAttribute("data-state", "default");
-            }
-            else{
-                console.log("윈도우");
-                this.setAttribute("data-state", "window");
-            }
-        });  
+// 브라우저 사이즈 변경시 풀페이지 셋팅 여부 파악
+function checkWidthAndRun() {
+    if(window.innerWidth > 800) {
+        myFullPageSetUp();
     }
+}
 
-});
+// Ready
+$(function(){
 
-
-
-// 기타 기능 관련 -------------------------------------------------------------------------------------------------------------------------------------------------------
-// 섹션 슬라이드 이미지 로드후 이미지뷰어 높이에 맞게 각 이미지 높이를 수정
-winElement.on("load",function(){
-    var images = myFullpage.find(".images");
-
-    // 섹션 슬라이드 이미지의 크기를 재조정
-    function imgsResize(images){
-        for(var i = 0; i < images.length; i++){
-            images.eq(i).children("img").each(function(){
-                $(this).css({
-                    "height": images.eq(i).height() * 0.45,
-                    "margin-bottom": images.eq(i).height() * 0.05
-                });
-            });
-        }
-    }
-
-    // 이미지 크기 지정
-    imgsResize(images);
-
-    // 브라우저 리사이즈시 이미지 크기 변경
-    winElement.resize(function(){
-        imgsResize(images);
-    });
-
-    // 이미지 위에 마우스 오버시 이미지스크롤만 활성화
-    images.hover(function(){
-        if($(this).children("img").length <= 2) return;
-        move.isImgScroll = true;
-    }, function(){
-        move.isImgScroll = false;
-    });
-
-    // 이미지 여러개인 경우 커스텀 휠 이벤트 적용
-    images.on("mousewheel", function(e){
-        if(!move.isImgScroll || move.imgScrolling) return;
-        move.imgScrolling = true;
-        var thisImages = $(this);
-        var delta = e.originalEvent.wheelDelta; // 휠 델타값으로 휠업, 휠다운 구분
-        e.preventDefault(); // 기본 이벤트 막기
-
-        // 휠 다운
-        if(delta < 0){
-            thisImages.stop().animate({
-                scrollTop: thisImages.scrollTop() + thisImages.height()
-            }, secAniTime);
-        }
-        // 휠 업
-        else if(delta > 0){
-            thisImages.stop().animate({
-                scrollTop: thisImages.scrollTop() - thisImages.height()
-            }, secAniTime);
-        }
-        setTimeout(function(){
-            move.imgScrolling = false;
-        }, secAniTime + secStopTime);
-    });
-
-    // 설명부 스크롤 있을때 섹션 스크롤 방지하기
-    var explain = myFullpage.find(".explain");
-
-    // 설명부 위에 마우스 오버시 설명부스크롤만 활성화
-    explain.hover(function(){
-        var $explain = $(this);
-
-        // 스크롤이 없는 경우 
-        if($explain.prop('scrollHeight') <= $explain.prop('clientHeight')){
-            return;
-        } 
-        move.isExpScroll = true;
-
-    }, function(){
-        move.isExpScroll = false;
-    });
-
+    window.addEventListener('resize', checkWidthAndRun);
+    checkWidthAndRun();
+    modalSetUp();
 });

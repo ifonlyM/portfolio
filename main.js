@@ -978,37 +978,25 @@ function mobilePageSetUp() {
     // 이미지 클릭시, 모달 이미지 설정 후 모달 ON
     $(".modal-img").click(function() {
         var $this = $(this);
-        var images = $this.parent().children();
+        var $images = $this.parent().children();
 
-        // 이미지 개수만큼 모달내 img 생성
-        for(var i = 0; i < images.length; i++) {
+        modal.children(".img-view").append("<img>");
 
-            modal.children(".img-view").append("<div class='img-wrap'>"); 
-            $img_view.children(".img-wrap").eq(i).append("<img>");
+        var img = $images.eq($this.index()); // 실제 이미지
+        var modal_img = $img_view.children("img"); // 모달로 복사된 이미지
 
-            var img = images.eq(i); // 실제 이미지
-            var modal_img = modal.find("img").eq(i); // 모달로 복사된 이미지
-
-            // 모달내 이미지의 src, alt 지정 및 height 지정
-            modal_img.attr({
-                "src": img.attr("src"),
-                "alt": img.attr("alt")
-            })
-            .css({
-                "height": img.data("height"),
-                "min-height": img.data("height")
-            });
-
-            // img-wrap 위치 지정
-            var img_wrap = $img_view.children(".img-wrap").eq(i);
-            // img_wrap.css("left", modal.width() * i);
-        }
+        // 모달내 이미지의 src, alt 지정 및 height 지정
+        modal_img.attr({
+            "src": img.attr("src"),
+            "alt": img.attr("alt")
+        })
+        .css({
+            "height": img.data("height"),
+            "min-height": img.data("height")
+        });
         
         // 이미지 모달 보이게하기
         $("#modal").css("display", "block");
-
-        // 내가 클릭한 이미지가 모달 화면에 바로 보이게 설정
-        $img_view.css("left", modal.width() * -$this.index());
         
         // 모달 외부 스크롤 불가
         $("body").css("overflow", "hidden");
@@ -1033,7 +1021,81 @@ function mobilePageSetUp() {
         e.stopPropagation();
     });
 
-    
+
+    // read-project 클릭시 프로젝트 설명화면으로 이동
+    $(".read-project a").click(function(e){
+        e.preventDefault();
+        
+        $('html,body').stop().animate({scrollTop:$(this.hash).offset().top + 1}, 500);
+    });
+
+
+    // About 섹션 벗어나면 move-top 버튼 활성화
+    $(window).on('scroll', function() {
+        var scrollTop = $(this).scrollTop(); // 현재 스크롤 위치
+        
+        if (scrollTop > 800) { // 800px 이상일 때
+            $(".move-top").css({
+                "display": "block"
+            });
+
+        } else {
+            $(".move-top").css({
+                "display": "none"
+            });
+        }
+    });
+
+    // move-top 클릭시 about으로 이동
+    $(".move-top").click(function(e){
+        e.preventDefault();
+
+        $('html,body').stop().animate({scrollTop:$("#about").offset().top + 1}, 500);
+    });
+
+    // 슬라이드 자세히 , 접기 로직 -------------------------------------
+    // 서브 슬라이드 접기 및 '자세히 보기' 버튼 생성
+    var $sections = $("#my-fullpage").children(".section");
+    for(var i = 0; i < $sections.length; i++) {
+        
+        var $sec_child = $sections.eq(i).children();
+        if($sec_child.hasClass("slides")) {
+            
+            var $slides = $sec_child;
+            // 첫번째 슬라이드를 제외하고, 디스플레이 none
+            $slides.children().not(":first-child").css("display", "none");
+
+            var $slide_title = $slides.children().first().find(".slide-title");
+            // 슬라이즈의 마지막 자식으로 '주요 경험 자세히 보기' 버튼 생성 및 슬라이드 타이틀과 같은 색상으로 CSS 설정
+            $("<div class='more-detail'>주요 경험 자세히 보기 👈</div>")
+            // .appendTo($slides.children().first().find(".inner-wrap"))
+            .appendTo($slides)
+            .css({
+                "background-color": $slide_title.css("background-color"),
+                "color": $slide_title.css("color")
+            });
+        }
+    }
+
+    // '자세히 보기' 클릭시 서브 슬라이드 켜고 끄기
+    $(".more-detail").click(function(){
+
+        var $this = $(this);
+        var $slides = $this.closest(".slides");
+        var $sub_slide = $slides.children().not(":first-child").not(":last-child");
+        var is_sub_slide_on = $sub_slide.css("display") === "block" ? true : false;
+
+        // 서브 슬라이드 ON 일때, 디스플레이 none 및 '접기' 버튼을 '주요 경험 자세히 보기'로 변경
+        if(is_sub_slide_on) {
+            $sub_slide.css("display", "none");
+            $this.text("주요 경험 자세히 보기 👈");
+        }
+        // 서브 슬라이드 OFF 일때, 디스플레이 block 및 '주요 경험 자세히 보기' 버튼을 '접기'로 변경
+        else {
+            $sub_slide.css("display", "block");
+            $this.text("접 기");
+        }
+    })
 }
 
 // 브라우저 사이즈 변경시 풀페이지 셋팅 여부 파악
@@ -1041,7 +1103,7 @@ function checkWidthAndRun() {
 
     $(window).off();
     $(document).off();
-    $("body").off();
+    $("html, body").off();
 
     if(window.innerWidth > 800) {
         myFullPageSetUp();

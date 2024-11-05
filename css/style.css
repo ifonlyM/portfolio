@@ -234,11 +234,14 @@
         font-size: .875rem;
     }
     .explain a {
-        text-decoration: #31648c;
-        font-weight: bold;
+        text-decoration: #6495ed;
+        font-weight: 500;
     }
     .explain a:hover { 
         text-decoration: underline;
+    }
+    .long_desc { 
+        line-height: 2.3rem;
     }
 }
 /* 슬라이드 공통, 설명란 레이아웃 - 모바일 */
@@ -309,13 +312,15 @@
         font-size: .875rem;
     }
     .explain a {
-        text-decoration: #31648c;
-        font-weight: bold;
+        text-decoration: #6495ed;
+        font-weight: 500;
     }
     .explain a:hover { 
         text-decoration: underline;
     }
-
+    .long_desc { 
+        line-height: 2rem;
+    }
     .more-detail {
         display: block;
         width: 60svw;
@@ -1000,4 +1005,3 @@
 .color-red { color: red;}
 .font-bold {font-weight: bold;}
 .font-semi_bold {font-weight: 600;}
-.long_desc { line-height: 2rem;}

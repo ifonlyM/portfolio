@@ -27,6 +27,8 @@ var winElement = $(window);
 var currSecNum = 0;     // 현재 보여지고 있는 섹션 Index
 var secAniTime = 500;   // 섹션 애니메이션 시간
 var secStopTime = 25;   // 섹션 애니메이션 정지시간
+var modal = $("#modal");   
+var modal_aniTime = 300;    //모달 애니메이션 시간 
 
 // 풀 페이지 관련 스크립트 -------------------------------------------------------------------------------------------------------------------------------------------------------
 function myFullPageSetUp() {
@@ -395,26 +397,6 @@ function myFullPageSetUp() {
         }
     }
 
-    // 슬라이드중 슬라이드 버튼 가리기
-    function slideArrowHideOn(move) {
-        var arrow_btn = $(".left-arrow, .right-arrow");
-
-        // 슬라이드 이동중엔 좌,우 이동 버튼 안보이게
-        arrow_btn
-            .css({"transition": "0s"})
-            .css({"opacity":0});
-
-        // 슬라이이드 이동이 끝난뒤 
-        setTimeout(function(){
-            move.sliding = false;
-
-            // 좌,우 슬라이드 이동버튼 보이게
-            arrow_btn
-                .css({"transition": "0.3s"})
-                .css({"opacity":1}); 
-        }, secAniTime + secStopTime);    
-    }
-
     // 슬라이드 우 버튼 클릭시 슬라이드 이동
     myFullpage.find(".section").on("click", ".right-arrow", function(){
         slideSequence(currSecNum, "next");
@@ -553,7 +535,283 @@ function myFullPageSetUp() {
         }
     });
 
+    // 슬라이드중 슬라이드 버튼 가리기
+    function slideArrowHideOn(move) {
+        var arrow_btn = $(".left-arrow, .right-arrow");
+
+        if(arrow_btn == null) return;
+
+        // 슬라이드 이동중엔 좌,우 이동 버튼 안보이게
+        arrow_btn
+            .css({"transition": "0s"})
+            .css({"opacity":0});
+
+        // 슬라이이드 이동이 끝난뒤 
+        setTimeout(function(){
+            move.sliding = false;
+
+            // 좌,우 슬라이드 이동버튼 보이게
+            arrow_btn
+                .css({"transition": "0.3s"})
+                .css({"opacity":1}); 
+        }, secAniTime + secStopTime);    
+    }
+
+    // 모달에서 마우스 휠 조작시 슬라이드
+    function modalWheelSequence(event) {
+        if(event.wheelDelta < 0) {
+            modalSlideSequence(-modal.width());
+        }
+        else if(event.wheelDelta > 0) {
+            modalSlideSequence(modal.width());
+        }
+    }
+
+    // 모달에서 몇번째 이미지가 보여지고있는지 확인
+    function currModalIndex(images) {
+        for(var i = 0; i < images.length; i++) {
+            var img = images.eq(i);
+
+            var modal_left = parseInt(modal.css("left"));
+            var modal_right = modal_left + parseInt(modal.outerWidth(true));
+            var img_left = parseInt(img.css("left"));
+
+            // 모달 안에 위치한 이미지 == 현재 보여지고 있는 이미지
+            if(img_left > modal_left && img_left < modal_right) {
+                return i;
+            }
+        }
+        // on("load") 를 이용해 이미지 로딩이후 정확한 수치값 구하는법
+        // $(images).on("load", $(img), function(){
+        //     if($(this).hasClass("tempImg")) return;
+        //     console.log(this.offsetWidth);
+        //     console.log($(this).offset().left);
+
+        // })
+    }
+
+    // 모달 이미지 슬라이드 방향 조정 
+    function modalSlideSequence(sequenceValue, pickIndex){
+        var modal_images = modal.find("img");
+
+        if(modal_images.length <= 1 || move.sliding) return;
+        move.sliding = true;
+        
+        // 입력된 방향으로 슬라이드
+        for(var i = 0; i < modal_images.length; i++) {
+            modal_images.eq(i)
+            .css({"left": parseInt(modal_images.eq(i).css("left")) + sequenceValue });
+        }
+
+        var currViewIdx = currModalIndex(modal_images);
+        if(pickIndex) currViewIdx = pickIndex;
+
+        // 모달 인덱스 처리
+        if(sequenceValue < 0) {
+            currViewIdx++;
+            if(currViewIdx > modal_images.length-2) //최대치 넘어가면 다시 1로 (무한 슬라이드이기 때문)
+                currViewIdx = 1;
+        }
+        else if(sequenceValue > 0) {
+            currViewIdx--;
+            if(currViewIdx < 1) // 최소치보다 작아지면 최대치로 (무한 슬라이드이기 때문)
+                currViewIdx = modal_images.length-2;
+        }
+        modal.children(".img-title").html(modal_images.eq(currViewIdx).attr("alt")); // 모달 이미지 타이틀 변경
+        modal.find(".left-index").text(currViewIdx);
+        modal.find(".right-index").text(modal_images.length - 2);
+
+        // 무한슬라이드 처리 및 슬라이드 인덱스 처리
+        setTimeout(function(){
+            currViewIdx = currModalIndex(modal_images);
+            if(currViewIdx == 0 || currViewIdx == (modal_images.length - 1)) { // 양쪽 끝에서 넘길경우
+                modal_images.css("transition", "0s")
+                            .each(function(){
+                                var img = $(this);
+                                img.css({"left": parseInt(img.css("left")) + (sequenceValue * -(modal_images.length - 2))})
+                                    .css("left");
+                            })
+                            .css("transition", "0.3s");
+            }
+            //move.sliding = false;
+            
+            // 슬라이드 인덱스 처리 (반응속도 느려서 타임아웃함수 밖에서 처리함) 코드는 간결한데 흠..
+            // modal.find(".left-index").text(currModalIndex(modal_images));
+            // modal.find(".right-index").text(modal_images.length - 2);
+
+            modal.children(".slides-index, .img-title").css({"opacity": 1});
+        }, secAniTime + secStopTime);
+
+        // 슬라이드중 버튼 가렸다 보이게하기
+        slideArrowHideOn(move);
+    }
+
+    // 모달 이미지 초기설정
+    function modalStartSetUp(images, pickImg) {
+        var setLeft = modal.width() / 2; // 모달 가운데에 이미지 위치
+
+        for(var i = 0; i < images.length; i++) {
+            modal.children(".img-view").append("<img>"); // 이미지 개수만큼 모달 img 태그 생성
+            var modal_img = modal.find("img").eq(i);
+            var img = images.eq(i);
+
+            // 모달내 이미지의 src, alt 지정 및 left, height 지정
+            modal_img.attr({
+                "src": img.attr("src"),
+                "alt": img.attr("alt")
+            })
+            .css({
+                "left": setLeft,
+                "height": img.data("height"),
+                "min-height": img.data("height")
+            })
+
+            setLeft += modal.width(); // 다음 이미지 위치값 증가
+        }
+
+        // 무한 슬라이드 효과를 위해서 임시 img 생성
+        modal.children(".img-view")
+                    .prepend("<img class='prevImg tempImg'>")
+                    .children(".prevImg")
+                        .attr({
+                            "src": images.eq(images.length - 1).attr("src"),
+                            "alt": images.eq(images.length - 1).attr("alt")
+                        })
+                        .css({
+                            "left":  -(modal.width()/2),
+                            "height": images.eq(images.length - 1).data("height")
+                        })
+                    .end()    
+                    .append("<img class='nextImg tempImg'>")
+                    .children(".nextImg")
+                        .attr({
+                            "src": images.eq(0).attr("src"),
+                            "alt": images.eq(0).attr("alt")
+                        })
+                        .css({
+                            "left":  setLeft,
+                            "height": images.eq(0).data("height")
+                        })
+        
+        // 클릭한 이미지를 사용자가 바로 볼 수 있게 위치 시킴
+        for(var i = 0; i < modal.find("img").length; i++) {
+            if(pickImg == images[i]) {
+                modalSlideSequence(-i * modal.width(), i);
+            }
+        }
+    }
+
+    // 이미지 클릭시 모달창 작동
+    $(".modal-img").click(function(e){
+
+        modalStartSetUp($(this).parent().children(), this); // 모달 이미지 위치및 속성 지정
+        modal.css("display", "block").animate({opacity: 1}, modal_aniTime);
+
+        // 섹션(모달 뒤 화면)의 이동 버튼 가리기
+        if(sections != null){
+            
+            var currSection = sections[currSecNum].element;
+            currSection.children(".right-arrow, .left-arrow").css("display", "none");
+        }
+
+        // 커스텀 커서 위치 갱신
+        // ### 2024-10-26: 커스텀 커서 사용 안함 ###
+        //
+        // modal.children(".close-cursor").css({
+        //     "left": (e.pageX - scrollX) + "px",
+        //     "top": (e.pageY - scrollY) + "px"
+        // });
+    });
     
+    // 모달 이미지 외부 화면 클릭시 창 종료
+    $(document).click(function(e){
+
+        var target = $(e.target);
+
+        if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+
+            closeModal(modal, modal_aniTime);
+
+            // 섹션(모달 뒤 화면)의 이동 버튼 보이기
+            if(sections)
+            var currSection = sections[currSecNum].element;
+            sections[currSecNum].slideIndex = currSection.children(".slides-nav").find("li[data-focus='true']").data("no");
+
+            // 섹션의 슬라이드가 첫 페이지일땐 우측 버튼만 보이게
+            if(sections[currSecNum].slideIndex === 0){
+                currSection.children(".left-arrow").css("display", "none");
+            }
+            else {
+                currSection.children(".left-arrow").css("display", "block");
+            }
+
+            // 섹션의 슬라이드가 마지막 페이지일땐 좌측 버튼만 보이게
+            if(sections[currSecNum].slideIndex === currSection.find(".slide").length -1){
+                currSection.children(".right-arrow").css("display", "none");
+            }
+            else {
+                currSection.children(".right-arrow").css("display", "block");
+            }
+        }
+    });
+
+    // 모달 끄기
+    function closeModal(modal, closeAniSec) {
+        modal.animate({opacity: 0}, closeAniSec);
+        modal.children(".slides-index, .img-title").css({"opacity": 0});
+        setTimeout(function(){
+            modal.css("display", "none").find("img").remove();
+            move.isModalScroll = false;
+        }, closeAniSec);
+    }
+
+    // 모달 close버튼 클릭시 창 종료
+    modal.on("click", ".close-btn", function(){
+        closeModal(modal, modal_aniTime);
+    });
+    
+    // esc키 입력시 모달창 종료
+    $(document).keydown(function(e){
+        // esc키 입력시 모달창 종료
+        if(e.keyCode === 27) {
+            if(modal.css("display") === "block") {
+                closeModal(modal, modal_aniTime)
+            }
+        }
+    });
+    
+    // 모달 버튼 입력시 슬라이드
+    modal.find(".left-arrow").click(function(){
+        modalSlideSequence(modal.width());
+    })
+    modal.find(".right-arrow").click(function(){
+        modalSlideSequence(-modal.width());
+    })
+
+    // 모달창 외부에서 커스텀 커서 사용 
+    // ### 2024-10-26: 사용안하기로 결정 ###
+    //
+    // winElement.mousemove(function(e){
+    //     if(modal.css("display") === "none") return;
+    //
+    //     // 마우스를 움직일때마다 비용낭비가 심하다
+    //     // var target = $(e.target); 
+    //     // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
+    //
+    //     //Jquery 사용안하고 바닐라JS로 비용절약
+    //     if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
+    //         modal.children(".close-cursor").css({
+    //             "display": "block",
+    //             "left": (e.pageX - scrollX) + "px",
+    //             "top": (e.pageY - scrollY) +"px"
+    //         });
+    //     }
+    //     else {
+    //         modal.children(".close-cursor").css({
+    //             "display": "none"
+    //         });
+    //     }
+    // })
 
     // 페이지 새로고침시 스크롤위치 초기화 // 스크롤을 없애는 css적용으로 사용할 필요가 없어짐*
     // window.onbeforeunload = function() {
@@ -711,265 +969,85 @@ function myFullPageSetUp() {
     });
 }
 
-function modalSetUp() {
-    // 모달 관련 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-    var modal = $("#modal");   
-    var modal_aniTime = 300;    //모달 애니메이션 시간 
-    
-    // 모달 이미지 슬라이드 방향 조정 
-    function modalSlideSequence(sequenceValue, pickIndex){
-        var modal_images = modal.find("img");
-        if(modal_images.length <= 1 || move.sliding) return;
-        move.sliding = true;
-        
-        // 입력된 방향으로 슬라이드
-        for(var i = 0; i < modal_images.length; i++) {
-            modal_images.eq(i)
-            .css({"left": parseInt(modal_images.eq(i).css("left")) + sequenceValue });
-        }
+// 모바일 페이지 관련 스크립트 ---------------------------------------------------------------------------------------------------------------------------------------------------
+function mobilePageSetUp() {
 
-        var currViewIdx = currModalIndex(modal_images);
-        if(pickIndex) currViewIdx = pickIndex;
-    
-        // 모달 인덱스 처리
-        if(sequenceValue < 0) {
-            currViewIdx++;
-            if(currViewIdx > modal_images.length-2) //최대치 넘어가면 다시 1로 (무한 슬라이드이기 때문)
-                currViewIdx = 1;
-        }
-        else if(sequenceValue > 0) {
-            currViewIdx--;
-            if(currViewIdx < 1) // 최소치보다 작아지면 최대치로 (무한 슬라이드이기 때문)
-                currViewIdx = modal_images.length-2;
-        }
-        modal.children(".img-title").html(modal_images.eq(currViewIdx).attr("alt")); // 모달 이미지 타이틀 변경
-        modal.find(".left-index").text(currViewIdx);
-        modal.find(".right-index").text(modal_images.length - 2);
+    // 모바일 환경에서 이미지 모달 설정 ------------------------------------------------------
+    var $img_view = $(".img-view");
 
-        // 무한슬라이드 처리 및 슬라이드 인덱스 처리
-        setTimeout(function(){
-            currViewIdx = currModalIndex(modal_images);
-            if(currViewIdx == 0 || currViewIdx == (modal_images.length - 1)) { // 양쪽 끝에서 넘길경우
-                modal_images.css("transition", "0s")
-                            .each(function(){
-                                var img = $(this);
-                                img.css({"left": parseInt(img.css("left")) + (sequenceValue * -(modal_images.length - 2))})
-                                    .css("left");
-                            })
-                            .css("transition", "0.3s");
-            }
-            //move.sliding = false;
-            
-            // 슬라이드 인덱스 처리 (반응속도 느려서 타임아웃함수 밖에서 처리함) 코드는 간결한데 흠..
-            // modal.find(".left-index").text(currModalIndex(modal_images));
-            // modal.find(".right-index").text(modal_images.length - 2);
+    // 이미지 클릭시, 모달 이미지 설정 후 모달 ON
+    $(".modal-img").click(function() {
+        var $this = $(this);
+        var images = $this.parent().children();
 
-            modal.children(".slides-index, .img-title").css({"opacity": 1});
-        }, secAniTime + secStopTime);
-
-        // 슬라이드중 버튼 가렸다 보이게하기
-        slideArrowHideOn(move);
-    } // end
-
-    // 모달 이미지 초기설정
-    function modalStartSetUp(images, pickImg) {
-        var setLeft = modal.width() / 2; // 모달 가운데에 이미지 위치
-
+        // 이미지 개수만큼 모달내 img 생성
         for(var i = 0; i < images.length; i++) {
-            modal.children(".img-view").append("<img>"); // 이미지 개수만큼 모달 img 태그 생성
-            var modal_img = modal.find("img").eq(i);
-            var img = images.eq(i);
 
-            // 모달내 이미지의 src, alt 지정 및 left, height 지정
+            modal.children(".img-view").append("<div class='img-wrap'>"); 
+            $img_view.children(".img-wrap").eq(i).append("<img>");
+
+            var img = images.eq(i); // 실제 이미지
+            var modal_img = modal.find("img").eq(i); // 모달로 복사된 이미지
+
+            // 모달내 이미지의 src, alt 지정 및 height 지정
             modal_img.attr({
                 "src": img.attr("src"),
                 "alt": img.attr("alt")
             })
             .css({
-                "left": setLeft,
                 "height": img.data("height"),
                 "min-height": img.data("height")
-            })
+            });
 
-            setLeft += modal.width(); // 다음 이미지 위치값 증가
+            // img-wrap 위치 지정
+            var img_wrap = $img_view.children(".img-wrap").eq(i);
+            // img_wrap.css("left", modal.width() * i);
         }
-
-        // 무한 슬라이드 효과를 위해서 임시 img 생성
-        modal.children(".img-view")
-                    .prepend("<img class='prevImg tempImg'>")
-                    .children(".prevImg")
-                        .attr({
-                            "src": images.eq(images.length - 1).attr("src"),
-                            "alt": images.eq(images.length - 1).attr("alt")
-                        })
-                        .css({
-                            "left":  -(modal.width()/2),
-                            "height": images.eq(images.length - 1).data("height")
-                        })
-                    .end()    
-                    .append("<img class='nextImg tempImg'>")
-                    .children(".nextImg")
-                        .attr({
-                            "src": images.eq(0).attr("src"),
-                            "alt": images.eq(0).attr("alt")
-                        })
-                        .css({
-                            "left":  setLeft,
-                            "height": images.eq(0).data("height")
-                        })
         
-        // 클릭한 이미지를 사용자가 바로 볼 수 있게 위치 시킴
-        for(var i = 0; i < modal.find("img").length; i++) {
-            if(pickImg == images[i]) {
-                modalSlideSequence(-i * modal.width(), i);
-            }
-        }
+        // 이미지 모달 보이게하기
+        $("#modal").css("display", "block");
 
-    }
-
-    // 모달에서 몇번째 이미지가 보여지고있는지 확인
-    function currModalIndex(images) {
-        for(var i = 0; i < images.length; i++) {
-            var img = images.eq(i);
-
-            var modal_left = parseInt(modal.css("left"));
-            var modal_right = modal_left + parseInt(modal.outerWidth(true));
-            var img_left = parseInt(img.css("left"));
-
-            // 모달 안에 위치한 이미지 == 현재 보여지고 있는 이미지
-            if(img_left > modal_left && img_left < modal_right) {
-                return i;
-            }
-        }
-        // on("load") 를 이용해 이미지 로딩이후 정확한 수치값 구하는법
-        // $(images).on("load", $(img), function(){
-        //     if($(this).hasClass("tempImg")) return;
-        //     console.log(this.offsetWidth);
-        //     console.log($(this).offset().left);
-
-        // })
-    }
-
-    // 모달 끄기
-    function closeModal(modal, closeAniSec) {
-        modal.animate({opacity: 0}, closeAniSec);
-        modal.children(".slides-index, .img-title").css({"opacity": 0});
-        setTimeout(function(){
-            modal.css("display", "none").find("img").remove();
-            move.isModalScroll = false;
-        }, closeAniSec);
-    }
-
-    // 이미지 클릭시 모달창 작동
-    $(".modal-img").click(function(e){
-        modalStartSetUp($(this).parent().children(), this); // 모달 이미지 위치및 속성 지정
-        modal.css("display", "block").animate({opacity: 1}, modal_aniTime);
-
-        // 섹션(모달 뒤 화면)의 이동 버튼 가리기
-        var currSection = sections[currSecNum].element;
-        currSection.children(".right-arrow, .left-arrow").css("display", "none");
-
-        // 커스텀 커서 위치 갱신
-        // ### 2024-10-26: 커스텀 커서 사용 안함 ###
-        //
-        // modal.children(".close-cursor").css({
-        //     "left": (e.pageX - scrollX) + "px",
-        //     "top": (e.pageY - scrollY) + "px"
-        // });
+        // 내가 클릭한 이미지가 모달 화면에 바로 보이게 설정
+        $img_view.css("left", modal.width() * -$this.index());
+        
+        // 모달 외부 스크롤 불가
+        $("body").css("overflow", "hidden");
     });
+
+    // 모달 이미지 외부 클릭시 모달 OFF
+    modal.on("click", function() {
+
+        $img_view.empty(); // 모달내 이미지 제거
+
+        modal
+            .css("display", "none")
+                .children(".img-view")
+                    .css("left", "0");
+
+        // 모달 외부 스크롤 가능
+        $("body").css("overflow", "auto");
+    });
+
+     // 모달 이미지 클릭시 이벤트 전파 막기
+     modal.on("click",  "img",function(e){
+        e.stopPropagation();
+    });
+
     
-    // 모달창 이미지 외부 화면 클릭시 창 종료
-    $(document).click(function(e){
-        var target = $(e.target);
-        if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
-
-            closeModal(modal, modal_aniTime);
-
-            // 섹션(모달 뒤 화면)의 이동 버튼 보이기
-            var currSection = sections[currSecNum].element;
-            sections[currSecNum].slideIndex = currSection.children(".slides-nav").find("li[data-focus='true']").data("no");
-
-            // 섹션의 슬라이드가 첫 페이지일땐 우측 버튼만 보이게
-            if(sections[currSecNum].slideIndex === 0){
-                currSection.children(".left-arrow").css("display", "none");
-            }
-            else {
-                currSection.children(".left-arrow").css("display", "block");
-            }
-
-            // 섹션의 슬라이드가 마지막 페이지일땐 좌측 버튼만 보이게
-            if(sections[currSecNum].slideIndex === currSection.find(".slide").length -1){
-                currSection.children(".right-arrow").css("display", "none");
-            }
-            else {
-                currSection.children(".right-arrow").css("display", "block");
-            }
-        }
-    });
-
-    // 모달창 close버튼 클릭시 창 종료
-    modal.on("click", ".close-btn", function(){
-        closeModal(modal, modal_aniTime);
-    });
-    
-    // esc키 입력시 모달창 종료
-    $(document).keydown(function(e){
-        // esc키 입력시 모달창 종료
-        if(e.keyCode === 27) {
-            if(modal.css("display") === "block") {
-                closeModal(modal, modal_aniTime)
-            }
-        }
-    });
-    
-    // 모달 버튼 입력시 슬라이드
-    modal.find(".left-arrow").click(function(){
-        modalSlideSequence(modal.width());
-    })
-    modal.find(".right-arrow").click(function(){
-        modalSlideSequence(-modal.width());
-    })
-
-    // 모달에서 마우스 휠 조작시 슬라이드
-    function modalWheelSequence(event) {
-        if(event.wheelDelta < 0) {
-            modalSlideSequence(-modal.width());
-        }
-        else if(event.wheelDelta > 0) {
-            modalSlideSequence(modal.width());
-        }
-    }
-
-    // 모달창 외부에서 커스텀 커서 사용 
-    // ### 2024-10-26: 사용안하기로 결정 ###
-    //
-    // winElement.mousemove(function(e){
-    //     if(modal.css("display") === "none") return;
-    //
-    //     // 마우스를 움직일때마다 비용낭비가 심하다
-    //     // var target = $(e.target); 
-    //     // if(target.hasClass("img-view") || target.hasClass("close-cursor")) {
-    //
-    //     //Jquery 사용안하고 바닐라JS로 비용절약
-    //     if(e.target.classList.contains("img-view") || e.target.classList.contains("close-cursor")) {
-    //         modal.children(".close-cursor").css({
-    //             "display": "block",
-    //             "left": (e.pageX - scrollX) + "px",
-    //             "top": (e.pageY - scrollY) +"px"
-    //         });
-    //     }
-    //     else {
-    //         modal.children(".close-cursor").css({
-    //             "display": "none"
-    //         });
-    //     }
-    // })
 }
 
 // 브라우저 사이즈 변경시 풀페이지 셋팅 여부 파악
 function checkWidthAndRun() {
+
+    $(window).off();
+    $(document).off();
+    $("body").off();
+
     if(window.innerWidth > 800) {
         myFullPageSetUp();
+    }
+    else {
+        mobilePageSetUp();
     }
 }
 
@@ -978,5 +1056,4 @@ $(function(){
 
     window.addEventListener('resize', checkWidthAndRun);
     checkWidthAndRun();
-    modalSetUp();
 });

@@ -55,20 +55,20 @@
         background-color: whitesmoke;
     }
     .wrap {
-        height: 100svh;
         padding: 0;
+        border-radius: 10px;
     }
     .inner-wrap {
-        padding: 6vh 0 11vh;
-        min-width: 100vw;
-        height: 100svh;
+        padding: 5svh 0;
+        width: 100svw;
         background-color: white;
+        border-top: 1px solid rgb(65, 65, 65);
     }
     p {
         padding: 0;
         margin: 0;
         line-height: 1.35rem;
-    } 
+    }
 }
 
 /* 섹션 네비 - 웹 */
@@ -124,60 +124,27 @@
 /* 섹션 네비 - 모바일 */
 @media (max-width: 800px) {
     .section-nav {
-        list-style: none;
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-        position: fixed;
-        right: 0;
-        top: 0;
-        width: 8vw;
-        font-family: 'Do Hyeon', sans-serif;
-        font-size: medium;
+        display: none;
     }
     .section-nav li {
-        padding: 1vh 0.5vw 1vh;
-        text-align: right;
-        cursor: pointer;
-    }
-    .mouse-over{
-        background-color: rgba(0, 0, 0, 0.250);
-        text-shadow: -1px 0px rgba(0, 0, 0, 0.5), 0px 1px rgba(0, 0, 0, 0.5), 1px 0px rgba(0, 0, 0, 0.5), 0px -1px rgba(0, 0, 0, 0.5);
-        color : white;
-        font-size : x-large;
-        white-space : nowrap;
-        overflow : visible;
-        float : right;
-    }
-    .mouse-out{
-        background-color: transparent;
-        color : hsla(0, 0%, 50%, 0.5);
-        font-weight : 100;
-        font-size : medium;
-        white-space : nowrap;
-        overflow : hidden;
-        text-overflow : ellipsis;
-        clear : both;
+        display: none;
     }
     .curr-section{
-        background-color: transparent;
-        color : rgba(0,0,0,0.7);
-        font-weight : 100;
-        font-size : medium;
-        white-space : nowrap;
-        overflow : hidden;
-        text-overflow : ellipsis;
-        clear : both;
-        font-weight: bolder;
+        display: none;
     }
 }
-
 
 
 /* 슬라이드 공통, 설명란 레이아웃 - 웹 */
 @media (min-width: 801px) {
     .slides {
         position: relative;
+    }
+    .slide {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        display: inline-block;
     }
     .slide-title {
         text-align: center;
@@ -254,20 +221,20 @@
     .slides {
         position: relative;
     }
+    .slide {
+        display: block;
+        width: 100svw;
+    }
     .slide-title {
+        padding: 1rem;
         text-align: center;
         z-index: 1;
         margin: 0px;
         font-family: 'Do Hyeon', sans-serif;
-        font-size: clamp(1.4rem, 4vw, 3rem);
+        font-size: clamp(1.8rem, 4vw, 3rem);
         font-weight: 500;
     }
     .section article {
-        /* padding: 2.5rem 0 0; */
-        margin: 2svh 0 0;
-        height: 90svh;
-        width: 100%;
-        /* overflow: hidden; */
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -277,10 +244,8 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 90svw;
-        height: 40svh;
-        overflow-y: auto;
-        overflow-x: hidden;
+        /* width: 100svw; */
+        margin: 2rem;
         font-family: 'Noto Sans KR', sans-serif;
     }
     .explain-title {
@@ -338,6 +303,19 @@
 .tech-stack_AML2 { background-color: #ff9900; color: black;}
 .tech-stack_jenkins { background-color: #335061; color: white;}
 
+.smart-apc {
+    background-color: #3ec55e;
+    color: white
+}
+.curisall {
+    background-color: #1a8a7b;
+    color: white;
+}
+.hosfit {
+    background-color: #26b4ce;
+    color: white;
+}
+
 /* 슬라이드 이미지 관련 - 웹 */
 @media (min-width: 801px) {
     .images{
@@ -390,14 +368,15 @@
 /* 슬라이드 이미지 관련 - 모바일 */
 @media (max-width: 800px) {
     .images{
-        width: 90svw;
-        height: 25svh;
         display: flex;
+        height: 30svh;
+        margin-top: 2rem;
         overflow: auto;
     }
     .images img {
         display: block;
         object-fit: contain;
+        max-width: 92svw;
         height: 100%;
         width: 100%;
         margin: 0;
@@ -468,12 +447,6 @@
         border-radius: 1rem;
         box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.623);
     }
-    .slide {
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        display: inline-block;
-    }
     .left-arrow, .right-arrow {
         position: absolute;
         transform: translate( 0, -50%);
@@ -506,72 +479,17 @@
 /* 슬라이드 네비, 버튼 설정 - 모바일 */
 @media (max-width: 800px) {
     .slides-nav {
-        position: absolute;
-        left: 50%;
-        bottom: 6%;
-        transform: translate(-50%, 0%);
-        z-index: 2;
+        display: none;
     }
     .slides-nav li {
-        background-color: lightgray;
-        display: inline-block;
-        margin-right: 10px;
-        width: 10px;
-        height: 10px;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    .slides-nav li:hover {
-        /* background-color: lightsteelblue; */
-        box-shadow: 0 0 5px 0px rgb(0, 0, 0);
-    }
-    .slides-nav li[data-focus="true"] {
-        background-color: black;
+        display: none;
     }
     .slides-nav-title {
         display: none;
-        position: absolute;
-        z-index: 1;
-        padding: 0.5rem;
-        margin: 0.5rem;
-        background-color: #f5f5f5;
-        border: lightgray 1px solid;
-        border-radius: 1rem;
-        box-shadow: 0 2px 5px 0 rgba(63, 63, 63, 0.623);
     }
-    .slide {
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        display: inline-block;
-    }
+    
     .left-arrow, .right-arrow {
-        position: absolute;
-        transform: translate( 0, -50%);
-        font-size: 8rem;
-        font-weight: bolder;
-        line-height: 5rem;
-        color: rgb(38,38,38);
-        background-color: transparent;
-        border: none;
-        transition: 0.2s;
-        cursor: pointer;
-    }
-    .left-arrow:hover {
-        color: rgb(76, 76, 76);
-        text-shadow: -5px 0 3px black;
-    }
-    .right-arrow:hover {
-        color: rgb(76, 76, 76);
-        text-shadow: 5px 0 3px black;
-    }
-    .left-arrow {
-        left: 3.5%;
-        top: 89%;
-    }
-    .right-arrow {
-        right: 3.5%;
-        top: 89%;
+        display: none;
     }
 }
 
@@ -668,193 +586,154 @@
 /* 모달 - 모바일 */
 @media (max-width: 800px) {
     #modal {
-        width: 100vw;
-        height: 100vh;
+        display: none;
         position: fixed;
         left: 0; top: 0;
+        width: 100vw;
+        height: 100vh;
         background-color: rgba(0, 0, 0, 0.8);
         z-index: 2;
-        display: none;
-        opacity: 0;
-    }
-    #modal .close-btn {
-        width: 7vw;
-        background-color: transparent;
-        color: black;
-        border: none;
-        padding: 0;
-        position: absolute;
-        left: 50%; bottom: 5%;
-        transform: translate( -50%, 0);
-        cursor: pointer;
     }
     #modal .img-view{
-        height: 100vh;
+        position: fixed;
+        left: 0; top: 0;
+        display: flex;
+        /* overflow: auto; */
+    }
+    #modal .img-view .img-wrap {
         position: relative;
-        cursor: pointer;
+        display: block;
+        height: 100svh;
+        width: 100svw;
     }
     #modal .img-view img {
-        max-height: 77.5vh;
-        max-width: 80vw;
-        object-fit: contain;
         position: absolute;
+        max-height: 80svh;
+        max-width: 90svw;
+        object-fit: contain;
         left: 50%; top: 50%;
         transform: translate(-50%, -50%);
-        cursor: default;
-        z-index: 3;
-        transition: 0.3s;
     }
     #modal .img-title {
-        position: absolute;
-        left: 50%; top: 5%;
-        transform: translate(-50%, -50%);
-        font-weight: bold;
-        font-size: 1.5rem;
-        color: white;
-        transition: 0.3s;
-        opacity: 0;
+        display: none;
     }
     #modal .close-cursor {
-        cursor: none;
-        position: absolute;
-        transform: translate( -50%, -50%);
-        height: 3rem;
-        width: 3rem;
-        border: black 0.25rem solid;
-        border-radius: 1000rem;
-        font-size: 3rem;
-        font-weight: bold;
-        text-align: center;
-        background-color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 0 1px 0.15rem rgba(255, 255, 255, 0.9);
-        line-height: 2.75rem;
+        display: none;
     }
     #modal .left-arrow, #modal .right-arrow {
-        color: whitesmoke;
-        top: 50%;
-    }
-    #modal .left-arrow:hover {
-        color: aliceblue;
-        text-shadow: -5px 0 3px gray;
-    }
-    #modal .right-arrow:hover {
-        color: aliceblue;
-        text-shadow: 5px 0 3px gray;
+        display: none;
     }
     #modal .slides-index {
-        position: absolute;
-        bottom: 3%;
-        left: 50%;
-        transform: translate( -50%, 0%);
-        font-weight: bold;
-        font-size: 1.5rem;
-        color: white;
-        opacity: 0;
-        transition: 0.3s;
+        display: none;
     }
 }
 
 
-/* 툴팁 관련 CSS */
-.explain span[data-tooltip] {
-    cursor: help;
-}
-/* 툴팁 박스의 높이 너비를 조정하기위한 temporary 클래스 */
-.explain span[data-tooltip] .temp {
-    display: none;
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    max-width: 35rem;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.9rem;
-    font-weight: normal;
-    line-height: 1.5rem;
-}
-.tooltip {
-    display: none;
-    position: relative;
-    border-radius: 10px;
-    line-height: 1.5rem;
-    box-shadow: 0px 0px 5px 1px black;
-}
-.tooltip-box {
-    position: absolute;
-    background-color: #f5f5f5;
-    padding: .5rem .5rem .8rem;
-    border-radius: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.9rem;
-    z-index: 2;
-}
-.tooltip-tail {
-    width: 2rem;
-    height: 2rem;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin: 0 auto;
-    transform: rotate(45deg ) translate(-70%, 0);
-    background-color: #f5f5f5;
-    z-index: 1;
-    box-shadow: 0px 0px 5px 1px black;
+/* 툴팁 관련 CSS - 웹 */
+@media (min-width: 801px) {
+    .explain span[data-tooltip] {
+        cursor: help;
+    }
+    /* 툴팁 박스의 높이 너비를 조정하기위한 temporary 클래스 */
+    .explain span[data-tooltip] .temp {
+        display: none;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        max-width: 35rem;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 0.9rem;
+        font-weight: normal;
+        line-height: 1.5rem;
+    }
+    .tooltip {
+        display: none;
+        position: relative;
+        border-radius: 10px;
+        line-height: 1.5rem;
+        box-shadow: 0px 0px 5px 1px black;
+    }
+    .tooltip-box {
+        position: absolute;
+        background-color: #f5f5f5;
+        padding: .5rem .5rem .8rem;
+        border-radius: 10px;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 0.9rem;
+        z-index: 2;
+    }
+    .tooltip-tail {
+        width: 2rem;
+        height: 2rem;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin: 0 auto;
+        transform: rotate(45deg ) translate(-70%, 0);
+        background-color: #f5f5f5;
+        z-index: 1;
+        box-shadow: 0px 0px 5px 1px black;
+    }
 }
 
-/* 프로필  */
-/* 웹 */
+
+/* 프로필 - 웹 */
 @media (min-width: 801px) {
     .profile h1 {
         text-align: center;
         margin-bottom: 10vh;
-    }    
+    }
+    .profile #ID-Photo{
+        padding-left: 8vw;
+        width: 20vw;
+        object-fit: contain;
+    }
+    .profile-list {
+        padding-left: 1.6rem;
+        line-height: 4rem;
+        font-size: clamp(0.5rem, 1.5vw, 2rem);
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    .read-project {
+        display: none;
+    }
 }
-/* 모바일 */
+/* 프로필 - 모바일 */
 @media (max-width: 800px) {
     .profile h1 {
         text-align: center;
         margin-bottom: 5svh;
         padding: 0 12svw;
     }
-}
-
-.profile .Ed-front article div:first-child{
-    text-align: center;
-}
-
-/* 웹 */
-@media (min-width: 801px) {
     .profile #ID-Photo{
-        padding-left: 8vw;
-        width: 20vw;
+        width: 35svw;
         object-fit: contain;
     }
-}
-/* 모바일 */
-@media (max-width: 800px) {
-    .profile #ID-Photo{
-        width: 40svw;
-        object-fit: contain;
-    }
-}
-
-/* 웹 */
-@media (min-width: 801px) {
-    .profile-list{
-        padding-left: 1.6rem;
-        line-height: 4rem;
-        font-size: clamp(0.5rem, 1.5vw, 2rem);
-        font-family: 'Noto Sans KR', sans-serif;
-    }
-}
-/* 모바일 */
-@media (max-width: 800px) {
     .profile-list{
         margin: 0;
         padding-left: 1.6rem;
         line-height: 3rem;
-        font-size: clamp(1rem, 1.5vw, 2rem);
+        font-size: clamp(1.2rem, 1.5vw, 2rem);
         font-family: 'Noto Sans KR', sans-serif;
     }
+    .profile-list a {
+        font-size: 1rem;
+    }
+    .read-project {
+        width: 50svw;
+        border-radius: 20px;
+        border: none;
+        background-color: #26b4ce;
+        color: white;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 500;
+        padding: .3rem;
+    }
+}
+
+.profile .Ed-front article div:first-child{
+    text-align: center;
 }
 
 .about-email a{
@@ -865,7 +744,7 @@
     text-decoration: none;
     color: cornflowerblue;
 }
-.profile-list ul {
+/* .profile-list ul {
     list-style: none;
     margin: 0 0 4vh 0;
     padding: 0;
@@ -904,7 +783,8 @@
     height: 10px;
     border-radius: 10px;
     cursor: pointer;
-}
+} */
+
 /* SKILLS(프로필 뒷면) */
 .Ed-item.Ed-back h1{
     text-align: center;

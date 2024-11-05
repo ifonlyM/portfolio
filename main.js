@@ -1100,7 +1100,10 @@ function mobilePageSetUp() {
         }
         // 서브 슬라이드 OFF 일때, 디스플레이 block 및 '주요 경험 자세히 보기' 버튼을 '접기'로 변경
         else {
-            $sub_slide.css("display", "block");
+            $sub_slide
+            .css("display", "block")
+            .not(":last-child").css("padding-bottom", "10svh")
+            .last().css("padding-bottom", "0");
             $this.text("접 기");
         }
     });

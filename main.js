@@ -969,7 +969,11 @@ function myFullPageSetUp() {
     });
 }
 
+
+
 // 모바일 페이지 관련 스크립트 ---------------------------------------------------------------------------------------------------------------------------------------------------
+var m_prevScrollTop = 0; // '접 기' 버튼 사용 후 스크롤이 제자리를 찾아가게 하기위한 전역 변수
+
 function mobilePageSetUp() {
 
     // 모바일 환경에서 이미지 모달 설정 ------------------------------------------------------
@@ -1068,7 +1072,6 @@ function mobilePageSetUp() {
             var $slide_title = $slides.children().first().find(".slide-title");
             // 슬라이즈의 마지막 자식으로 '주요 경험 자세히 보기' 버튼 생성 및 슬라이드 타이틀과 같은 색상으로 CSS 설정
             $("<div class='more-detail'>주요 경험 자세히 보기 👈</div>")
-            // .appendTo($slides.children().first().find(".inner-wrap"))
             .appendTo($slides)
             .css({
                 "background-color": $slide_title.css("background-color"),
@@ -1085,23 +1088,28 @@ function mobilePageSetUp() {
         var $sub_slide = $slides.children().not(":first-child").not(":last-child");
         var is_sub_slide_on = $sub_slide.css("display") === "block" ? true : false;
 
-        // 서브 슬라이드 ON 일때, 디스플레이 none 및 '접기' 버튼을 '주요 경험 자세히 보기'로 변경
+        // 서브 슬라이드 ON 일때 (ON일때 클릭은 접는 행위), 디스플레이 none 및 '접기' 버튼을 '주요 경험 자세히 보기'로 변경 +..
         if(is_sub_slide_on) {
             $sub_slide.css("display", "none");
             $this.text("주요 경험 자세히 보기 👈");
+
+            // 접었을때, 엉뚱한 위치로 스크롤이 가게하는거 방지
+            var gap = ($this.offset().top - $slides.offset().top) - window.innerHeight; // 자세히 버튼 top 까지 계산
+            var detail_gap = gap + window.innerHeight / 2; // 버튼을 화면 중앙쯤 오게끔 top 조절
+            winElement.scrollTop($slides.offset().top + detail_gap); 
         }
         // 서브 슬라이드 OFF 일때, 디스플레이 block 및 '주요 경험 자세히 보기' 버튼을 '접기'로 변경
         else {
             $sub_slide.css("display", "block");
             $this.text("접 기");
         }
-    })
+    });
 }
 
 // 브라우저 사이즈 변경시 풀페이지 셋팅 여부 파악
 function checkWidthAndRun() {
 
-    $(window).off();
+    winElement.off();
     $(document).off();
     $("html, body").off();
 
@@ -1116,6 +1124,8 @@ function checkWidthAndRun() {
 // Ready
 $(function(){
 
-    window.addEventListener('resize', checkWidthAndRun);
+    // 모바일 브라우저에서 빈번하게 resize가 일어나므로 버그와 자원낭비가 많이 발생함. 방법을 찾아보자~
+    // 방법 1. 최초 화면 너비를 잰뒤 사용자가 창 크기를 변경했을때 PC화면 or 모바일 화면으로 보시겠냐고 유도한다.
+    // window.addEventListener('resize', checkWidthAndRun); 
     checkWidthAndRun();
 });

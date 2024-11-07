@@ -327,6 +327,7 @@
         margin: 2svh auto;
         padding: .5rem;
         border-radius: 20px;
+        border: none;
         text-align: center;
         font-size: 1.2rem;
         font-weight: 600;
@@ -345,38 +346,14 @@
 .tech-stack_AML2 { background-color: #ff9900; color: black;}
 .tech-stack_jenkins { background-color: #335061; color: white;}
 
-.smart-apc {
-    background-color: #3ec55e;
-    color: white
-}
-.curisall {
-    background-color: #1a8a7b;
-    color: white;
-}
-.hosfit {
-    background-color: #26b4ce;
-    color: white;
-}
-.fullpage {
-    background-color:#912d96;
-    color: white;
-}
-.spring-team {
-    background-color: #05a49d;
-    color: white;
-}
-.s-j-to-spring {
-    background-color: #424242;
-    color: white;
-}
-.s-j {
-    background-color: #202020;
-    color: white;
-}
-.java {
-    background-color: #ea2d2e;
-    color: white;
-}
+.smart-apc { background-color: #3ec55e; color: white; }
+.curisall { background-color: #1a8a7b; color: white; }
+.hosfit { background-color: #26b4ce; color: white; }
+.fullpage { background-color:#912d96; color: white; }
+.spring-team { background-color: #05a49d; color: white; }
+.s-j-to-spring { background-color: #424242; color: white; }
+.s-j { background-color: #202020; color: white; }
+.java { background-color: #ea2d2e; color: white; }
 
 /* 슬라이드 이미지 관련 - 웹 */
 @media (min-width: 801px) {
@@ -785,15 +762,9 @@
         font-weight: 600;
         padding: .5rem;
     }
-    .read-project a {
-        text-decoration: none;
-        color: white;
-    }
 }
 
-.profile .Ed-front article div:first-child{
-    text-align: center;
-}
+.profile .Ed-front article div:first-child{ text-align: center; }
 .about-cell a {
     color: black;
     font-weight: 500;
@@ -853,78 +824,80 @@
     cursor: pointer;
 } */
 
-/* SKILLS(프로필 뒷면) */
-.Ed-item.Ed-back h1{
-    text-align: center;
-    margin-bottom: 2vh;
-}
-.Ed-item.Ed-back h2 {
-    margin-top:0;
-    border-bottom: 1px solid black;
-}
-.Ed-item.Ed-back .skill-group-wrap {
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.Ed-item.Ed-back .skill-group{
-    width: 15vw;
-    height: auto;
-    padding: 2vh 1vw;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 1rem 1rem 1rem 1rem rgb(68 68 68 / 20%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: bold;
-}
-.Ed-item.Ed-back .skill-group h2 {
-    font-size: 1.8rem;
-}
-.Ed-item.Ed-back img{
-    min-width: 4vw;
-    max-width: 4.5vw;
-    object-fit: contain;
-    margin: 1vh auto;
-    display: inline-block;
-}
-
-/* 3d 효과 설정 */
-.Ed-container{
-    background-color: whitesmoke;
-    perspective: 5000px;
-}
-.Ed-item{
-    background-color: white;
-    backface-visibility: hidden;
-    transition: 1.5s;
-}
-.Ed-container .Ed-item.Ed-front{
-    position: absolute;
-    transform: rotateY(0deg);
-}
-.Ed-container .Ed-item.Ed-back{
-    transform: rotateY(-180deg);
-}
-.Ed-btn{
-    background-color: transparent;
-    border:none;
-    position: absolute;
-    left: 88.4%;
-    bottom: 1%;
-    cursor: pointer;
-}
-.Ed-btn img{
-    width: 4vw;
-    object-fit: contain;
-    transition: 0.2s;
-}
-.Ed-btn img:hover {
-    width: 4.5vw;
+/* SKILLS(프로필 뒷면) - 웹 */
+@media (min-width: 801px){
+    .Ed-item.Ed-back h1{
+        text-align: center;
+        margin-bottom: 2vh;
+    }
+    .Ed-item.Ed-back h2 {
+        margin-top:0;
+        border-bottom: 1px solid black;
+    }
+    .Ed-item.Ed-back .skill-group-wrap {
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .Ed-item.Ed-back .skill-group{
+        width: 15vw;
+        height: auto;
+        padding: 2vh 1vw;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 1rem 1rem 1rem 1rem rgb(68 68 68 / 20%);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: bold;
+    }
+    .Ed-item.Ed-back .skill-group h2 {
+        font-size: 1.8rem;
+    }
+    .Ed-item.Ed-back img{
+        min-width: 4vw;
+        max-width: 4.5vw;
+        object-fit: contain;
+        margin: 1vh auto;
+        display: inline-block;
+    }
+    
+    /* 3d 효과 설정 */
+    .Ed-container{
+        background-color: whitesmoke;
+        perspective: 5000px;
+    }
+    .Ed-item{
+        background-color: white;
+        backface-visibility: hidden;
+        transition: 1.5s;
+    }
+    .Ed-container .Ed-item.Ed-front{
+        position: absolute;
+        transform: rotateY(0deg);
+    }
+    .Ed-container .Ed-item.Ed-back{
+        transform: rotateY(-180deg);
+    }
+    .Ed-btn{
+        background-color: transparent;
+        border:none;
+        position: absolute;
+        left: 88.4%;
+        bottom: 1%;
+        cursor: pointer;
+    }
+    .Ed-btn img{
+        width: 4vw;
+        object-fit: contain;
+        transition: 0.2s;
+    }
+    .Ed-btn img:hover {
+        width: 4.5vw;
+    }
 }
 
 /* video custom - 웹 */
@@ -994,13 +967,8 @@
 }
 
 .mg-0 { margin: 0; }
-.pd-lt-1vw {
-    padding: 0;
-    padding-left: 1rem;
-}
-.pd-tb-2vh{
-    padding: 2vh 0 2vh 0;
-}
+.pd-lt-1vw { padding: 0; padding-left: 1rem; }
+.pd-tb-2vh{ padding: 2vh 0 2vh 0; }
 .wid-100 { width: 100%;}
 .color-red { color: red;}
 .font-bold {font-weight: bold;}

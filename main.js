@@ -976,7 +976,7 @@ var m_prevScrollTop = 0; // '접 기' 버튼 사용 후 스크롤이 제자리�
 
 function mobilePageSetUp() {
 
-    // 모바일 환경에서 이미지 모달 설정 ------------------------------------------------------
+    // 이미지 모달 설정 ------------------------------------------------------
     var $img_view = $(".img-view");
 
     // 이미지 클릭시, 모달 이미지 설정 후 모달 ON
@@ -1027,15 +1027,15 @@ function mobilePageSetUp() {
 
 
     // read-project 클릭시 프로젝트 설명화면으로 이동
-    $(".read-project a").click(function(e){
+    $(".read-project").click(function(e){
         e.preventDefault();
         
-        $('html,body').stop().animate({scrollTop:$(this.hash).offset().top + 1}, 500);
+        html.stop().animate({scrollTop:$("#recent-project").offset().top + 1}, 500);
     });
 
 
     // About 섹션 벗어나면 move-top 버튼 활성화
-    $(window).on('scroll', function() {
+    winElement.on('scroll', function() {
         var scrollTop = $(this).scrollTop(); // 현재 스크롤 위치
         
         if (scrollTop > 800) { // 800px 이상일 때
@@ -1054,10 +1054,10 @@ function mobilePageSetUp() {
     $(".move-top").click(function(e){
         e.preventDefault();
 
-        $('html,body').stop().animate({scrollTop:$("#about").offset().top + 1}, 500);
+        html.stop().animate({scrollTop:$("#about").offset().top + 1}, 500);
     });
 
-    // 슬라이드 자세히 , 접기 로직 -------------------------------------
+    // 슬라이드 자세히 , 접기 로직 -----------------------------------------------------------------------------
     // 서브 슬라이드 접기 및 '자세히 보기' 버튼 생성
     var $sections = $("#my-fullpage").children(".section");
     for(var i = 0; i < $sections.length; i++) {
@@ -1071,7 +1071,7 @@ function mobilePageSetUp() {
 
             var $slide_title = $slides.children().first().find(".slide-title");
             // 슬라이즈의 마지막 자식으로 '주요 경험 자세히 보기' 버튼 생성 및 슬라이드 타이틀과 같은 색상으로 CSS 설정
-            $("<div class='more-detail'>주요 경험 자세히 보기 👈</div>")
+            $("<button class='more-detail'>주요 경험 자세히 보기 👈</button>")
             .appendTo($slides)
             .css({
                 "background-color": $slide_title.css("background-color"),
@@ -1107,6 +1107,28 @@ function mobilePageSetUp() {
             $this.text("접 기");
         }
     });
+
+
+    // 스크롤중에 슬라이드 타이틀이 화면 상단에 고정되게 끔 -------------------------------------------------------
+    var pin_title = $(".slide-title:not(.profile .slide-title)"); // pin 처리할 타이틀 (프로필의 타이틀은 제외)
+    var pin_slide = pin_title.closest(".slide"); // pin 타이틀의 슬라이드
+    var ps_top = pin_slide.offset().top; // 슬라이드의 top 값
+    var ps_bottom = ps_top + pin_slide.outerHeight(); // 슬라이드의 bottom 값
+    
+    winElement.on("scroll", function(){
+
+        var sc_top = winElement.scrollTop() // 현재 스크롤 위치    
+
+        // 슬라이드 영역 내에서 타이틀에 pin 기능 부여하기
+        if(ps_top <= sc_top && ps_bottom > sc_top) {
+            
+        }
+        else {
+            // 슬라이드 영역을 벗어난 경우 원래 위치로 복원
+            
+        }
+    });
+
 }
 
 // 브라우저 사이즈 변경시 풀페이지 셋팅 여부 파악

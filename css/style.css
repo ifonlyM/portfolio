@@ -625,23 +625,32 @@
 /* 모달 - 모바일 */
 @media (max-width: 800px) {
     #modal {
+        left: 0; top: 0;
+        width: 100svw;
+        height: 100svh;
         display: none;
         position: fixed;
-        left: 0; top: 0;
-        width: 100vw;
-        height: 100vh;
+        overflow: scroll;
         background-color: rgba(0, 0, 0, 0.8);
         z-index: 2;
     }
-    #modal .img-view{
+    #modal .img-view {
+        display: flex;
         position: relative;
-        width: 100vw;
-        height: 100vh;
     }
-    #modal .img-view img {
-        position: absolute;
+
+    #modal .img-view div {
+        width: 100svw;
+        height: 100svh;
+        position: relative;
+    }
+
+    #modal .img-view div img {
+        height: auto;
         max-height: 80svh;
+        width: auto;
         max-width: 90svw;
+        position: absolute;
         object-fit: contain;
         left: 50%; top: 50%;
         transform: translate(-50%, -50%);

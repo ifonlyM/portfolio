@@ -627,7 +627,7 @@
     #modal {
         left: 0; top: 0;
         width: 100svw;
-        height: 100svh;
+        height: 120svh;
         display: none;
         position: fixed;
         overflow: scroll;

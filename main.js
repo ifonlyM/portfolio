@@ -1013,14 +1013,13 @@ function mobilePageSetUp() {
             });
         }
 
-        // 이미지 모달 보이게하기
-        $("#modal").css("display", "flex");
+        // 이미지 모달 보이게하기 & 클릭한 이미지가 가운데 보이게 스크롤x값 조절
+        $modal
+            .css("display", "flex")
+            .scrollLeft($window.width() * $this.index());
 
-        // 클릭한 이미지를 화면 가운데에서 보여주게 하기
-        $img_view.css("left",$window.width() * -$this.index());
-        
         // 모달 외부 스크롤 불가
-        $("body").css("overflow", "hidden");
+        $html.css("overflow", "hidden");
     });
 
 
@@ -1028,14 +1027,16 @@ function mobilePageSetUp() {
     // 모달 이미지 외부 클릭시 모달 OFF
     $modal.on("click", function() {
 
-        // 모달내 이미지 제거 및 left 값 초기화
-        $img_view.empty(); 
+        // 모달 이미지뷰내 이미지 제거 및 left 값 초기화
+        $img_view.scrollLeft(0).empty(); 
 
         // 모달 off
-        $modal.css("display", "none");
+        $modal
+            .scrollLeft(0)
+            .css("display", "none");
 
         // 모달 외부 스크롤 가능
-        $("body").css("overflow", "auto");
+        $html.css("overflow", "auto");
     });
 
      // 모달 이미지 클릭시 이벤트 전파 막기

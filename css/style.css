@@ -954,6 +954,27 @@
     }
 }
 
+/* 웹 */
+@media (min-width: 801px) {
+    .muse {
+        font-size: larger; 
+        line-height: 2.35rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+/* 모바일 */
+@media (max-width: 800px) {
+    .muse {
+        font-size: small; 
+        line-height: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+}
+
 /* css class */
 .mg-tp-2vh {
     margin: 0;
